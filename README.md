@@ -19,18 +19,18 @@ Java 1.6 or higher
 ### Maven users
 Add this dependency in your project's POM:
 
-'''xml
+```xml
 <dependency>
   <groupId>com.monext.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
   <version>4.44.1</version>
 </dependency>
-'''
+```
 
 ## Usage
 SampleCalls.java
 
-'''java
+```java
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,7 +64,7 @@ public class SampleCalls {
         logger.log(Level.INFO, "  - long message :  " + res.getResult().getLongMessage());
     }
 }
-'''
+```
 
 ## Version
 4.44.1
