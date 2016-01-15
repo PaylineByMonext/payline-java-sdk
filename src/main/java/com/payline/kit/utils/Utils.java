@@ -117,7 +117,7 @@ public final class Utils {
 
     /**
      * @param proxy the ws binding provider
-     * @param type the type of api to use Set HTTP credentials (username/password) and ws endpoint
+     * @param api the type of api to use Set HTTP credentials (username/password) and ws endpoint
      */
     public static void setHTTPBasicCredentialAndEndPointFromBundle(final Object proxy, final String api) {
         if (LOG_LEVEL != Level.OFF)

@@ -1,4 +1,6 @@
 # Payline Java SDK
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.payline/payline-java-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.payline/payline-java-sdk)
+
 The Payline API provides access to the various functions of the Payline payment solution. It is
 based on standard web service components, which include the SOAP protocol, the WSDL and
 XSD definition languages. These standards are supported by a large range of development tools
@@ -21,7 +23,7 @@ Add this dependency in your project's POM:
 
 ```xml
 <dependency>
-  <groupId>com.monext.payline</groupId>
+  <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
   <version>4.44.1</version>
 </dependency>
@@ -58,7 +60,7 @@ public class SampleCalls {
         DirectPayment directPayment = new DirectPayment(params);
         GetMerchantSettingsResponse res = directPayment.getMerchantSettings(null);
 
-        logger.log(Level.INFO, "\ndoBankTransfer result :  ");
+        logger.log(Level.INFO, "\ngetMerchantSettings result :  ");
         logger.log(Level.INFO, "  - code :  " + res.getResult().getCode());
         logger.log(Level.INFO, "  - short message :  " + res.getResult().getShortMessage());
         logger.log(Level.INFO, "  - long message :  " + res.getResult().getLongMessage());

@@ -2,10 +2,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.monext.payline</groupId>
+	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
 	<version>4.44.1</version>
 	<name>Payline JAVA SDK Project</name>
+	<description>The Payline API provides access to the various functions of the Payline payment solution. It is based on standard web service components, which include the SOAP protocol, the WSDL and XSD definition languages. These standards are supported by a large range of development tools on multiple platforms. This SDK covers all the functions of the Payline payment solution.</description>
+	<url>www.payline.com</url>
+	<developers>
+		<developer>
+			<name>Payline Dev Team</name>
+			<organization>Monext</organization>
+			<email>support@payline.com</email>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License (LGPLv3)</name>
+			<url>http://www.gnu.org/copyleft/lesser.html</url>
+		</license>
+	</licenses>
+	<scm><url>https://github.com/PaylineByMonext/payline-java-sdk</url></scm>
 
 	<organization>
 		<name>MONEXT</name>
@@ -22,6 +38,14 @@
 			<url>http://repo1.maven.org/maven2</url>
 		</pluginRepository>
 	</pluginRepositories>
+	
+	<distributionManagement>
+    <repository>
+        <id>bintray-paylinebymonext-payline</id>
+        <name>paylinebymonext-payline</name>
+        <url>https://api.bintray.com/maven/paylinebymonext/payline/payline-java-sdk/;publish=1</url>
+    </repository>
+	</distributionManagement>
 
 	<build>
 		<finalName>payline-java-sdk-${project.version}</finalName>
@@ -56,6 +80,33 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-source-plugin</artifactId>
+				  <executions>
+				    <execution>
+				      <id>attach-sources</id>
+				      <goals>
+				        <goal>jar</goal>
+				      </goals>
+				    </execution>
+				  </executions>
+			  </plugin>
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-javadoc-plugin</artifactId>
+				  <executions>
+				    <execution>
+				      <id>attach-javadocs</id>
+				      <goals>
+				        <goal>jar</goal>
+				      </goals>
+				      <configuration>
+				      	 <excludePackageNames>com.payline.ws.*</excludePackageNames>
+				      </configuration>
+				    </execution>
+				  </executions>
+				</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
