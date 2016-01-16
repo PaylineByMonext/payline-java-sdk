@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
@@ -22,35 +21,38 @@
 		</license>
 	</licenses>
 	<scm><url>https://github.com/PaylineByMonext/payline-java-sdk</url></scm>
-
 	<organization>
 		<name>MONEXT</name>
 		<url>http://www.monext.fr/</url>
 	</organization>
-
 	<properties>
 		<java.version>1.6</java.version>
 	</properties>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>Apache Maven Central repository</id>
-			<url>http://repo1.maven.org/maven2</url>
-		</pluginRepository>
-	</pluginRepositories>
-	
 	<distributionManagement>
-    <repository>
-        <id>bintray-paylinebymonext-payline</id>
-        <name>paylinebymonext-payline</name>
-        <url>https://api.bintray.com/maven/paylinebymonext/payline/payline-java-sdk/;publish=1</url>
-    </repository>
+	  <snapshotRepository>
+	    <id>ossrh</id>
+	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	  </snapshotRepository>
+	  <repository>
+	    <id>ossrh</id>
+	    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	  </repository>
 	</distributionManagement>
-
 	<build>
 		<finalName>payline-java-sdk-${project.version}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
+			<plugin>
+		      <groupId>org.sonatype.plugins</groupId>
+		      <artifactId>nexus-staging-maven-plugin</artifactId>
+		      <version>1.6.3</version>
+		      <extensions>true</extensions>
+		      <configuration>
+		        <serverId>ossrh</serverId>
+		        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+		      </configuration>
+		    </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -70,7 +72,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -87,7 +88,7 @@
 				    <execution>
 				      <id>attach-sources</id>
 				      <goals>
-				        <goal>jar</goal>
+				        <goal>jar-no-fork</goal>
 				      </goals>
 				    </execution>
 				  </executions>
@@ -106,8 +107,21 @@
 				      </configuration>
 				    </execution>
 				  </executions>
-				</plugin>
-
+			 </plugin>
+			 <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-gpg-plugin</artifactId>
+		      <version>1.5</version>
+		      <executions>
+		        <execution>
+		          <id>sign-artifacts</id>
+		          <phase>verify</phase>
+		          <goals>
+		            <goal>sign</goal>
+		          </goals>
+		        </execution>
+		      </executions>
+		    </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
@@ -140,7 +154,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<!-- DEPENDENCIES REFERENCES -->
 	<dependencies>
 		<dependency>
@@ -149,5 +162,4 @@
 			<version>1.10</version>
 		</dependency>
 	</dependencies>
-
 </project>
