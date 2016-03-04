@@ -46,9 +46,9 @@
 	
 	<profiles>
 		<profile>
-			<id>sign</id> <!-- this profile can be deactivated to skip artifact signature -->
+			<id>sign</id> <!-- this profile induce artifact signature -->
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
 				<plugins>
@@ -87,25 +87,6 @@
 		        <autoReleaseAfterClose>true</autoReleaseAfterClose>
 		      </configuration>
 		    </plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>generated/src</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -172,7 +153,6 @@
 					<!-- Package name -->
 					<packageName>com.payline.ws.model</packageName>
 					<!-- generated source files destination -->
-					<sourceDestDir>${basedir}/generated/src</sourceDestDir>
 					<wsdlLocation>wsdls/v${payline.wsdl.version}.wsdl</wsdlLocation>
 				</configuration>
 			</plugin>
