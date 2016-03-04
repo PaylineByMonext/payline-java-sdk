@@ -1,11 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
-	<version>4.44.1</version>
+	<version>4.44.1.1</version>
 	<name>Payline JAVA SDK Project</name>
 	<description>The Payline API provides access to the various functions of the Payline payment solution. It is based on standard web service components, which include the SOAP protocol, the WSDL and XSD definition languages. These standards are supported by a large range of development tools on multiple platforms. This SDK covers all the functions of the Payline payment solution.</description>
+	
+	<properties>
+		<java.version>1.6</java.version>
+		<payline.wsdl.version>4.44.1</payline.wsdl.version>
+	</properties>
+	
 	<url>www.payline.com</url>
 	<developers>
 		<developer>
@@ -25,9 +32,7 @@
 		<name>MONEXT</name>
 		<url>http://www.monext.fr/</url>
 	</organization>
-	<properties>
-		<java.version>1.6</java.version>
-	</properties>
+	
 	<distributionManagement>
 	  <snapshotRepository>
 	    <id>ossrh</id>
@@ -38,6 +43,35 @@
 	    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 	  </repository>
 	</distributionManagement>
+	
+	<profiles>
+		<profile>
+			<id>sign</id> <!-- this profile can be deactivated to skip artifact signature -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+				      <groupId>org.apache.maven.plugins</groupId>
+				      <artifactId>maven-gpg-plugin</artifactId>
+				      <version>1.6</version>
+				      <executions>
+				        <execution>
+				          <id>sign-artifacts</id>
+				          <phase>verify</phase>
+				          <goals>
+				            <goal>sign</goal>
+				          </goals>
+				        </execution>
+				      </executions>
+				    </plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+	</profiles>
+	
 	<build>
 		<finalName>payline-java-sdk-${project.version}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -110,24 +144,11 @@
 				    </execution>
 				  </executions>
 			 </plugin>
-			 <plugin>
-		      <groupId>org.apache.maven.plugins</groupId>
-		      <artifactId>maven-gpg-plugin</artifactId>
-		      <version>1.6</version>
-		      <executions>
-		        <execution>
-		          <id>sign-artifacts</id>
-		          <phase>verify</phase>
-		          <goals>
-		            <goal>sign</goal>
-		          </goals>
-		        </execution>
-		      </executions>
-		    </plugin>
+			 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
-				<version>1.12</version>
+				<version>2.4.1</version>
 				<executions>
 					<execution>
 						<id>wsimport-from-jdk</id>
@@ -144,7 +165,7 @@
 					<wsdlDirectory>${basedir}/src/main/resources/wsdls</wsdlDirectory>
 					<!-- wsdl file -->
 					<wsdlFiles>
-						<wsdlFile>v${project.version}.wsdl</wsdlFile>
+						<wsdlFile>v${payline.wsdl.version}.wsdl</wsdlFile>
 					</wsdlFiles>
 					<!-- Keep generated files -->
 					<keep>true</keep>
@@ -152,6 +173,7 @@
 					<packageName>com.payline.ws.model</packageName>
 					<!-- generated source files destination -->
 					<sourceDestDir>${basedir}/generated/src</sourceDestDir>
+					<wsdlLocation>wsdls/v${payline.wsdl.version}.wsdl</wsdlLocation>
 				</configuration>
 			</plugin>
 		</plugins>

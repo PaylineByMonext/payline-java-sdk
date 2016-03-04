@@ -73,7 +73,7 @@ public final class Utils {
     /**
      * WSDL
      */
-    public static final String WSDL = "v4.44.1.wsdl";
+    public static final String WSDL = "wsdls/v4.44.1.wsdl";
 
     /**
      * logger.
@@ -145,7 +145,7 @@ public final class Utils {
                 System.setProperty("http.proxyPassword", PaylineProperties.getString("PROXY_PWD"));
             }
         } else {
-            // Suppression des paramètres proxy pour éviter un effet cache
+            // Suppression des paramï¿½tres proxy pour ï¿½viter un effet cache
             System.setProperty("http.proxySet", "false");
             System.clearProperty("http.proxyHost");
             System.clearProperty("http.proxyPort");
@@ -217,7 +217,7 @@ public final class Utils {
                 System.setProperty("http.proxyPassword", params.getProxyPassword());
             }
         } else {
-            // Suppression des paramètres proxy pour éviter un effet cache
+            // Suppression des paramï¿½tres proxy pour ï¿½viter un effet cache
             System.setProperty("http.proxySet", "false");
             System.clearProperty("http.proxyHost");
             System.clearProperty("http.proxyPort");
@@ -447,7 +447,7 @@ public final class Utils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.log(LOG_LEVEL, "Erreur lors de la décompression");
+            logger.log(LOG_LEVEL, "Erreur lors de la dï¿½compression");
         }
         return outStr;
     }
