@@ -145,7 +145,7 @@ public final class Utils {
                 System.setProperty("http.proxyPassword", PaylineProperties.getString("PROXY_PWD"));
             }
         } else {
-            // Suppression des param�tres proxy pour �viter un effet cache
+            // remove proxy parameters to prevent cache side effects
             System.setProperty("http.proxySet", "false");
             System.clearProperty("http.proxyHost");
             System.clearProperty("http.proxyPort");
@@ -217,7 +217,7 @@ public final class Utils {
                 System.setProperty("http.proxyPassword", params.getProxyPassword());
             }
         } else {
-            // Suppression des param�tres proxy pour �viter un effet cache
+        	// remove proxy parameters to prevent cache side effects
             System.setProperty("http.proxySet", "false");
             System.clearProperty("http.proxyHost");
             System.clearProperty("http.proxyPort");
@@ -447,7 +447,7 @@ public final class Utils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.log(LOG_LEVEL, "Erreur lors de la d�compression");
+            logger.log(LOG_LEVEL, "unexpected error during GZip inflation");
         }
         return outStr;
     }

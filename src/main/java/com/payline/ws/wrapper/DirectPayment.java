@@ -379,7 +379,7 @@ public class DirectPayment extends WebServiceWrapper {
     }
 
     /**
-     * Verify that the buyer’s card is 3DSecure.
+     * Verify that the buyers card is 3DSecure.
      * @param card the card object, containing the card data : number, expirationDate, cvx,...
      * @param payment the payment object containing the amount, the currency, action and mode codes
      * @param orderRef the order reference

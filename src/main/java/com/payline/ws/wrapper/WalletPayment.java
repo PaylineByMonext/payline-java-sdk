@@ -116,7 +116,7 @@ public class WalletPayment extends WebServiceWrapper {
     }
 
     /**
-     * Create a customer wallet. The “createWallet” function is used to create a virtual wallet for your customer. In order to validate the use of a wallet,
+     * Create a customer wallet. The 'createWallet' function is used to create a virtual wallet for your customer. In order to validate the use of a wallet,
      * Payline performs an e-payment check of the payment method via an authorization transaction of 1 euro which will not then be validated (no actual
      * payment).
      * @param wallet the wallet object, containing the walletId and data about its owner (firstName, lastName, email,...)
@@ -157,7 +157,7 @@ public class WalletPayment extends WebServiceWrapper {
     }
 
     /**
-     * Retrieve information making up the customer wallet The “getWallet” function retrieves virtual wallet data.
+     * Retrieve information making up the customer wallet The 'getWallet' function retrieves virtual wallet data.
      * @param walletId the wallet identifier
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param Cardind within a wallet, index of the card to be used for payment
@@ -193,7 +193,7 @@ public class WalletPayment extends WebServiceWrapper {
     }
 
     /**
-     * Update customer wallet. The “updateWallet” function is used to update the virtual wallet.
+     * Update customer wallet. The 'updateWallet' function is used to update the virtual wallet.
      * @param wallet the wallet object, containing the walletId and data about its owner (firstName, lastName, email,...)
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
@@ -234,7 +234,7 @@ public class WalletPayment extends WebServiceWrapper {
     }
 
     /**
-     * Deactivate a customer wallet. The “disableWalletResponse” message is the response from Payline to a virtual wallet deactivation request.
+     * Deactivate a customer wallet. The 'disableWalletResponse' message is the response from Payline to a virtual wallet deactivation request.
      * @param walletIdList the list of virtual wallet ID
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param Cardind within a wallet, index of the card to be used for payment
@@ -640,7 +640,7 @@ public class WalletPayment extends WebServiceWrapper {
     /**
      * Create a customer wallet using web pages The <b>createWebWallet</b> function initialises the creation of a virtual wallet via the web interface. Once
      * your customer is redirected, they are asked to enter their card details to create their virtual wallet. Payline checks this information by a debit
-     * authorization request for a sum of €1 (validation does not take place so no card is credited on creation) and registers the customer wallet with the ID
+     * authorization request for a sum of EUR 1 (validation does not take place so no card is credited on creation) and registers the customer wallet with the ID
      * (walletId) you have provided.
      * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
