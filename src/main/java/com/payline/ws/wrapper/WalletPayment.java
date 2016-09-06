@@ -868,13 +868,14 @@ public class WalletPayment extends WebServiceWrapper {
      * @param cardInd within a wallet, index of the card to be used for payment
      * @return GetCardsResponse
      */
-    public final GetCardsResponse getCards(final String contractNumber, final String walletId, final String cardInd) {
+    public final GetCardsResponse getCards(final String contractNumber, final String walletId, final String cardInd, final String version) {
         setException(null);
         GetCardsResponse result = new GetCardsResponse();
         GetCardsRequest parameters = new GetCardsRequest();
         parameters.setContractNumber(contractNumber);
         parameters.setWalletId(walletId);
         parameters.setCardInd(cardInd);
+        parameters.setVersion(version);
 
         DirectPaymentAPI port = null;
         try {

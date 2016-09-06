@@ -73,7 +73,7 @@ public final class Utils {
     /**
      * WSDL
      */
-    public static final String WSDL = "wsdls/v4.44.1.wsdl";
+    public static final String WSDL = "wsdls/v4.47.wsdl";
 
     /**
      * logger.
@@ -89,7 +89,7 @@ public final class Utils {
     /**
      * kit version
      */
-    public static final String kitVersion = "kit JAVA v4.44.1";
+    public static final String kitVersion = "kit JAVA v4.47";
 
     /**
      * Default constructor.
