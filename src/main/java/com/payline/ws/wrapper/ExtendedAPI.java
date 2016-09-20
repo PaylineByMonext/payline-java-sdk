@@ -76,11 +76,13 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @param transactionId the unique Payline transaction ID
      * @return GetAlertDetailsResponse
      */
-    public final GetAlertDetailsResponse getAlertDetails(final String alertId, final String transactionId) {
+    public final GetAlertDetailsResponse getAlertDetails(final String alertId, final String transactionId, final String transactionDate, final String version) {
         GetAlertDetailsResponse result = new GetAlertDetailsResponse();
         GetAlertDetailsRequest parameters = new GetAlertDetailsRequest();
         parameters.setAlertId(alertId);
+        parameters.setTransactionDate(transactionDate);
         parameters.setTransactionId(transactionId);
+        parameters.setVersion(version);
         com.payline.ws.model.ExtendedAPI port = null;
         try {
             if (this.initFromFile) {
