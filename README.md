@@ -69,7 +69,7 @@ public class SampleCalls {
 ```
 
 ## Version
-4.47
+4.48
 
 ## Learn about Payline
 * [www.payline.com](http://www.payline.com/index.php/en/)
