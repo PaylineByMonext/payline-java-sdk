@@ -18,6 +18,7 @@ package com.payline.ws.wrapper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.ws.WebServiceException;
 
 import com.payline.kit.utils.ConnectParams;
@@ -56,6 +57,7 @@ import com.payline.ws.model.GetMerchantSettingsRequest;
 import com.payline.ws.model.GetMerchantSettingsResponse;
 import com.payline.ws.model.GetTokenRequest;
 import com.payline.ws.model.GetTokenResponse;
+import com.payline.ws.model.ObjectFactory;
 import com.payline.ws.model.Order;
 import com.payline.ws.model.Payment;
 import com.payline.ws.model.PrivateDataList;
@@ -77,6 +79,11 @@ public class DirectPayment extends WebServiceWrapper {
      * A Logger object is used to log messages
      */
     private static final Logger logger = Logger.getLogger(DirectPayment.class.getName());
+    
+    /**
+     * ObjectFactory is used to create result messages
+     */
+    private ObjectFactory factory = null;
 
     /**
      * initFromFile, initiating Direct Services from payline properties file
@@ -94,6 +101,7 @@ public class DirectPayment extends WebServiceWrapper {
      */
     public DirectPayment() {
         super();
+        this.factory = new ObjectFactory();
     }
 
     /**
@@ -102,6 +110,7 @@ public class DirectPayment extends WebServiceWrapper {
      */
     public DirectPayment(ConnectParams connectParams) {
         super();
+        this.factory = new ObjectFactory();
         this.initFromFile = false;
         this.connectParams = connectParams;
     }
@@ -144,8 +153,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doAuthorization call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -192,8 +201,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doDebit call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -232,8 +241,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doBankTransfer call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -271,8 +280,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doCapture call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -312,8 +321,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doRefund call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -357,8 +366,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doCredit call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -413,8 +422,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during verifyEnrollment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -447,8 +456,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doReset call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -479,8 +488,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getBalance call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -507,8 +516,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getEncryptionKey call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -538,8 +547,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getMerchantSettings call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -572,8 +581,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getToken call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -605,8 +614,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during unBlock call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -643,8 +652,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doScoringCheque call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -682,8 +691,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doReAuthorization call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -722,8 +731,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during verifyAuthentication call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;

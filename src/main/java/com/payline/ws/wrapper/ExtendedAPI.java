@@ -26,6 +26,7 @@ import com.payline.ws.model.GetAlertDetailsRequest;
 import com.payline.ws.model.GetAlertDetailsResponse;
 import com.payline.ws.model.GetTransactionDetailsRequest;
 import com.payline.ws.model.GetTransactionDetailsResponse;
+import com.payline.ws.model.ObjectFactory;
 import com.payline.ws.model.Result;
 import com.payline.ws.model.TransactionsSearchRequest;
 import com.payline.ws.model.TransactionsSearchResponse;
@@ -40,6 +41,11 @@ public class ExtendedAPI extends WebServiceWrapper {
      * A Logger object is used to log messages
      */
     private static final Logger logger = Logger.getLogger(ExtendedAPI.class.getName());
+    
+    /**
+     * ObjectFactory is used to create result messages
+     */
+    private ObjectFactory factory = null;
 
     /**
      * initFromFile
@@ -57,6 +63,7 @@ public class ExtendedAPI extends WebServiceWrapper {
      */
     public ExtendedAPI() {
         super();
+        this.factory = new ObjectFactory();
     }
 
     /**
@@ -65,6 +72,7 @@ public class ExtendedAPI extends WebServiceWrapper {
      */
     public ExtendedAPI(ConnectParams connectParams) {
         super();
+        this.factory = new ObjectFactory();
         this.initFromFile = false;
         this.connectParams = connectParams;
     }

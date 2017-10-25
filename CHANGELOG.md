@@ -1,3 +1,15 @@
+* 4.52 (2017-10-25)
+
+  * new "merchantName" parameter for services
+  	- doWebPayment
+  	- manageWebWallet
+  	- verifyEnrollment
+  * new "details" object parameter for doRefund service
+  * new "avs" child node for "transaction" object
+  * new "paymentData" child node for "card" object
+
+----------------------------------------
+
 * 4.48 (2016-09-20)
 
   * new getAlertDetails parameters

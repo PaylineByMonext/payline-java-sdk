@@ -56,6 +56,7 @@ import com.payline.ws.model.GetWebWalletRequest;
 import com.payline.ws.model.GetWebWalletResponse;
 import com.payline.ws.model.ManageWebWalletRequest;
 import com.payline.ws.model.ManageWebWalletResponse;
+import com.payline.ws.model.ObjectFactory;
 import com.payline.ws.model.Order;
 import com.payline.ws.model.Owner;
 import com.payline.ws.model.Payment;
@@ -86,6 +87,11 @@ public class WalletPayment extends WebServiceWrapper {
      * A Logger object is used to log messages
      */
     private static final Logger logger = Logger.getLogger(ExtendedAPI.class.getName());
+    
+    /**
+     * ObjectFactory is used to create result messages
+     */
+    private ObjectFactory factory = null;
 
     /**
      * initFromFile
@@ -103,6 +109,7 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public WalletPayment() {
         super();
+        this.factory = new ObjectFactory();
     }
 
     /**
@@ -111,6 +118,7 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public WalletPayment(ConnectParams connectParams) {
         super();
+        this.factory = new ObjectFactory();
         this.initFromFile = false;
         this.connectParams = connectParams;
     }
@@ -149,8 +157,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during createWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -185,8 +193,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -226,8 +234,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -260,8 +268,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during disableWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -295,8 +303,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during enableWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -359,8 +367,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doImmediateWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -407,8 +415,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doScheduledWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -456,8 +464,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doRecurrentWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -489,8 +497,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getPaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -526,8 +534,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updatePaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -559,8 +567,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during disablePaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -592,8 +600,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getBillingRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -629,8 +637,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateBillingRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -699,8 +707,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during createWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -761,8 +769,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -822,8 +830,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during manageWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -854,8 +862,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -890,8 +898,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getCards call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;

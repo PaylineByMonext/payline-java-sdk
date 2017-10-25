@@ -28,6 +28,7 @@ import com.payline.ws.model.DoWebPaymentRequest;
 import com.payline.ws.model.DoWebPaymentResponse;
 import com.payline.ws.model.GetWebPaymentDetailsRequest;
 import com.payline.ws.model.GetWebPaymentDetailsResponse;
+import com.payline.ws.model.ObjectFactory;
 import com.payline.ws.model.Order;
 import com.payline.ws.model.Payment;
 import com.payline.ws.model.PrivateDataList;
@@ -46,6 +47,11 @@ public class WebPayment extends WebServiceWrapper {
      * A Logger object is used to log messages
      */
     private static final Logger logger = Logger.getLogger(WebPayment.class.getName());
+    
+    /**
+     * ObjectFactory is used to create result messages
+     */
+    private ObjectFactory factory = null;
 
     /**
      * initFromFile
@@ -62,6 +68,7 @@ public class WebPayment extends WebServiceWrapper {
      */
     public WebPayment() {
         super();
+        this.factory = new ObjectFactory();
     }
 
     /**
@@ -70,6 +77,7 @@ public class WebPayment extends WebServiceWrapper {
      */
     public WebPayment(ConnectParams connectParams) {
         super();
+        this.factory = new ObjectFactory();
         this.initFromFile = false;
         this.connectParams = connectParams;
     }
@@ -100,8 +108,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWebPaymentDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -203,8 +211,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doWebPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;

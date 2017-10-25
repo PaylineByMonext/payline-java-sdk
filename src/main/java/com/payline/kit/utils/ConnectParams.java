@@ -25,48 +25,48 @@ public class ConnectParams {
     /**
      * production, flag to indicate whether web services calls should be done in production environment
      */
-    private static boolean production;
+    private boolean production;
 
     /**
      * clientAuthentication, This attribute specifies if client authentication should be required. Returns whether client authentication is required. true, if
      * clients are required to authenticate, false otherwise.
      */
-    private static boolean clientAuthentication;
+    private boolean clientAuthentication;
 
     /**
      * module, the module to connect
      */
-    private static String module = null;
+    private String module = null;
 
     /**
      * merchantId the merchant identifier being used
      */
-    private static String merchantId;
+    private String merchantId;
 
     /**
      * accessKey, the access key for this credentials object The unique identifier access key of the connection in security domain
      */
-    private static String accessKey;
+    private String accessKey;
 
     /**
      * proxyHost, The hostname, or address, of the proxy server
      */
-    private static String proxyHost = null;
+    private String proxyHost = null;
 
     /**
      * proxyPort, The port number of the proxy server.
      */
-    private static String proxyPort = null;
+    private String proxyPort = null;
 
     /**
      * proxyLogin, the proxy login should use for retrieving Connections
      */
-    private static String proxyLogin = null;
+    private String proxyLogin = null;
 
     /**
      * proxyPassword, the proxy password that should use for retrieving Connections
      */
-    private static String proxyPassword = null;
+    private String proxyPassword = null;
 
     /**
      * Class constructor specifying the connection properties to create
@@ -83,23 +83,23 @@ public class ConnectParams {
     public ConnectParams(String module, boolean production, boolean clientAuthentication, String merchantId, String accessKey, String proxyHost,
         String proxyPort, String proxyLogin, String proxyPassword) {
         if (module != null && module.length() != 0) {
-            ConnectParams.module = module;
+            this.module = module;
         }
-        ConnectParams.production = production;
-        ConnectParams.clientAuthentication = clientAuthentication;
-        ConnectParams.merchantId = merchantId;
-        ConnectParams.accessKey = accessKey;
+        this.production = production;
+        this.clientAuthentication = clientAuthentication;
+        this.merchantId = merchantId;
+        this.accessKey = accessKey;
         if (proxyHost != null && proxyHost.length() != 0) {
-            ConnectParams.proxyHost = proxyHost;
+        	this.proxyHost = proxyHost;
         }
         if (proxyPort != null && proxyPort.length() != 0) {
-            ConnectParams.proxyPort = proxyPort;
+        	this.proxyPort = proxyPort;
         }
         if (proxyLogin != null && proxyLogin.length() != 0) {
-            ConnectParams.proxyLogin = proxyLogin;
+        	this.proxyLogin = proxyLogin;
         }
         if (proxyPassword != null && proxyPassword.length() != 0) {
-            ConnectParams.proxyPassword = proxyPassword;
+        	this.proxyPassword = proxyPassword;
         }
     }
 
@@ -113,12 +113,12 @@ public class ConnectParams {
      */
     public ConnectParams(String module, boolean production, boolean clientAuthentication, String merchantId, String accessKey) {
         if (module != null && module.length() != 0) {
-            ConnectParams.module = module;
+        	this.module = module;
         }
-        ConnectParams.production = production;
-        ConnectParams.clientAuthentication = clientAuthentication;
-        ConnectParams.merchantId = merchantId;
-        ConnectParams.accessKey = accessKey;
+        this.production = production;
+        this.clientAuthentication = clientAuthentication;
+        this.merchantId = merchantId;
+        this.accessKey = accessKey;
     }
 
     /**
