@@ -104,8 +104,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getAlertDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -119,7 +119,7 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @param startDate the Start date of the transaction search period
      * @param endDate the End date of the transaction search period
      * @param transactionHistory the status history for a given transaction
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return GetTransactionDetailsResponse
      */
     public final GetTransactionDetailsResponse getTransactionDetails(final String orderRef, final String transactionID, final String startDate,
@@ -146,8 +146,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getTransactionDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;
@@ -214,8 +214,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during transactionsSearch call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(ex.getMessage());
-            err.setShortMessage(ex.getMessage());
+            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
+            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
             result.setResult(err);
         }
         return result;

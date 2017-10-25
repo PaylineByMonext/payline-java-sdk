@@ -85,7 +85,7 @@ public class WebPayment extends WebServiceWrapper {
     /**
      * Get web payment results
      * @param token identifier of a web payment, create/update wallet session
-     * @param version, the API version of Payline : 13 corresponds to 4.45 release
+     * @param version, the API version of Payline
      * @return GetWebPaymentDetailsResponse the response from Payline to a request for the results of a web payment.
      */
     public final GetWebPaymentDetailsResponse getWebPaymentDetails(final String token, final String version) {
@@ -118,7 +118,7 @@ public class WebPayment extends WebServiceWrapper {
     /**
      * Initialisation of a web payment The <b>doWebPayment</b> function initialises a web payment before redirecting your customer to Payline payment pages.
      * This allows immediate or deferred cash payments, X-time payments, and subscription payments to be made
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @param payment the payment object containing the amount, the currency, action and mode codes
      * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
      * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
@@ -134,12 +134,13 @@ public class WebPayment extends WebServiceWrapper {
      * @param selectedContractList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
      * @param secondSelectedContractList the list of contract numbers you wish to present again after a first payment attempt has failed.
      * @param customPaymentTemplateURL URL of the custom template
+     * @param merchantName name displayed to buyer on 3D Secure authentication form
      * @return DoWebPaymentResponse the response given by Payline to a web payment initialisation request
      */
     public final DoWebPaymentResponse doWebPayment(final String version, final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final Recurring recurring, String notificationURL, String returnURL, String cancelURL, String languageCode,
         String securityMode, final String customPaymentPageCode, SelectedContractList selectedContractList, SelectedContractList secondSelectedContractList,
-        final String customPaymentTemplateURL) {
+        final String customPaymentTemplateURL, final String merchantName) {
         setException(null);
         DoWebPaymentResponse result = new DoWebPaymentResponse();
         DoWebPaymentRequest parameters = new DoWebPaymentRequest();
@@ -198,6 +199,7 @@ public class WebPayment extends WebServiceWrapper {
 
         parameters.setSelectedContractList(selectedContractList);
         parameters.setSecondSelectedContractList(secondSelectedContractList);
+        parameters.setMerchantName(merchantName);
         WebPaymentAPI port = null;
         try {
             if (this.initFromFile) {

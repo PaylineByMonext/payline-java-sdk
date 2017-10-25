@@ -124,7 +124,7 @@ public class DirectPayment extends WebServiceWrapper {
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
      * @param bank the bankAccountData object, used for ELV payment only
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return DoAuthorizationResponse the response given by Payline to a debit authorization request
      */
     public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer, final Card card,
@@ -170,7 +170,7 @@ public class DirectPayment extends WebServiceWrapper {
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
      * @param authorization the authorization
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return DoDebitResponse the response given by Payline to a debit request
      */
     public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card, final PrivateDataList privateDataList,
@@ -214,7 +214,7 @@ public class DirectPayment extends WebServiceWrapper {
      * @param transationID the unique Payline transaction ID
      * @param orderID the unique Payline order id
      * @param comment the comment
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return DoBankTransferResponse
      */
     public final DoBankTransferResponse doBankTransfer(final Payment payment, final Creditor creditor, final String transationID, final String orderID,
@@ -295,10 +295,11 @@ public class DirectPayment extends WebServiceWrapper {
      * @param comment the comment
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param sequenceNumber the transaction sequence number
+     * @param order the order info. Only details (cart content) is used for doRefund
      * @return DoRefundResponse the response given by Payline to a refund request
      */
     public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment, final PrivateDataList privateDataList,
-        final String sequenceNumber, final String version) {
+        final String sequenceNumber, final String version, final Order order) {
         setException(null);
         DoRefundResponse result = new DoRefundResponse();
         DoRefundRequest parameters = new DoRefundRequest();
@@ -308,6 +309,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setSequenceNumber(sequenceNumber);
         parameters.setPrivateDataList(privateDataList);
         parameters.setVersion(version);
+        parameters.setDetails(order.getDetails());
         DirectPaymentAPI port = null;
         try {
             if (this.initFromFile) {
@@ -338,7 +340,7 @@ public class DirectPayment extends WebServiceWrapper {
      * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
      * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return DoCreditResponse
      */
     public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment, final Buyer buyer, final Order order,
@@ -379,12 +381,12 @@ public class DirectPayment extends WebServiceWrapper {
      * @param payment the payment object containing the amount, the currency, action and mode codes
      * @param orderRef the order reference
      * @param UsrAgent the user Agent
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return VerifyEnrollmentResponse
      */
     public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment, final String orderRef, final String UsrAgent,
         final String version) {
-        return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version);
+        return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version, null);
     }
 
     /**
@@ -395,10 +397,12 @@ public class DirectPayment extends WebServiceWrapper {
      * @param walletId the wallet identifier
      * @param walletCardInd the card index to use
      * @param UsrAgent the user Agent
+     * @param version the API version of Payline
+     * @param merchantName name displayed to buyer on 3D Secure authentication form
      * @return VerifyEnrollmentResponse
      */
     public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment, final String orderRef, final String walletId,
-        final String walletCardInd, final String UsrAgent, final String version) {
+        final String walletCardInd, final String UsrAgent, final String version, final String merchantName) {
         setException(null);
         VerifyEnrollmentResponse result = new VerifyEnrollmentResponse();
         VerifyEnrollmentRequest parameters = new VerifyEnrollmentRequest();
@@ -409,6 +413,8 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setOrderRef(orderRef);
         parameters.setUserAgent(UsrAgent);
         parameters.setVersion(version);
+        parameters.setMerchantName(merchantName);
+        
         DirectPaymentAPI port = null;
         try {
             if (this.initFromFile) {
@@ -591,7 +597,7 @@ public class DirectPayment extends WebServiceWrapper {
     /**
      * @param transactionID the unique Payline transaction ID
      * @param transactionDate the transaction date
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return UnBlockResponse
      */
     public final UnBlockResponse unBlock(final String transactionID, final String transactionDate, final String version) {

@@ -131,7 +131,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return CreateWalletResponse
      */
     public final CreateWalletResponse createWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
@@ -169,7 +169,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param walletId the wallet identifier
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param Cardind within a wallet, index of the card to be used for payment
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return GetWalletResponse
      */
     public final GetWalletResponse getWallet(final String walletId, final String contractNumber, final String Cardind, final String version) {
@@ -207,7 +207,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
      * @param Cardind within a wallet, index of the card to be used for payment
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return UpdateWalletResponse
      */
     public final UpdateWalletResponse updateWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
@@ -319,7 +319,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param walletId the wallet identifier
      * @param Cardind within a wallet, index of the card to be used for payment
      * @param cvx Card Verification Value associated to the Card Number
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return DoImmediateWalletPaymentResponse
      */
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
@@ -506,7 +506,7 @@ public class WalletPayment extends WebServiceWrapper {
 
     /**
      * This web service modifies one or several settings for a payment record.
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param paymentRecordId identifier of a payment record (a list of billing record)
      * @param recurring the recurring object, containing data about how Payline will deal with the recurring payment : first amount, other amount, number of
@@ -778,7 +778,7 @@ public class WalletPayment extends WebServiceWrapper {
 
     /**
      * Manage a wallet from the web interface.
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param selectedContractList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
      * @param updatePersonalDetails flag (0/1) to indicate whether customer can change his personal details (firstname, lastname,...) on update wallet page
@@ -793,12 +793,13 @@ public class WalletPayment extends WebServiceWrapper {
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param customPaymentTemplateURL URL of the custom template
      * @param contractNumberWalletList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param merchantName name displayed to buyer on 3D Secure authentication form
      * @return ManageWebWalletResponse
      */
     public final ManageWebWalletResponse manageWebWallet(final String version, final String contractNumber, final SelectedContractList selectedContractList,
         final String updatePersonalDetails, final Buyer buyer, final Owner owner, final String languageCode, final String customPaymentPageCode,
         final String securityMode, final String returnURL, final String cancelURL, final String notificationURL, final PrivateDataList privateDataList,
-        final String customPaymentTemplateURL, final ContractNumberWalletList contractNumberWalletList) {
+        final String customPaymentTemplateURL, final ContractNumberWalletList contractNumberWalletList, final String merchantName) {
         setException(null);
         WebPaymentAPI port = null;
         ManageWebWalletResponse result = new ManageWebWalletResponse();
@@ -818,6 +819,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privateDataList);
         parameters.setCustomPaymentTemplateURL(customPaymentTemplateURL);
         parameters.setContractNumberWalletList(contractNumberWalletList);
+        parameters.setMerchantName(merchantName);
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceWeb();
@@ -840,7 +842,7 @@ public class WalletPayment extends WebServiceWrapper {
     /**
      * This method is used to retrieve information from a virtual wallet created via the web interface
      * @param token identifier of a web payment, create/update wallet session
-     * @param version the API version of Payline : 13 corresponds to 4.45 release
+     * @param version the API version of Payline
      * @return GetWebWalletResponse
      */
     public final GetWebWalletResponse getWebWallet(final String token, final String version) {
