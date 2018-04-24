@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
-	<version>4.52</version>
+	<version>4.53</version>
 	<name>Payline JAVA SDK Project</name>
 	<description>The Payline API provides access to the various functions of the Payline payment solution. It is based on standard web service components, which include the SOAP protocol, the WSDL and XSD definition languages. These standards are supported by a large range of development tools on multiple platforms. This SDK covers all the functions of the Payline payment solution.</description>
 	
 	<properties>
 		<java.version>1.6</java.version>
-		<payline.wsdl.version>4.52</payline.wsdl.version>
+		<payline.wsdl.version>4.53</payline.wsdl.version>
 	</properties>
 	
 	<url>www.payline.com</url>

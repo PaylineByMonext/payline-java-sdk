@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.52</version>
+  <version>4.53</version>
 </dependency>
 ```
 

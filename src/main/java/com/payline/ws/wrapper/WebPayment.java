@@ -20,22 +20,22 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.WebServiceException;
 
+import com.experian.payline.ws.impl.DoWebPaymentRequest;
+import com.experian.payline.ws.impl.DoWebPaymentResponse;
+import com.experian.payline.ws.impl.GetWebPaymentDetailsRequest;
+import com.experian.payline.ws.impl.GetWebPaymentDetailsResponse;
+import com.experian.payline.ws.impl.WebPaymentAPI;
+import com.experian.payline.ws.obj.Buyer;
+import com.experian.payline.ws.obj.Order;
+import com.experian.payline.ws.obj.Payment;
+import com.experian.payline.ws.obj.PrivateDataList;
+import com.experian.payline.ws.obj.Recurring;
+import com.experian.payline.ws.obj.Result;
+import com.experian.payline.ws.obj.SelectedContractList;
+import com.experian.payline.ws.obj.SubMerchant;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.PaylineProperties;
 import com.payline.kit.utils.Utils;
-import com.payline.ws.model.Buyer;
-import com.payline.ws.model.DoWebPaymentRequest;
-import com.payline.ws.model.DoWebPaymentResponse;
-import com.payline.ws.model.GetWebPaymentDetailsRequest;
-import com.payline.ws.model.GetWebPaymentDetailsResponse;
-import com.payline.ws.model.ObjectFactory;
-import com.payline.ws.model.Order;
-import com.payline.ws.model.Payment;
-import com.payline.ws.model.PrivateDataList;
-import com.payline.ws.model.Recurring;
-import com.payline.ws.model.Result;
-import com.payline.ws.model.SelectedContractList;
-import com.payline.ws.model.WebPaymentAPI;
 
 /**
  * . WebPayment class
@@ -47,11 +47,6 @@ public class WebPayment extends WebServiceWrapper {
      * A Logger object is used to log messages
      */
     private static final Logger logger = Logger.getLogger(WebPayment.class.getName());
-    
-    /**
-     * ObjectFactory is used to create result messages
-     */
-    private ObjectFactory factory = null;
 
     /**
      * initFromFile
@@ -68,7 +63,6 @@ public class WebPayment extends WebServiceWrapper {
      */
     public WebPayment() {
         super();
-        this.factory = new ObjectFactory();
     }
 
     /**
@@ -77,7 +71,6 @@ public class WebPayment extends WebServiceWrapper {
      */
     public WebPayment(ConnectParams connectParams) {
         super();
-        this.factory = new ObjectFactory();
         this.initFromFile = false;
         this.connectParams = connectParams;
     }
@@ -108,8 +101,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWebPaymentDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
-            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
+            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
+            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -135,56 +128,61 @@ public class WebPayment extends WebServiceWrapper {
      * @param secondSelectedContractList the list of contract numbers you wish to present again after a first payment attempt has failed.
      * @param customPaymentTemplateURL URL of the custom template
      * @param merchantName name displayed to buyer on 3D Secure authentication form
+     * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
+     * @param miscData
      * @return DoWebPaymentResponse the response given by Payline to a web payment initialisation request
      */
     public final DoWebPaymentResponse doWebPayment(final String version, final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final Recurring recurring, String notificationURL, String returnURL, String cancelURL, String languageCode,
         String securityMode, final String customPaymentPageCode, SelectedContractList selectedContractList, SelectedContractList secondSelectedContractList,
-        final String customPaymentTemplateURL, final String merchantName) {
+        final String customPaymentTemplateURL, final String merchantName, final SubMerchant subMerchant, final String miscData) {
         setException(null);
         DoWebPaymentResponse result = new DoWebPaymentResponse();
         DoWebPaymentRequest parameters = new DoWebPaymentRequest();
 
-        if (returnURL == null || returnURL.length() == 0) {
-            returnURL = PaylineProperties.getString("RETURN_URL");
-        }
-        if (cancelURL == null || cancelURL.length() == 0) {
-            cancelURL = PaylineProperties.getString("CANCEL_URL");
-        }
-        if (notificationURL == null || notificationURL.length() == 0) {
-            notificationURL = PaylineProperties.getString("NOTIFICATION_URL");
-        }
-        if (payment.getContractNumber() == null || payment.getContractNumber().length() == 0) {
-            payment.setContractNumber(PaylineProperties.getString("CONTRACT_NUMBER"));
-        }
-        if (payment.getAction() == null || payment.getAction().length() == 0) {
-            payment.setAction(PaylineProperties.getString("PAYMENT_ACTION"));
-        }
-        if (payment.getMode() == null || payment.getMode().length() == 0) {
-            payment.setMode(PaylineProperties.getString("PAYMENT_MODE"));
-        }
-
-        if (selectedContractList == null) {
-            String list = PaylineProperties.getString("SELECTED_CONTRACT_LIST");
-            selectedContractList = new SelectedContractList();
-            String[] contracts = list.split(";");
-            for (String con : contracts) {
-                selectedContractList.getSelectedContract().add(con);
-            }
-        }
-
-        if (languageCode == null || languageCode.length() == 0) {
-            languageCode = PaylineProperties.getString("LANGUAGE_CODE");
-        }
-
-        if (securityMode == null || securityMode.length() == 0) {
-            securityMode = PaylineProperties.getString("SECURITY_MODE");
+        if(this.initFromFile){
+	        if (returnURL == null || returnURL.length() == 0) {
+	            returnURL = PaylineProperties.getString("RETURN_URL");
+	        }
+	        if (cancelURL == null || cancelURL.length() == 0) {
+	            cancelURL = PaylineProperties.getString("CANCEL_URL");
+	        }
+	        if (notificationURL == null || notificationURL.length() == 0) {
+	            notificationURL = PaylineProperties.getString("NOTIFICATION_URL");
+	        }
+	        if (payment.getContractNumber() == null || payment.getContractNumber().length() == 0) {
+	            payment.setContractNumber(PaylineProperties.getString("CONTRACT_NUMBER"));
+	        }
+	        if (payment.getAction() == null || payment.getAction().length() == 0) {
+	            payment.setAction(PaylineProperties.getString("PAYMENT_ACTION"));
+	        }
+	        if (payment.getMode() == null || payment.getMode().length() == 0) {
+	            payment.setMode(PaylineProperties.getString("PAYMENT_MODE"));
+	        }
+	
+	        if (selectedContractList == null) {
+	            String list = PaylineProperties.getString("SELECTED_CONTRACT_LIST");
+	            selectedContractList = new SelectedContractList();
+	            String[] contracts = list.split(";");
+	            for (String con : contracts) {
+	                selectedContractList.getSelectedContract().add(con);
+	            }
+	        }
+	
+	        if (languageCode == null || languageCode.length() == 0) {
+	            languageCode = PaylineProperties.getString("LANGUAGE_CODE");
+	        }
+	
+	        if (securityMode == null || securityMode.length() == 0) {
+	            securityMode = PaylineProperties.getString("SECURITY_MODE");
+	        }
         }
 
         parameters.setVersion(version);
         parameters.setPayment(payment);
         parameters.setOrder(order);
-        parameters.setBuyer(buyer);
+        parameters.setBuyer(Utils.formatJAXBuyer(buyer));
+        		
         parameters.setPrivateDataList(privateDataList);
         if (recurring != null && recurring.getAmount().length() > 0) {
             parameters.setRecurring(recurring);
@@ -213,8 +211,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doWebPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(this.factory.createResultLongMessage(ex.getMessage()));
-            err.setShortMessage(this.factory.createResultShortMessage(Utils.EXCEPTION_SHORTMESSAGE));
+            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
+            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;

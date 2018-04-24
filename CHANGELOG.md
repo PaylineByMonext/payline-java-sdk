@@ -1,3 +1,14 @@
+* 4.53 (2018-04-24)
+  * remove com.experian.payline.ws.obj.ObjectFactory dependencies from all com.payline.ws.wrapper classes
+  * new deliveryCharge attribute in order object
+  * new registrationToken attribute in payment object
+  * new object subMerchant
+  * new method isRegistered
+  * new subMerchant parameter for doAuthorization, doWebPayment, doCredit, doDebit, doImmediateWalletPayment, doScheduledWalletPayment
+  * new miscData parameter for doWebPayment
+  
+---------------------------------------- 
+
 * 4.52 (2017-10-25)
 
   * new "merchantName" parameter for services
