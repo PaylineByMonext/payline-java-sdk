@@ -20,59 +20,59 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.WebServiceException;
 
-import com.experian.payline.ws.impl.CreateWalletRequest;
-import com.experian.payline.ws.impl.CreateWalletResponse;
-import com.experian.payline.ws.impl.CreateWebWalletRequest;
-import com.experian.payline.ws.impl.CreateWebWalletResponse;
-import com.experian.payline.ws.impl.DirectPaymentAPI;
-import com.experian.payline.ws.impl.DisablePaymentRecordRequest;
-import com.experian.payline.ws.impl.DisablePaymentRecordResponse;
-import com.experian.payline.ws.impl.DisableWalletRequest;
-import com.experian.payline.ws.impl.DisableWalletResponse;
-import com.experian.payline.ws.impl.DoImmediateWalletPaymentRequest;
-import com.experian.payline.ws.impl.DoImmediateWalletPaymentResponse;
-import com.experian.payline.ws.impl.DoRecurrentWalletPaymentRequest;
-import com.experian.payline.ws.impl.DoRecurrentWalletPaymentResponse;
-import com.experian.payline.ws.impl.DoScheduledWalletPaymentRequest;
-import com.experian.payline.ws.impl.DoScheduledWalletPaymentResponse;
-import com.experian.payline.ws.impl.EnableWalletRequest;
-import com.experian.payline.ws.impl.EnableWalletResponse;
-import com.experian.payline.ws.impl.GetBillingRecordRequest;
-import com.experian.payline.ws.impl.GetBillingRecordResponse;
-import com.experian.payline.ws.impl.GetCardsRequest;
-import com.experian.payline.ws.impl.GetCardsResponse;
-import com.experian.payline.ws.impl.GetPaymentRecordRequest;
-import com.experian.payline.ws.impl.GetPaymentRecordResponse;
-import com.experian.payline.ws.impl.GetWalletRequest;
-import com.experian.payline.ws.impl.GetWalletResponse;
-import com.experian.payline.ws.impl.GetWebWalletRequest;
-import com.experian.payline.ws.impl.GetWebWalletResponse;
-import com.experian.payline.ws.impl.ManageWebWalletRequest;
-import com.experian.payline.ws.impl.ManageWebWalletResponse;
-import com.experian.payline.ws.impl.UpdateBillingRecordRequest;
-import com.experian.payline.ws.impl.UpdateBillingRecordResponse;
-import com.experian.payline.ws.impl.UpdatePaymentRecordRequest;
-import com.experian.payline.ws.impl.UpdatePaymentRecordResponse;
-import com.experian.payline.ws.impl.UpdateWalletRequest;
-import com.experian.payline.ws.impl.UpdateWalletResponse;
-import com.experian.payline.ws.impl.UpdateWebWalletRequest;
-import com.experian.payline.ws.impl.UpdateWebWalletResponse;
-import com.experian.payline.ws.impl.WebPaymentAPI;
-import com.experian.payline.ws.obj.Authentication3DSecure;
-import com.experian.payline.ws.obj.BillingRecordForUpdate;
-import com.experian.payline.ws.obj.Buyer;
-import com.experian.payline.ws.obj.ContractNumberWalletList;
-import com.experian.payline.ws.obj.Order;
-import com.experian.payline.ws.obj.Owner;
-import com.experian.payline.ws.obj.Payment;
-import com.experian.payline.ws.obj.PrivateDataList;
-import com.experian.payline.ws.obj.Recurring;
-import com.experian.payline.ws.obj.RecurringForUpdate;
-import com.experian.payline.ws.obj.Result;
-import com.experian.payline.ws.obj.SelectedContractList;
-import com.experian.payline.ws.obj.SubMerchant;
-import com.experian.payline.ws.obj.Wallet;
-import com.experian.payline.ws.obj.WalletIdList;
+import com.payline.ws.model.CreateWalletRequest;
+import com.payline.ws.model.CreateWalletResponse;
+import com.payline.ws.model.CreateWebWalletRequest;
+import com.payline.ws.model.CreateWebWalletResponse;
+import com.payline.ws.model.DirectPaymentAPI;
+import com.payline.ws.model.DisablePaymentRecordRequest;
+import com.payline.ws.model.DisablePaymentRecordResponse;
+import com.payline.ws.model.DisableWalletRequest;
+import com.payline.ws.model.DisableWalletResponse;
+import com.payline.ws.model.DoImmediateWalletPaymentRequest;
+import com.payline.ws.model.DoImmediateWalletPaymentResponse;
+import com.payline.ws.model.DoRecurrentWalletPaymentRequest;
+import com.payline.ws.model.DoRecurrentWalletPaymentResponse;
+import com.payline.ws.model.DoScheduledWalletPaymentRequest;
+import com.payline.ws.model.DoScheduledWalletPaymentResponse;
+import com.payline.ws.model.EnableWalletRequest;
+import com.payline.ws.model.EnableWalletResponse;
+import com.payline.ws.model.GetBillingRecordRequest;
+import com.payline.ws.model.GetBillingRecordResponse;
+import com.payline.ws.model.GetCardsRequest;
+import com.payline.ws.model.GetCardsResponse;
+import com.payline.ws.model.GetPaymentRecordRequest;
+import com.payline.ws.model.GetPaymentRecordResponse;
+import com.payline.ws.model.GetWalletRequest;
+import com.payline.ws.model.GetWalletResponse;
+import com.payline.ws.model.GetWebWalletRequest;
+import com.payline.ws.model.GetWebWalletResponse;
+import com.payline.ws.model.ManageWebWalletRequest;
+import com.payline.ws.model.ManageWebWalletResponse;
+import com.payline.ws.model.UpdateBillingRecordRequest;
+import com.payline.ws.model.UpdateBillingRecordResponse;
+import com.payline.ws.model.UpdatePaymentRecordRequest;
+import com.payline.ws.model.UpdatePaymentRecordResponse;
+import com.payline.ws.model.UpdateWalletRequest;
+import com.payline.ws.model.UpdateWalletResponse;
+import com.payline.ws.model.UpdateWebWalletRequest;
+import com.payline.ws.model.UpdateWebWalletResponse;
+import com.payline.ws.model.WebPaymentAPI;
+import com.payline.ws.model.Authentication3DSecure;
+import com.payline.ws.model.BillingRecordForUpdate;
+import com.payline.ws.model.Buyer;
+import com.payline.ws.model.ContractNumberWalletList;
+import com.payline.ws.model.Order;
+import com.payline.ws.model.Owner;
+import com.payline.ws.model.Payment;
+import com.payline.ws.model.PrivateDataList;
+import com.payline.ws.model.Recurring;
+import com.payline.ws.model.RecurringForUpdate;
+import com.payline.ws.model.Result;
+import com.payline.ws.model.SelectedContractList;
+import com.payline.ws.model.SubMerchant;
+import com.payline.ws.model.Wallet;
+import com.payline.ws.model.WalletIdList;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.PaylineProperties;
 import com.payline.kit.utils.Utils;
@@ -108,7 +108,7 @@ public class WalletPayment extends WebServiceWrapper {
 
     /**
      * The Constructor class
-     * @param connectParams
+     * @param connectParams the connections parameters
      */
     public WalletPayment(ConnectParams connectParams) {
         super();
@@ -137,7 +137,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privateDataList);
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -150,8 +150,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during createWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -173,7 +173,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setVersion(version);
         parameters.setCardInd(Cardind);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -186,8 +186,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -214,7 +214,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setCardInd(Cardind);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -227,8 +227,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -248,7 +248,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setWalletIdList(walletIdList);
         parameters.setContractNumber(contractNumber);
         parameters.setCardInd(Cardind);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -261,8 +261,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during disableWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -282,7 +282,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setWalletId(walletId);
         parameters.setCardInd(Cardind);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -296,8 +296,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during enableWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -351,7 +351,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setAuthentication3DSecure(auth3ds);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -364,8 +364,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doImmediateWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -377,7 +377,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param payment the payment object containing the amount, the currency, action and mode codes
      * @param date the date to use
      * @param ref the reference
-     * @param scheduledDate
+     * @param scheduledDate the sechduled Date
      * @param walletId the wallet identifier
      * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
@@ -402,7 +402,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -415,8 +415,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doScheduledWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -451,7 +451,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setWalletId(walletId);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -464,8 +464,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doRecurrentWalletPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -484,7 +484,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setPaymentRecordId(recordId);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -497,8 +497,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getPaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -521,7 +521,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setPaymentRecordId(paymentRecordId);
         parameters.setRecurring(recurring);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -534,8 +534,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updatePaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -554,7 +554,7 @@ public class WalletPayment extends WebServiceWrapper {
         DisablePaymentRecordRequest parameters = new DisablePaymentRecordRequest();
         parameters.setContractNumber(contractNumber);
         parameters.setPaymentRecordId(recordId);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -567,8 +567,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during disablePaymentRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -587,7 +587,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setPaymentRecordId(paymentRecordId);
         parameters.setBillingRecordId(billingRecordId);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -600,8 +600,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getBillingRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -624,7 +624,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setPaymentRecordId(paymentRecordId);
         parameters.setBillingRecordId(billingRecordId);
         parameters.setBillingRecordForUpdate(billingRecord);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -637,8 +637,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateBillingRecord call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -694,7 +694,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setSelectedContractList(selectedContractList);
         parameters.setUpdatePersonalDetails(updatePersonalDetails);
         parameters.setVersion(version);
-        WebPaymentAPI port = null;
+        final WebPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceWeb();
@@ -707,8 +707,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during createWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -756,7 +756,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setBuyer(buyer);
         parameters.setVersion(version);
-        WebPaymentAPI port = null;
+        final WebPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceWeb();
@@ -769,8 +769,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during updateWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -801,7 +801,7 @@ public class WalletPayment extends WebServiceWrapper {
         final String securityMode, final String returnURL, final String cancelURL, final String notificationURL, final PrivateDataList privateDataList,
         final String customPaymentTemplateURL, final ContractNumberWalletList contractNumberWalletList, final String merchantName) {
         setException(null);
-        WebPaymentAPI port = null;
+        final WebPaymentAPI port;
         ManageWebWalletResponse result = new ManageWebWalletResponse();
         ManageWebWalletRequest parameters = new ManageWebWalletRequest();
         parameters.setVersion(version);
@@ -832,8 +832,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during manageWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -847,7 +847,7 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public final GetWebWalletResponse getWebWallet(final String token, final String version) {
         setException(null);
-        WebPaymentAPI port = null;
+        final WebPaymentAPI port;
         GetWebWalletResponse result = new GetWebWalletResponse();
         GetWebWalletRequest parameters = new GetWebWalletRequest();
         parameters.setToken(token);
@@ -864,8 +864,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWebWallet call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -887,7 +887,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(cardInd);
         parameters.setVersion(version);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -900,8 +900,8 @@ public class WalletPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getCards call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;

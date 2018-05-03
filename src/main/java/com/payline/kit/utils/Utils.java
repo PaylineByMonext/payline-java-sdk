@@ -30,33 +30,23 @@ import java.util.zip.GZIPInputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.MessageContext;
 
-import com.experian.payline.ws.impl.DirectPaymentAPI;
-import com.experian.payline.ws.impl.DirectPaymentAPI_Service;
-import com.experian.payline.ws.impl.ExtendedAPI;
-import com.experian.payline.ws.impl.ExtendedAPI_Service;
-import com.experian.payline.ws.impl.WebPaymentAPI;
-import com.experian.payline.ws.impl.WebPaymentAPI_Service;
-import com.experian.payline.ws.obj.Buyer;
-import com.experian.payline.ws.obj.Result;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
+import com.payline.ws.model.DirectPaymentAPI;
+import com.payline.ws.model.DirectPaymentAPI_Service;
+import com.payline.ws.model.ExtendedAPI;
+import com.payline.ws.model.ExtendedAPI_Service;
+import com.payline.ws.model.WebPaymentAPI;
+import com.payline.ws.model.WebPaymentAPI_Service;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * Utils class.
  * @author payline dev team
  */
 public final class Utils {
-	
-	private final static QName _ResultCode_QNAME = new QName("http://obj.ws.payline.experian.com", "code");
-	private final static QName _ResultShortMessage_QNAME = new QName("http://obj.ws.payline.experian.com", "shortMessage");
-    private final static QName _ResultLongMessage_QNAME = new QName("http://obj.ws.payline.experian.com", "longMessage");
-    private final static QName _Buyer_QNAME = new QName("http://obj.ws.payline.experian.com", "buyer");
-
     /**
      * EndPoints
      */
@@ -94,8 +84,6 @@ public final class Utils {
      */
     public static final String EXCEPTION_CODE = "XXXXX";
     public static final String EXCEPTION_SHORTMESSAGE = "EXCEPTION";
-    public static final JAXBElement<String> JAX_EXCEPTION_CODE = new JAXBElement<String>(_ResultCode_QNAME, String.class, Result.class, EXCEPTION_CODE);
-    public static final JAXBElement<String> JAX_EXCEPTION_SHORTMESSAGE = new JAXBElement<String>(_ResultShortMessage_QNAME, String.class, Result.class, EXCEPTION_SHORTMESSAGE);
 
     /**
      * kit version
@@ -412,7 +400,7 @@ public final class Utils {
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             byte[] ciphered = cipher.doFinal(msgUtf8);
 
-            crypted = new String(Base64.encode(ciphered));
+            crypted = new String(Base64.encodeBase64URLSafeString(ciphered));
         } catch (Exception e) {
             crypted = e.toString();
             e.printStackTrace();
@@ -436,7 +424,7 @@ public final class Utils {
 
             final Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            finalDecrypt = cipher.doFinal(Base64.decode(encrypt.getBytes("UTF-8")));
+            finalDecrypt = cipher.doFinal(Base64.decodeBase64(encrypt.getBytes("UTF-8")));
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -461,44 +449,5 @@ public final class Utils {
             logger.log(LOG_LEVEL, "unexpected error during GZip inflation");
         }
         return outStr;
-    }
-    
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Buyer }{@code >}
-     * 
-     * @param buyer
-     *     Buyer instance containing the buyer's information.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Buyer }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://obj.ws.payline.experian.com", name = "buyer", scope = Buyer.class)
-    public static JAXBElement<Buyer> formatJAXBuyer(Buyer value) {
-        return new JAXBElement<Buyer>(_Buyer_QNAME, Buyer.class, Buyer.class, value);
-    }
-    
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://obj.ws.payline.experian.com", name = "shortMessage", scope = Result.class)
-    public static JAXBElement<String> formatResultShortMessage(String value) {
-        return new JAXBElement<String>(_ResultShortMessage_QNAME, String.class, Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://obj.ws.payline.experian.com", name = "longMessage", scope = Result.class)
-    public static JAXBElement<String> formatResultLongMessage(String value) {
-        return new JAXBElement<String>(_ResultLongMessage_QNAME, String.class, Result.class, value);
     }
 }

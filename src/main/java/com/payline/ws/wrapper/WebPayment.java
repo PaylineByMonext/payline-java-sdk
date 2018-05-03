@@ -20,19 +20,19 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.WebServiceException;
 
-import com.experian.payline.ws.impl.DoWebPaymentRequest;
-import com.experian.payline.ws.impl.DoWebPaymentResponse;
-import com.experian.payline.ws.impl.GetWebPaymentDetailsRequest;
-import com.experian.payline.ws.impl.GetWebPaymentDetailsResponse;
-import com.experian.payline.ws.impl.WebPaymentAPI;
-import com.experian.payline.ws.obj.Buyer;
-import com.experian.payline.ws.obj.Order;
-import com.experian.payline.ws.obj.Payment;
-import com.experian.payline.ws.obj.PrivateDataList;
-import com.experian.payline.ws.obj.Recurring;
-import com.experian.payline.ws.obj.Result;
-import com.experian.payline.ws.obj.SelectedContractList;
-import com.experian.payline.ws.obj.SubMerchant;
+import com.payline.ws.model.DoWebPaymentRequest;
+import com.payline.ws.model.DoWebPaymentResponse;
+import com.payline.ws.model.GetWebPaymentDetailsRequest;
+import com.payline.ws.model.GetWebPaymentDetailsResponse;
+import com.payline.ws.model.WebPaymentAPI;
+import com.payline.ws.model.Buyer;
+import com.payline.ws.model.Order;
+import com.payline.ws.model.Payment;
+import com.payline.ws.model.PrivateDataList;
+import com.payline.ws.model.Recurring;
+import com.payline.ws.model.Result;
+import com.payline.ws.model.SelectedContractList;
+import com.payline.ws.model.SubMerchant;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.PaylineProperties;
 import com.payline.kit.utils.Utils;
@@ -101,8 +101,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getWebPaymentDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -181,7 +181,7 @@ public class WebPayment extends WebServiceWrapper {
         parameters.setVersion(version);
         parameters.setPayment(payment);
         parameters.setOrder(order);
-        parameters.setBuyer(Utils.formatJAXBuyer(buyer));
+        parameters.setBuyer(buyer);
         		
         parameters.setPrivateDataList(privateDataList);
         if (recurring != null && recurring.getAmount().length() > 0) {
@@ -211,8 +211,8 @@ public class WebPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doWebPayment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;

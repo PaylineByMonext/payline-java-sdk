@@ -20,13 +20,13 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.WebServiceException;
 
-import com.experian.payline.ws.impl.GetAlertDetailsRequest;
-import com.experian.payline.ws.impl.GetAlertDetailsResponse;
-import com.experian.payline.ws.impl.GetTransactionDetailsRequest;
-import com.experian.payline.ws.impl.GetTransactionDetailsResponse;
-import com.experian.payline.ws.impl.TransactionsSearchRequest;
-import com.experian.payline.ws.impl.TransactionsSearchResponse;
-import com.experian.payline.ws.obj.Result;
+import com.payline.ws.model.GetAlertDetailsRequest;
+import com.payline.ws.model.GetAlertDetailsResponse;
+import com.payline.ws.model.GetTransactionDetailsRequest;
+import com.payline.ws.model.GetTransactionDetailsResponse;
+import com.payline.ws.model.TransactionsSearchRequest;
+import com.payline.ws.model.TransactionsSearchResponse;
+import com.payline.ws.model.Result;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.Utils;
 
@@ -83,7 +83,7 @@ public class ExtendedAPI extends WebServiceWrapper {
         parameters.setTransactionDate(transactionDate);
         parameters.setTransactionId(transactionId);
         parameters.setVersion(version);
-        com.experian.payline.ws.impl.ExtendedAPI port = null;
+        final com.payline.ws.model.ExtendedAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceExtended();
@@ -96,8 +96,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getAlertDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -125,7 +125,7 @@ public class ExtendedAPI extends WebServiceWrapper {
         request.setStartDate(startDate);
         request.setEndDate(endDate);
         request.setTransactionHistory(transactionHistory);
-        com.experian.payline.ws.impl.ExtendedAPI port = null;
+        final com.payline.ws.model.ExtendedAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceExtended();
@@ -138,8 +138,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getTransactionDetails call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -193,7 +193,7 @@ public class ExtendedAPI extends WebServiceWrapper {
         request.setWalletId(walletID);
         request.setSequenceNumber(seqNumber);
         request.setVersion(version);
-        com.experian.payline.ws.impl.ExtendedAPI port = null;
+        final com.payline.ws.model.ExtendedAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceExtended();
@@ -206,8 +206,8 @@ public class ExtendedAPI extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during transactionsSearch call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;

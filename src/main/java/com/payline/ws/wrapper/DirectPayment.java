@@ -20,53 +20,53 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.WebServiceException;
 
-import com.experian.payline.ws.impl.DirectPaymentAPI;
-import com.experian.payline.ws.impl.DoAuthorizationRequest;
-import com.experian.payline.ws.impl.DoAuthorizationResponse;
-import com.experian.payline.ws.impl.DoBankTransferRequest;
-import com.experian.payline.ws.impl.DoBankTransferResponse;
-import com.experian.payline.ws.impl.DoCaptureRequest;
-import com.experian.payline.ws.impl.DoCaptureResponse;
-import com.experian.payline.ws.impl.DoCreditRequest;
-import com.experian.payline.ws.impl.DoCreditResponse;
-import com.experian.payline.ws.impl.DoDebitRequest;
-import com.experian.payline.ws.impl.DoDebitResponse;
-import com.experian.payline.ws.impl.DoReAuthorizationRequest;
-import com.experian.payline.ws.impl.DoReAuthorizationResponse;
-import com.experian.payline.ws.impl.DoRefundRequest;
-import com.experian.payline.ws.impl.DoRefundResponse;
-import com.experian.payline.ws.impl.DoResetRequest;
-import com.experian.payline.ws.impl.DoResetResponse;
-import com.experian.payline.ws.impl.DoScoringChequeRequest;
-import com.experian.payline.ws.impl.DoScoringChequeResponse;
-import com.experian.payline.ws.impl.GetBalanceRequest;
-import com.experian.payline.ws.impl.GetBalanceResponse;
-import com.experian.payline.ws.impl.GetEncryptionKeyRequest;
-import com.experian.payline.ws.impl.GetEncryptionKeyResponse;
-import com.experian.payline.ws.impl.GetMerchantSettingsRequest;
-import com.experian.payline.ws.impl.GetMerchantSettingsResponse;
-import com.experian.payline.ws.impl.GetTokenRequest;
-import com.experian.payline.ws.impl.GetTokenResponse;
-import com.experian.payline.ws.impl.IsRegisteredRequest;
-import com.experian.payline.ws.impl.IsRegisteredResponse;
-import com.experian.payline.ws.impl.UnBlockRequest;
-import com.experian.payline.ws.impl.UnBlockResponse;
-import com.experian.payline.ws.impl.VerifyAuthenticationRequest;
-import com.experian.payline.ws.impl.VerifyAuthenticationResponse;
-import com.experian.payline.ws.impl.VerifyEnrollmentRequest;
-import com.experian.payline.ws.impl.VerifyEnrollmentResponse;
-import com.experian.payline.ws.obj.Authentication3DSecure;
-import com.experian.payline.ws.obj.Authorization;
-import com.experian.payline.ws.obj.BankAccountData;
-import com.experian.payline.ws.obj.Buyer;
-import com.experian.payline.ws.obj.Card;
-import com.experian.payline.ws.obj.Cheque;
-import com.experian.payline.ws.obj.Creditor;
-import com.experian.payline.ws.obj.Order;
-import com.experian.payline.ws.obj.Payment;
-import com.experian.payline.ws.obj.PrivateDataList;
-import com.experian.payline.ws.obj.Result;
-import com.experian.payline.ws.obj.SubMerchant;
+import com.payline.ws.model.DirectPaymentAPI;
+import com.payline.ws.model.DoAuthorizationRequest;
+import com.payline.ws.model.DoAuthorizationResponse;
+import com.payline.ws.model.DoBankTransferRequest;
+import com.payline.ws.model.DoBankTransferResponse;
+import com.payline.ws.model.DoCaptureRequest;
+import com.payline.ws.model.DoCaptureResponse;
+import com.payline.ws.model.DoCreditRequest;
+import com.payline.ws.model.DoCreditResponse;
+import com.payline.ws.model.DoDebitRequest;
+import com.payline.ws.model.DoDebitResponse;
+import com.payline.ws.model.DoReAuthorizationRequest;
+import com.payline.ws.model.DoReAuthorizationResponse;
+import com.payline.ws.model.DoRefundRequest;
+import com.payline.ws.model.DoRefundResponse;
+import com.payline.ws.model.DoResetRequest;
+import com.payline.ws.model.DoResetResponse;
+import com.payline.ws.model.DoScoringChequeRequest;
+import com.payline.ws.model.DoScoringChequeResponse;
+import com.payline.ws.model.GetBalanceRequest;
+import com.payline.ws.model.GetBalanceResponse;
+import com.payline.ws.model.GetEncryptionKeyRequest;
+import com.payline.ws.model.GetEncryptionKeyResponse;
+import com.payline.ws.model.GetMerchantSettingsRequest;
+import com.payline.ws.model.GetMerchantSettingsResponse;
+import com.payline.ws.model.GetTokenRequest;
+import com.payline.ws.model.GetTokenResponse;
+import com.payline.ws.model.IsRegisteredRequest;
+import com.payline.ws.model.IsRegisteredResponse;
+import com.payline.ws.model.UnBlockRequest;
+import com.payline.ws.model.UnBlockResponse;
+import com.payline.ws.model.VerifyAuthenticationRequest;
+import com.payline.ws.model.VerifyAuthenticationResponse;
+import com.payline.ws.model.VerifyEnrollmentRequest;
+import com.payline.ws.model.VerifyEnrollmentResponse;
+import com.payline.ws.model.Authentication3DSecure;
+import com.payline.ws.model.Authorization;
+import com.payline.ws.model.BankAccountData;
+import com.payline.ws.model.Buyer;
+import com.payline.ws.model.Card;
+import com.payline.ws.model.Cheque;
+import com.payline.ws.model.Creditor;
+import com.payline.ws.model.Order;
+import com.payline.ws.model.Payment;
+import com.payline.ws.model.PrivateDataList;
+import com.payline.ws.model.Result;
+import com.payline.ws.model.SubMerchant;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.Utils;
 
@@ -135,7 +135,8 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
-        DirectPaymentAPI port = null;
+        parameters.setBankAccountData(bank);
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -149,8 +150,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doAuthorization call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -184,7 +185,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setVersion(version);
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setSubMerchant(subMerchant);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -199,8 +200,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doDebit call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -226,7 +227,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setOrderID(orderID);
         parameters.setComment(comment);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -239,8 +240,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doBankTransfer call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -265,7 +266,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setSequenceNumber(sequenceNumber);
         parameters.setPrivateDataList(privateDataList);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -278,8 +279,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doCapture call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -308,7 +309,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privateDataList);
         parameters.setVersion(version);
         parameters.setDetails(order.getDetails());
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -321,8 +322,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doRefund call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -355,7 +356,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privateDataList);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -368,8 +369,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doCredit call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -415,7 +416,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setVersion(version);
         parameters.setMerchantName(merchantName);
         
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -428,8 +429,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during verifyEnrollment call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -449,7 +450,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setTransactionID(transationID);
         parameters.setComment(comment);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -462,8 +463,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doReset call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -481,7 +482,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setCardID(cardID);
         parameters.setContractNumber(contractNumber);
         parameters.setVersion(version);
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -494,8 +495,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getBalance call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -509,7 +510,7 @@ public class DirectPayment extends WebServiceWrapper {
         setException(null);
         GetEncryptionKeyResponse result = new GetEncryptionKeyResponse();
         GetEncryptionKeyRequest parameters = new GetEncryptionKeyRequest();
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -522,8 +523,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getEncryptionKey call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -540,7 +541,7 @@ public class DirectPayment extends WebServiceWrapper {
         GetMerchantSettingsRequest parameters = new GetMerchantSettingsRequest();
         parameters.setVersion(version);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -553,8 +554,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getMerchantSettings call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -574,7 +575,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setExpirationDate(expirationDate);
         parameters.setContractNumber(contractNumber);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -587,8 +588,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during getToken call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -607,7 +608,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setVersion(version);
         parameters.setTransactionID(transactionID);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -620,8 +621,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during unBlock call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -645,7 +646,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privatedatalist);
         parameters.setVersion(version);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -658,8 +659,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doScoringCheque call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -684,7 +685,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privatedatalist);
         parameters.setVersion(version);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -697,8 +698,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during doReAuthorization call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -724,7 +725,7 @@ public class DirectPayment extends WebServiceWrapper {
         parameters.setCard(card);
         parameters.setVersion(version);
 
-        DirectPaymentAPI port = null;
+        final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceDirect();
@@ -737,8 +738,8 @@ public class DirectPayment extends WebServiceWrapper {
             logger.log(Level.SEVERE, "Error during verifyAuthentication call : ", ex);
             Result err = new Result();
             err.setCode(Utils.EXCEPTION_CODE);
-            err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-            err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+            err.setLongMessage(ex.getMessage());
+            err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
             result.setResult(err);
         }
         return result;
@@ -757,13 +758,13 @@ public class DirectPayment extends WebServiceWrapper {
     	IsRegisteredResponse result = new IsRegisteredResponse();
     	IsRegisteredRequest parameters = new IsRegisteredRequest();
     	
-        parameters.setBuyer(Utils.formatJAXBuyer(buyer));
+        parameters.setBuyer(buyer);
     	parameters.setOrder(order);
     	parameters.setPayment(payment);
     	parameters.setPrivateDataList(privatedatalist);
     	parameters.setVersion(version);
     	
-    	 DirectPaymentAPI port = null;
+    	 final DirectPaymentAPI port;
          try {
              if (this.initFromFile) {
                  port = Utils.initServiceDirect();
@@ -773,11 +774,11 @@ public class DirectPayment extends WebServiceWrapper {
              result = port.isRegistered(parameters);
          } catch (WebServiceException ex) {
              setException(ex);
-             logger.log(Level.SEVERE, "Error during verifyAuthentication call : ", ex);
+             logger.log(Level.SEVERE, "Error during isRegistered call : ", ex);
              Result err = new Result();
              err.setCode(Utils.EXCEPTION_CODE);
-             err.setLongMessage(Utils.formatResultLongMessage(ex.getMessage()));
-             err.setShortMessage(Utils.JAX_EXCEPTION_SHORTMESSAGE);
+             err.setLongMessage(ex.getMessage());
+             err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
              result.setResult(err);
          }
     	return result;
