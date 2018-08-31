@@ -8,9 +8,7 @@ pipeline {
     stages {
       stage('Build') {
           steps {
-              gitlabCommitStatus("Assemble") {
-                  sh 'mvn clean install'
-              }
+            sh 'mvn clean install'
           }
       }
        stage('SonarQube analysis') {
