@@ -15,7 +15,9 @@ pipeline {
       }
       stage('Sign') {
           steps {
-            sh 'mvn package gpg:sign'
+              withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE')]) {
+                 sh 'mvn package gpg:sign'
+              }
           }
       }
        stage('SonarQube analysis') {
