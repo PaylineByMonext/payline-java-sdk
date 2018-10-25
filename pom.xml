@@ -27,7 +27,7 @@
 			<url>http://www.gnu.org/copyleft/lesser.html</url>
 		</license>
 	</licenses>
-	<scm><url>https://github.com/PaylineByMonext/payline-java-sdk</url></scm>
+	<scm><connection>https://github.com/PaylineByMonext/payline-java-sdk</connection></scm>
 	<organization>
 		<name>MONEXT</name>
 		<url>http://www.monext.fr/</url>
