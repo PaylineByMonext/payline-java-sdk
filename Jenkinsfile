@@ -13,11 +13,11 @@ pipeline {
             sh 'mvn clean install'
           }
       }
-      stage('Release') {
+      stage('Deploy') {
           steps {
               withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE'),
                                usernamePassword(credentialsId: 'OSSRH', usernameVariable: 'OSSRH_USER', passwordVariable: 'OSSRH_PWD')]) {
-                 sh 'mvn release:prepare release:perform'
+                 sh 'mvn deploy'
               }
           }
       }
