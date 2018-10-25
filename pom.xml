@@ -48,7 +48,7 @@
 		<profile>
 			<id>sign</id> <!-- this profile induce artifact signature -->
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
 				<plugins>
