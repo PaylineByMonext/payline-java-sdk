@@ -15,7 +15,7 @@ pipeline {
       }
       stage('Sign') {
           steps {
-            sh 'mvn gpg:sign'
+            sh 'mvn package gpg:sign'
           }
       }
        stage('SonarQube analysis') {
