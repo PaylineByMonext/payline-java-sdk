@@ -13,6 +13,11 @@ pipeline {
             sh 'mvn clean install'
           }
       }
+      stage('Sign') {
+          steps {
+            sh 'mvn gpg:sign'
+          }
+      }
        stage('SonarQube analysis') {
           steps {
               withSonarQubeEnv('SonarMonext') {
