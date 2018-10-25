@@ -17,6 +17,8 @@ pipeline {
           steps {
               withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE'),
                                usernamePassword(credentialsId: 'OSSRH', usernameVariable: 'OSSRH_USER', passwordVariable: 'OSSRH_PWD')]) {
+                  sh 'echo $KEY_GPG_PASSPHRASE'
+                  sh 'echo $OSSRH_USER'
                  sh 'mvn deploy'
               }
           }
