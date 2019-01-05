@@ -1249,104 +1249,6 @@
 					</sequence>
 				</complexType>
 			</element>
-			<element name="createMerchantRequest">
-				<complexType>
-					<annotation>
-						<documentation>
-							This element is the request for the
-							createMerchant
-							method
-						</documentation>
-					</annotation>
-					<sequence>
-						<element name="corporateName" nillable="true" type="xsd:string" />
-						<element name="publicName" nillable="true" type="xsd:string" />
-						<element name="currency">
-							<annotation>
-								<documentation>currency in ISO 4217 numeric format
-								</documentation>
-							</annotation>
-							<simpleType>
-								<restriction base="xsd:string">
-									<length value="3" />
-								</restriction>
-							</simpleType>
-						</element>
-						<element name="nationalID" nillable="true">
-							<annotation>
-								<documentation>unique national merchant ID</documentation>
-							</annotation>
-							<complexType>
-								<choice>
-									<element name="SIRET">
-										<annotation>
-											<documentation>Systeme d identification du Repertoire des
-												ENtreprises
-											</documentation>
-										</annotation>
-										<simpleType>
-											<restriction base="xsd:string">
-												<length value="14" />
-											</restriction>
-										</simpleType>
-									</element>
-									<element name="other" type="xsd:string">
-										<annotation>
-											<documentation>to use if country is not France
-											</documentation>
-										</annotation>
-									</element>
-								</choice>
-							</complexType>
-						</element>
-						<element name="distributor" nillable="true" type="xsd:string">
-							<annotation>
-								<documentation>Payline Distributor ID</documentation>
-							</annotation>
-						</element>
-						<element name="merchantAddress" nillable="true"
-							type="tns1:addressInterlocutor" />
-						<element name="businessInterlocutor" nillable="true"
-							type="tns1:interlocutor" />
-						<element name="technicalInterlocutor" nillable="true"
-							type="tns1:interlocutor" />
-						<element name="subscription" nillable="true" type="tns1:subscription" />
-						<element name="poss" nillable="true">
-							<annotation>
-								<documentation>list of point of sell</documentation>
-							</annotation>
-							<complexType>
-								<sequence>
-									<element nillable="true" name="pos" type="tns1:pointOfSell"
-										minOccurs="0" maxOccurs="unbounded" />
-								</sequence>
-							</complexType>
-						</element>
-						<element name="partner" nillable="true" type="xsd:string">
-							<annotation>
-								<documentation>Billing partner. 1:monext, 2:cetib, 3:payline.com
-								</documentation>
-							</annotation>
-						</element>
-					</sequence>
-				</complexType>
-			</element>
-			<element name="createMerchantResponse">
-				<complexType>
-					<annotation>
-						<documentation>
-							This element is the reponse from the
-							createMerchant
-							method
-						</documentation>
-					</annotation>
-					<sequence>
-						<element name="result" nillable="false" type="tns1:result" />
-						<element name="connectionData" nillable="false"
-							type="tns1:connectionData" />
-					</sequence>
-				</complexType>
-			</element>
 			<element name="doScoringChequeRequest">
 				<complexType>
 					<annotation>
@@ -3278,12 +3180,6 @@
 	<wsdl:message name="verifyAuthenticationResponse">
 		<wsdl:part name="parameters" element="impl:verifyAuthenticationResponse" />
 	</wsdl:message>
-	<wsdl:message name="createMerchantRequest">
-		<wsdl:part name="parameters" element="impl:createMerchantRequest" />
-	</wsdl:message>
-	<wsdl:message name="createMerchantResponse">
-		<wsdl:part name="parameters" element="impl:createMerchantResponse" />
-	</wsdl:message>
 	<wsdl:message name="doScoringChequeRequest">
 		<wsdl:part name="parameters" element="impl:doScoringChequeRequest" />
 	</wsdl:message>
@@ -3545,12 +3441,6 @@
 			<wsdl:input name="verifyAuthenticationRequest" message="impl:verifyAuthenticationRequest">
 			</wsdl:input>
 			<wsdl:output name="verifyAuthenticationResponse" message="impl:verifyAuthenticationResponse">
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="createMerchant">
-			<wsdl:input name="createMerchantRequest" message="impl:createMerchantRequest">
-			</wsdl:input>
-			<wsdl:output name="createMerchantResponse" message="impl:createMerchantResponse">
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="doScoringCheque">
@@ -3849,15 +3739,6 @@
 		</wsdl:operation>
 		<wsdl:operation name="verifyAuthentication">
 			<wsdlsoap:operation soapAction="verifyAuthentication" />
-			<wsdl:input>
-				<wsdlsoap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output>
-				<wsdlsoap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="createMerchant">
-			<wsdlsoap:operation soapAction="createMerchant" />
 			<wsdl:input>
 				<wsdlsoap:body use="literal" />
 			</wsdl:input>
