@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.56</version>
+  <version>4.56a</version>
 </dependency>
 ```
 
@@ -69,7 +69,7 @@ public class SampleCalls {
 ```
 
 ## Version
-4.56
+4.56a
 
 ## Learn about Payline
 * [www.payline.com](http://www.payline.com/index.php/en/)
