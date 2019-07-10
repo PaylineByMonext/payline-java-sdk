@@ -1,3 +1,7 @@
+* 4.58.1 (2018-07-10)
+  * new 3D-Secure V2 fields
+    
+---------------------------------------- 
 * 4.53 (2018-04-24)
   * remove com.experian.payline.ws.obj.ObjectFactory dependencies from all com.payline.ws.wrapper classes
   * new deliveryCharge attribute in order object
