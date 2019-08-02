@@ -18,17 +18,47 @@ The set of web services Payline is covered by this library. Web services are div
 Java 1.6 or higher
 
 ## Installation
-### Maven users
+### Maven users and JDK 8
 Add this dependency in your project's POM:
 
 ```xml
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.59</version>
+  <version>4.59.0.1</version>
 </dependency>
 ```
 
+### Maven users and JDK 12
+```xml
+<dependency>
+  <groupId>com.payline</groupId>
+  <artifactId>payline-java-sdk</artifactId>
+  <version>4.59.0.1</version>
+</dependency>
+<dependency>
+  <groupId>javax.xml.ws</groupId>
+  <artifactId>jaxws-api</artifactId>
+  <version>2.3.1</version>
+</dependency>
+<dependency>
+  <groupId>com.sun.xml.ws</groupId>
+  <artifactId>jaxws-rt</artifactId>
+  <version>2.3.2</version>
+</dependency>
+```
+
+### Gradle users and JDK 8
+```
+   implementation 'com.payline:payline-java-sdk:4.59.0.1'
+```
+
+### Gradle users and JDK 12
+```
+   implementation 'com.payline:payline-java-sdk:4.59.0.1'
+   implementation 'javax.xml.ws:jaxws-api:2.3.1'
+   implementation 'com.sun.xml.ws:jaxws-rt:2.3.2'
+```
 ## Usage
 SampleCalls.java
 
