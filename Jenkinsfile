@@ -13,6 +13,13 @@ pipeline {
             sh 'mvn clean install'
           }
       }
+      stage('SonarQube analysis') {
+        steps {
+            withSonarQubeEnv('SonarMonext') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+            }
+        }
+      }
       stage('Deploy') {
           steps {
               withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE'),
@@ -21,12 +28,5 @@ pipeline {
               }
           }
       }
-       stage('SonarQube analysis') {
-          steps {
-              withSonarQubeEnv('SonarMonext') {
-                  sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-              }
-          }
-      } 
     }
 }
