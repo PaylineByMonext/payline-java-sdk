@@ -50,10 +50,10 @@ public final class Utils {
     /**
      * EndPoints
      */
-    public static final String HOMO_ENDPOINT = "https://homologation.payline.com/V4/services/";
-    public static final String HOMO_ENDPOINT_CC = "https://homologation-cc.payline.com/V4/services/";
-    public static final String PROD_ENDPOINT = "https://services.payline.com/V4/services/";
-    public static final String PROD_ENDPOINT_CC = "https://services-cc.payline.com/V4/services/";
+    private static final String HOMO_ENDPOINT = "https://homologation.payline.com/V4/services/";
+    private static final String HOMO_ENDPOINT_CC = "https://homologation-cc.payline.com/V4/services/";
+    private static final String PROD_ENDPOINT = "https://services.payline.com/V4/services/";
+    private static final String PROD_ENDPOINT_CC = "https://services-cc.payline.com/V4/services/";
 
     /**
      * Ajax servlet
@@ -64,14 +64,14 @@ public final class Utils {
     /**
      * API
      */
-    public static final String WEB_PAYMENT_API = "WebPaymentAPI";
-    public static final String DIRECT_PAYMENT_API = "DirectPaymentAPI";
-    public static final String EXTENDED_API = "ExtendedAPI";
+    private static final String WEB_PAYMENT_API = "WebPaymentAPI";
+    private static final String DIRECT_PAYMENT_API = "DirectPaymentAPI";
+    private static final String EXTENDED_API = "ExtendedAPI";
 
     /**
      * WSDL
      */
-    public static final String WSDL = "wsdls/v4.59.wsdl";
+    private static final String WSDL = "wsdls/v4.59.wsdl";
 
     /**
      * logger.
@@ -88,7 +88,21 @@ public final class Utils {
     /**
      * kit version
      */
-    public static final String kitVersion = "kit JAVA v4.59";
+    private static final String kitVersion = "kit JAVA v4.59";
+
+    private static final String HTTP_PROXY_SET = "http.proxySet";
+    private static final String HTTP_PROXY_HOST = "http.proxyHost";
+    private static final String HTTP_PROXY_PORT = "http.proxyPort";
+    private static final String HTTPS_PROXY_SET = "https.proxySet";
+    private static final String HTTPS_PROXY_HOST = "https.proxyHost";
+    private static final String HTTPS_PROXY_PORT = "https.proxyPort";
+    private static final String PROXY_LOGIN = "PROXY_LOGIN";
+    private static final String HTTPS_PROXY_LOGIN = "https.proxyLogin";
+    private static final String HTTP_PROXY_LOGIN = "http.proxyLogin";
+    private static final String HTTPS_PROXY_PASSWORD = "https.proxyPassword";
+    private static final String HTTP_PROXY_PASSWORD = "http.proxyPassword";
+    private static final String TRUE = "true";
+    private static final String PROXY_PWD = "PROXY_PWD";
 
     /**
      * Default constructor.
@@ -97,8 +111,8 @@ public final class Utils {
     }
 
     private static String maskAccessKey(String accessKey) {
-        String maskedAccessKey = new String("");
-        if (accessKey != null && accessKey != "" && accessKey.length() > 0) {
+        String maskedAccessKey = "";
+        if (accessKey != null && accessKey.length() > 0) {
             int keyLengh = accessKey.length();
             maskedAccessKey = accessKey.substring(0, 2);
             maskedAccessKey += "********************".substring(0, keyLengh - 4);
@@ -118,43 +132,43 @@ public final class Utils {
      * @param proxy the ws binding provider
      * @param api the type of api to use Set HTTP credentials (username/password) and ws endpoint
      */
-    public static void setHTTPBasicCredentialAndEndPointFromBundle(final Object proxy, final String api) {
+    private static void setHTTPBasicCredentialAndEndPointFromBundle(final Object proxy, final String api) {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "setting HTTPBasic Credentials And EndPoint from payline.properties file");
 
         // Set HTTP Proxy from bundle
-        if (PaylineProperties.getString("USE_PROXY") != null && PaylineProperties.getString("USE_PROXY").equals("1")) {
+        if (PaylineProperties.getString("USE_PROXY") != null && "1".equals(PaylineProperties.getString("USE_PROXY"))) {
             // Proxy HTTP
-            System.setProperty("http.proxySet", "true");
-            System.setProperty("http.proxyHost", PaylineProperties.getString("PROXY_HOST"));
-            System.setProperty("http.proxyPort", PaylineProperties.getString("PROXY_PORT"));
+            System.setProperty(HTTP_PROXY_SET, TRUE);
+            System.setProperty(HTTP_PROXY_HOST, PaylineProperties.getString("PROXY_HOST"));
+            System.setProperty(HTTP_PROXY_PORT, PaylineProperties.getString("PROXY_PORT"));
             // PROXY HTTPS
-            System.setProperty("https.proxySet", "true");
-            System.setProperty("https.proxyHost", PaylineProperties.getString("PROXY_HOST"));
-            System.setProperty("https.proxyPort", PaylineProperties.getString("PROXY_PORT"));
+            System.setProperty(HTTPS_PROXY_SET, TRUE);
+            System.setProperty(HTTPS_PROXY_HOST, PaylineProperties.getString("PROXY_HOST"));
+            System.setProperty(HTTPS_PROXY_PORT, PaylineProperties.getString("PROXY_PORT"));
 
             // Login Proxy
-            if (PaylineProperties.getString("PROXY_LOGIN") != null && PaylineProperties.getString("PROXY_LOGIN").length() != 0) {
-                System.setProperty("https.proxyLogin", PaylineProperties.getString("PROXY_LOGIN"));
-                System.setProperty("http.proxyLogin", PaylineProperties.getString("PROXY_LOGIN"));
+            if (PaylineProperties.getString(PROXY_LOGIN) != null && PaylineProperties.getString(PROXY_LOGIN).length() != 0) {
+                System.setProperty(HTTPS_PROXY_LOGIN, PaylineProperties.getString(PROXY_LOGIN));
+                System.setProperty(HTTP_PROXY_LOGIN, PaylineProperties.getString(PROXY_LOGIN));
             }
             // Password Proxy
-            if (PaylineProperties.getString("PROXY_PWD") != null && PaylineProperties.getString("PROXY_PWD").length() != 0) {
-                System.setProperty("https.proxyPassword", PaylineProperties.getString("PROXY_PWD"));
-                System.setProperty("http.proxyPassword", PaylineProperties.getString("PROXY_PWD"));
+            if (PaylineProperties.getString(PROXY_PWD) != null && PaylineProperties.getString(PROXY_PWD).length() != 0) {
+                System.setProperty(HTTPS_PROXY_PASSWORD, PaylineProperties.getString(PROXY_PWD));
+                System.setProperty(HTTP_PROXY_PASSWORD, PaylineProperties.getString(PROXY_PWD));
             }
         } else {
             // remove proxy parameters to prevent cache side effects
-            System.setProperty("http.proxySet", "false");
-            System.clearProperty("http.proxyHost");
-            System.clearProperty("http.proxyPort");
-            System.clearProperty("http.proxyLogin");
-            System.clearProperty("http.proxyPassword");
-            System.setProperty("https.proxySet", "false");
-            System.clearProperty("https.proxyHost");
-            System.clearProperty("https.proxyPort");
-            System.clearProperty("https.proxyLogin");
-            System.clearProperty("https.proxyPassword");
+            System.setProperty(HTTP_PROXY_SET, "false");
+            System.clearProperty(HTTP_PROXY_HOST);
+            System.clearProperty(HTTP_PROXY_PORT);
+            System.clearProperty(HTTP_PROXY_LOGIN);
+            System.clearProperty(HTTP_PROXY_PASSWORD);
+            System.setProperty(HTTPS_PROXY_SET, "false");
+            System.clearProperty(HTTPS_PROXY_HOST);
+            System.clearProperty(HTTPS_PROXY_PORT);
+            System.clearProperty(HTTPS_PROXY_LOGIN);
+            System.clearProperty(HTTPS_PROXY_PASSWORD);
         }
 
         // Set username from bundle
@@ -167,9 +181,9 @@ public final class Utils {
             logger.log(LOG_LEVEL, "password is : " + maskAccessKey(PaylineProperties.getString("ACCES_KEY")));
 
         // Set endpoint
-        String endpoint = null;
+        String endpoint;
         String prod = PaylineProperties.getString("PRODUCTION");
-        if (prod.equalsIgnoreCase("true")) {
+        if (TRUE.equalsIgnoreCase(prod)) {
             endpoint = Utils.PROD_ENDPOINT;
         } else {
             endpoint = Utils.HOMO_ENDPOINT;
@@ -178,9 +192,7 @@ public final class Utils {
 
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "endpoint is : " + endpoint);
-        if (endpoint != null) {
-            ((BindingProvider) proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
-        }
+        ((BindingProvider) proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
 
         // version
         Map<String, List<String>> httpHeaders = new HashMap<String, List<String>>();
@@ -189,47 +201,47 @@ public final class Utils {
         reqContext.put(MessageContext.HTTP_REQUEST_HEADERS, httpHeaders);
     }
 
-    public static void setHTTPBasicCredentialAndEndPointFromParams(final Object proxy, final String api, ConnectParams params) {
+    private static void setHTTPBasicCredentialAndEndPointFromParams(final Object proxy, final String api, ConnectParams params) {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "setting HTTPBasic Credentials And EndPoint from function parameters");
 
         // Set proxy
         if (params.getProxyHost() != null) {
             // Proxy HTTP
-            System.setProperty("http.proxySet", "true");
-            System.setProperty("http.proxyHost", params.getProxyHost());
-            System.setProperty("http.proxyPort", params.getProxyPort());
+            System.setProperty(HTTP_PROXY_SET, TRUE);
+            System.setProperty(HTTP_PROXY_HOST, params.getProxyHost());
+            System.setProperty(HTTP_PROXY_PORT, params.getProxyPort());
 
             // PROXY HTTPS
-            System.setProperty("https.proxySet", "true");
-            System.setProperty("https.proxyHost", params.getProxyHost());
-            System.setProperty("https.proxyPort", params.getProxyPort());
+            System.setProperty(HTTPS_PROXY_SET, TRUE);
+            System.setProperty(HTTPS_PROXY_HOST, params.getProxyHost());
+            System.setProperty(HTTPS_PROXY_PORT, params.getProxyPort());
 
             // Login Proxy
             if (params.getProxyLogin() != null) {
-                System.setProperty("https.proxyLogin", params.getProxyLogin());
-                System.setProperty("http.proxyLogin", params.getProxyLogin());
+                System.setProperty(HTTPS_PROXY_LOGIN, params.getProxyLogin());
+                System.setProperty(HTTP_PROXY_LOGIN, params.getProxyLogin());
             }
             // Password Proxy
             if (params.getProxyPassword() != null) {
-                System.setProperty("https.proxyPassword", params.getProxyPassword());
-                System.setProperty("http.proxyPassword", params.getProxyPassword());
+                System.setProperty(HTTPS_PROXY_PASSWORD, params.getProxyPassword());
+                System.setProperty(HTTP_PROXY_PASSWORD, params.getProxyPassword());
             }
         } else {
         	// remove proxy parameters to prevent cache side effects
-            System.setProperty("http.proxySet", "false");
-            System.clearProperty("http.proxyHost");
-            System.clearProperty("http.proxyPort");
-            System.clearProperty("http.proxyLogin");
-            System.clearProperty("http.proxyPassword");
-            System.setProperty("https.proxySet", "false");
-            System.clearProperty("https.proxyHost");
-            System.clearProperty("https.proxyPort");
-            System.clearProperty("https.proxyLogin");
-            System.clearProperty("https.proxyPassword");
+            System.setProperty(HTTP_PROXY_SET, "false");
+            System.clearProperty(HTTP_PROXY_HOST);
+            System.clearProperty(HTTP_PROXY_PORT);
+            System.clearProperty(HTTP_PROXY_LOGIN);
+            System.clearProperty(HTTP_PROXY_PASSWORD);
+            System.setProperty(HTTPS_PROXY_SET, "false");
+            System.clearProperty(HTTPS_PROXY_HOST);
+            System.clearProperty(HTTPS_PROXY_PORT);
+            System.clearProperty(HTTPS_PROXY_LOGIN);
+            System.clearProperty(HTTPS_PROXY_PASSWORD);
         }
 
-        String endpoint = null;
+        String endpoint;
         if (params.isClientAuthentication()) {
             // Set endpoint
             if (params.isProduction()) {
@@ -260,7 +272,7 @@ public final class Utils {
         ((BindingProvider) proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
 
         // version
-        String headerVersion = null;
+        String headerVersion;
         if (params.getModule() != null) {
             headerVersion = params.getModule();
         } else {
@@ -379,10 +391,10 @@ public final class Utils {
     }
 
     /**
-     * @param merchantId
+     * @param merchantId the merchant identifier
      * @param orderRef the order reference
      * @param contractNumber Payline identifier of your e-commerce contract number
-     * @param accessKey
+     * @param accessKey the access key
      * @return String authentication data for getToken servlet
      */
     public static String encrypt(final String merchantId, final String orderRef, final String contractNumber, final String accessKey) {
@@ -400,20 +412,20 @@ public final class Utils {
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             byte[] ciphered = cipher.doFinal(msgUtf8);
 
-            crypted = new String(Base64.encodeBase64URLSafeString(ciphered));
+            crypted = Base64.encodeBase64URLSafeString(ciphered);
         } catch (Exception e) {
             crypted = e.toString();
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Unexpected error", e);
         }
         return crypted;
     }
 
     /**
-     * @param encrypt : data returned by getToken
-     * @param accessKey
+     * @param encrypt data returned by getToken
+     * @param accessKey the access key
      * @return decrypted data
      */
-    public static final byte[] decrypt(final String accessKey, final String encrypt) {
+    public static byte[] decrypt(final String accessKey, final String encrypt) {
         byte[] finalDecrypt = new byte[0];
         try {
             byte[] accessKeyBytes = accessKey.getBytes("UTF-8");
@@ -426,28 +438,27 @@ public final class Utils {
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
             finalDecrypt = cipher.doFinal(Base64.decodeBase64(encrypt.getBytes("UTF-8")));
         } catch (final Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Unexpected error", e);
         }
         return finalDecrypt;
     }
 
     /**
-     * @param decrypt
+     * @param decrypt data
      * @return decompressed String result
      */
     public static String gzipDecompress(final byte[] decrypt) {
-        String outStr = "";
+        StringBuilder outStr = new StringBuilder();
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(decrypt));
             BufferedReader bf = new BufferedReader(new InputStreamReader(gis, "UTF-8"));
             String line;
             while ((line = bf.readLine()) != null) {
-                outStr += line;
+                outStr.append(line);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.log(LOG_LEVEL, "unexpected error during GZip inflation");
+            logger.log(Level.SEVERE, "Unexpected error during GZip inflation", e);
         }
-        return outStr;
+        return outStr.toString();
     }
 }

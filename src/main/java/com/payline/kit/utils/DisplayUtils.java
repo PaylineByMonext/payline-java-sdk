@@ -63,36 +63,32 @@ public final class DisplayUtils {
 
                     Method[] methods = cl.getDeclaredMethods();
 
-                    for (int k = 0; k < methods.length; k++) {
-                        Method m = methods[k];
-
+                    for (Method m : methods) {
                         String methodName = m.getName();
                         Class<?> retType = m.getReturnType();
                         Class<?>[] paramTypes = m.getParameterTypes();
 
-                        if (methodName.startsWith("get") && Modifier.toString(m.getModifiers()).equalsIgnoreCase("public")) {
-                            if (paramTypes.length == 0) {
-                                try {
-                                    if (retType.isPrimitive() || retType.getName().contains("String")) {
-                                        Object r = m.invoke(obj);
-                                        String result = null;
-                                        if (r != null) {
-                                            result = r.toString();
-                                        }
-                                        // if result sounds like an url, puts
-                                        // <a>
-                                        if (result != null && result.startsWith("http")) {
-                                            result = "<a href=\"" + result + "\">" + result + "</a>";
-                                        }
-                                        out.append("<li>" + methodName + " => " + result + "</li>");
-                                    } else {
-                                        out.append(objectDetails(m.invoke(obj)));
+                        if (methodName.startsWith("get") && Modifier.toString(m.getModifiers()).equalsIgnoreCase("public") && paramTypes.length == 0) {
+                            try {
+                                if (retType.isPrimitive() || retType.getName().contains("String")) {
+                                    Object r = m.invoke(obj);
+                                    String result = null;
+                                    if (r != null) {
+                                        result = r.toString();
                                     }
-                                } catch (IllegalAccessException ex) {
-                                    logger.log(Level.SEVERE, "error during introspection :", ex);
-                                } catch (InvocationTargetException ex) {
-                                    logger.log(Level.SEVERE, "error during introspection :", ex);
+                                    // if result sounds like an url, puts
+                                    // <a>
+                                    if (result != null && result.startsWith("http")) {
+                                        result = "<a href=\"" + result + "\">" + result + "</a>";
+                                    }
+                                    out.append("<li>" + methodName + " => " + result + "</li>");
+                                } else {
+                                    out.append(objectDetails(m.invoke(obj)));
                                 }
+                            } catch (IllegalAccessException ex) {
+                                logger.log(Level.SEVERE, "error during introspection :", ex);
+                            } catch (InvocationTargetException ex) {
+                                logger.log(Level.SEVERE, "error during introspection :", ex);
                             }
                         }
                     }
@@ -101,7 +97,7 @@ public final class DisplayUtils {
             }
 
         } catch (NoSuchElementException ex) {
-            System.out.println(ex.getMessage());
+            logger.log(Level.SEVERE, "error during introspection :", ex);
         }
         return out.toString();
     }
@@ -117,10 +113,10 @@ public final class DisplayUtils {
 
             if (obj != null) {
                 if (obj.size() > 0) {
-                    out.append("<ul><li class=\"object\">" + obj.getClass().getName() + "</li>");
+                    out.append("<ul><li class=\"object\">").append(obj.getClass().getName()).append("</li>");
                 }
-                for (int i = 0; i < obj.size(); i++) {
-                    out.append(objectDetails(obj.get(i)));
+                for (Object o : obj) {
+                    out.append(objectDetails(o));
                 }
                 out.append(" </ul>");
             }
@@ -129,5 +125,4 @@ public final class DisplayUtils {
         }
         return out.toString();
     }
-
 }
