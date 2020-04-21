@@ -165,12 +165,17 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @param maxAmount the maximum transaction amount
      * @param walletID the wallet identifier
      * @param seqNumber the transaction sequence number
+     * @param posId point of sell identifier
+     * @param cardNetwork Card network code.
+     * @param threeDSecure Type of transaction's 3DS authentication.
+     * @param customerMediaId  Customer media code.
      * @return TransactionsSearchResponse
      */
     public final TransactionsSearchResponse transactionsSearch(final String orderRef, final String transactionID, final String startDate, final String endDate,
-        final String contractNumber, final String authorizationNumber, final String returnCode, final String cardType, final String transactionType,
-        final String buyerName, final String email, final String buyerFName, final String cardNumber, final String currency, final String minAmount,
-        final String maxAmount, final String walletID, final String seqNumber, final String version) {
+                   final String contractNumber, final String authorizationNumber, final String returnCode, final String cardType, final String transactionType,
+                   final String buyerName, final String email, final String buyerFName, final String cardNumber, final String currency, final String minAmount,
+                   final String maxAmount, final String walletID, final String seqNumber, final String version, final String posId, final String cardNetwork,
+                   final String threeDSecure, final String customerMediaId) {
         setException(null);
         TransactionsSearchResponse result = new TransactionsSearchResponse();
         TransactionsSearchRequest request = new TransactionsSearchRequest();
@@ -193,6 +198,10 @@ public class ExtendedAPI extends WebServiceWrapper {
         request.setWalletId(walletID);
         request.setSequenceNumber(seqNumber);
         request.setVersion(version);
+        request.setPointOfSellId(posId);
+        request.setCardNetwork(cardNetwork);
+        request.setThreeDSecured(threeDSecure);
+        request.setCustomerMediaId(customerMediaId);
         final com.payline.ws.model.ExtendedAPI port;
         try {
             if (this.initFromFile) {

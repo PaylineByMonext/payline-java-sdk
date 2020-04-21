@@ -71,7 +71,7 @@ public final class Utils {
     /**
      * WSDL
      */
-    private static final String WSDL = "wsdls/v4.59.wsdl";
+    private static final String WSDL = "wsdls/v4.62.1.wsdl";
 
     /**
      * logger.
@@ -88,7 +88,7 @@ public final class Utils {
     /**
      * kit version
      */
-    private static final String kitVersion = "kit JAVA v4.59";
+    private static final String kitVersion = "kit JAVA v4.62.1";
 
     private static final String HTTP_PROXY_SET = "http.proxySet";
     private static final String HTTP_PROXY_HOST = "http.proxyHost";
