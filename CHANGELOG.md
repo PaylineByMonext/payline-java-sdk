@@ -1,3 +1,11 @@
+* 4.62.1 
+
+ * Update WSDL from 4.59 to 4.62.1
+ * new posId, cardNetwork, threeDSecure and customerMediaId parameters for GetTransactionDetails 
+ * new authorizedAmount and authorizedCurrency attributes in Authorization object
+ 
+----------------------------------------
+
 * 4.59 (2019-08-01)
   * new 3D-Secure V2 fields
   * minor fixes

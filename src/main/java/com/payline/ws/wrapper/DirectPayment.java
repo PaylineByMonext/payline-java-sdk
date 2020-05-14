@@ -15,60 +15,13 @@
  */
 package com.payline.ws.wrapper;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.ws.WebServiceException;
-
-import com.payline.ws.model.DirectPaymentAPI;
-import com.payline.ws.model.DoAuthorizationRequest;
-import com.payline.ws.model.DoAuthorizationResponse;
-import com.payline.ws.model.DoBankTransferRequest;
-import com.payline.ws.model.DoBankTransferResponse;
-import com.payline.ws.model.DoCaptureRequest;
-import com.payline.ws.model.DoCaptureResponse;
-import com.payline.ws.model.DoCreditRequest;
-import com.payline.ws.model.DoCreditResponse;
-import com.payline.ws.model.DoDebitRequest;
-import com.payline.ws.model.DoDebitResponse;
-import com.payline.ws.model.DoReAuthorizationRequest;
-import com.payline.ws.model.DoReAuthorizationResponse;
-import com.payline.ws.model.DoRefundRequest;
-import com.payline.ws.model.DoRefundResponse;
-import com.payline.ws.model.DoResetRequest;
-import com.payline.ws.model.DoResetResponse;
-import com.payline.ws.model.DoScoringChequeRequest;
-import com.payline.ws.model.DoScoringChequeResponse;
-import com.payline.ws.model.GetBalanceRequest;
-import com.payline.ws.model.GetBalanceResponse;
-import com.payline.ws.model.GetEncryptionKeyRequest;
-import com.payline.ws.model.GetEncryptionKeyResponse;
-import com.payline.ws.model.GetMerchantSettingsRequest;
-import com.payline.ws.model.GetMerchantSettingsResponse;
-import com.payline.ws.model.GetTokenRequest;
-import com.payline.ws.model.GetTokenResponse;
-import com.payline.ws.model.IsRegisteredRequest;
-import com.payline.ws.model.IsRegisteredResponse;
-import com.payline.ws.model.UnBlockRequest;
-import com.payline.ws.model.UnBlockResponse;
-import com.payline.ws.model.VerifyAuthenticationRequest;
-import com.payline.ws.model.VerifyAuthenticationResponse;
-import com.payline.ws.model.VerifyEnrollmentRequest;
-import com.payline.ws.model.VerifyEnrollmentResponse;
-import com.payline.ws.model.Authentication3DSecure;
-import com.payline.ws.model.Authorization;
-import com.payline.ws.model.BankAccountData;
-import com.payline.ws.model.Buyer;
-import com.payline.ws.model.Card;
-import com.payline.ws.model.Cheque;
-import com.payline.ws.model.Creditor;
-import com.payline.ws.model.Order;
-import com.payline.ws.model.Payment;
-import com.payline.ws.model.PrivateDataList;
-import com.payline.ws.model.Result;
-import com.payline.ws.model.SubMerchant;
 import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.Utils;
+import com.payline.ws.model.*;
+
+import javax.xml.ws.WebServiceException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * DirectPayment class.
@@ -441,15 +394,22 @@ public class DirectPayment extends WebServiceWrapper {
      * cancel sending your bank a debit or credit transaction made using the following functions: doauthorization, doDebit, doCredit, doRefund
      * @param transationID the unique Payline transaction ID
      * @param comment the comment
+     * @param version WSDL version
+     * @param amount Amount to be reset
+     * @param currency Currency of the transaction
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @return DoResetResponse the response given by Payline to a reset request
      */
-    public final DoResetResponse doReset(final String transationID, final String comment, final String version) {
+    public final DoResetResponse doReset(final String transationID, final String comment, final String version, final String amount, final String currency, final PrivateDataList privateDataList) {
         setException(null);
         DoResetResponse result = new DoResetResponse();
         DoResetRequest parameters = new DoResetRequest();
         parameters.setTransactionID(transationID);
         parameters.setComment(comment);
         parameters.setVersion(version);
+        parameters.setAmount(amount);
+        parameters.setCurrency(currency);
+        parameters.setPrivateDataList(privateDataList);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
