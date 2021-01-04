@@ -15,7 +15,7 @@ The set of web services Payline is covered by this library. Web services are div
 * WebPayment
 
 ## Requirements
-Java 1.6 or higher
+Java 1.8 or higher
 
 ## Installation
 ### Maven users and JDK 8
@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.59.0.1</version>
+  <version>4.64.1</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.59.0.1</version>
+  <version>4.64.1</version>
 </dependency>
 <dependency>
   <groupId>javax.xml.ws</groupId>
