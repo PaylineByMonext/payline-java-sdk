@@ -11,7 +11,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<WebPaymentAPI.service>WebpaymentAPI</WebPaymentAPI.service>
+		<WebPaymentAPI.service>WebPaymentAPI</WebPaymentAPI.service>
 		<DirectpaymentAPI.service>DirectPaymentAPI</DirectpaymentAPI.service>
 		<ExtendedAPI.service>ExtendedAPI</ExtendedAPI.service>
 	</properties>
