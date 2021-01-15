@@ -71,7 +71,9 @@ public final class Utils {
     /**
      * WSDL
      */
-    private static final String WSDL = "wsdls/v4.62.1.wsdl";
+    private static final String DIRECT_PAYMENT_API_WSDL = "wsdls/DirectPaymentAPI.wsdl";
+    private static final String EXTENDED_API_WSDL = "wsdls/ExtendedAPI.wsdl";
+    private static final String WEB_PAYMENT_API_WSDL = "wsdls/WebPaymentAPI.wsdl";
 
     /**
      * logger.
@@ -88,7 +90,7 @@ public final class Utils {
     /**
      * kit version
      */
-    private static final String kitVersion = "kit JAVA v4.62.1";
+    private static final String kitVersion = "kit JAVA v4.64.1";
 
     private static final String HTTP_PROXY_SET = "http.proxySet";
     private static final String HTTP_PROXY_HOST = "http.proxyHost";
@@ -292,7 +294,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating WebPayment Services from payline.properties file");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.WEB_PAYMENT_API_WSDL);
         WebPaymentAPI_Service service = new WebPaymentAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.WEB_PAYMENT_API));
         WebPaymentAPI port = service.getWebPaymentAPI();
 
@@ -309,7 +311,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating WebPayment Services from function parameters");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.WEB_PAYMENT_API_WSDL);
         WebPaymentAPI_Service service = new WebPaymentAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.WEB_PAYMENT_API));
         WebPaymentAPI port = service.getWebPaymentAPI();
 
@@ -327,7 +329,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating Direct Services from payline.properties file");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.DIRECT_PAYMENT_API_WSDL);
         DirectPaymentAPI_Service service = new DirectPaymentAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.DIRECT_PAYMENT_API));
         DirectPaymentAPI port = service.getDirectPaymentAPI();
 
@@ -345,7 +347,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating Direct Services from function parameters");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.DIRECT_PAYMENT_API_WSDL);
         DirectPaymentAPI_Service service = new DirectPaymentAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.DIRECT_PAYMENT_API));
         DirectPaymentAPI port = service.getDirectPaymentAPI();
 
@@ -363,7 +365,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating Extended Services from payline.properties file");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.EXTENDED_API_WSDL);
         ExtendedAPI_Service service = new ExtendedAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.EXTENDED_API));
         ExtendedAPI port = service.getExtendedAPI();
 
@@ -381,7 +383,7 @@ public final class Utils {
         if (LOG_LEVEL != Level.OFF)
             logger.log(LOG_LEVEL, "Initiating Extended Services from function parameters");
 
-        URL url = Utils.class.getClassLoader().getResource(Utils.WSDL);
+        URL url = Utils.class.getClassLoader().getResource(Utils.EXTENDED_API_WSDL);
         ExtendedAPI_Service service = new ExtendedAPI_Service(url, new QName("http://impl.ws.payline.experian.com", Utils.EXTENDED_API));
         ExtendedAPI port = service.getExtendedAPI();
 
