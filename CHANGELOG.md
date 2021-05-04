@@ -1,5 +1,13 @@
-* 4.62.1 
+----------------------------------------
 
+* 4.64.1 (2020-12-14)
+ * Update WSDL from 4.62.1 to 4.64.1
+ * Split wsl in tree files
+ * Improve pom.xml definition
+
+----------------------------------------
+
+* 4.62.1 (2020-05-01)
  * Update WSDL from 4.59 to 4.62.1
  * new posId, cardNetwork, threeDSecure and customerMediaId parameters for GetTransactionDetails 
  * new authorizedAmount and authorizedCurrency attributes in Authorization object
