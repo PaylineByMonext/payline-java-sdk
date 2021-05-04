@@ -317,7 +317,7 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final String version) {
-        return this.doImmediateWalletPayment(payment, order, buyer, privateDataList, walletId, Cardind, cvx, null, version,null);
+        return this.doImmediateWalletPayment(payment, order, buyer, privateDataList, walletId, Cardind, cvx, null, version, null, null, null);
     }
 
     /**
@@ -333,11 +333,13 @@ public class WalletPayment extends WebServiceWrapper {
      * @param auth3ds 3D Secure authentication data
      * @param version the API version of Payline
      * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
+     * @param recurring Recurring information
+     * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
      * @return DoImmediateWalletPaymentResponse
      */
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
-        final String version, final SubMerchant subMerchant) {
+        final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId) {
         setException(null);
         DoImmediateWalletPaymentResponse result = new DoImmediateWalletPaymentResponse();
         DoImmediateWalletPaymentRequest parameters = new DoImmediateWalletPaymentRequest();
@@ -351,6 +353,8 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setAuthentication3DSecure(auth3ds);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
+        parameters.setRecurring(recurring);
+        parameters.setLinkedTransactionId(linkedTransactionId);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -384,11 +388,15 @@ public class WalletPayment extends WebServiceWrapper {
      * @param Cardind within a wallet, index of the card to be used for payment
      * @param version the API version of Payline
      * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
+     * @param recurring Recurring information
+     * @param authentication3dSecure authentication3DSecure information
+     * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
      * @return DoScheduledWalletPaymentResponse
      */
     public final DoScheduledWalletPaymentResponse doScheduledWalletPayment(final Payment payment, final String date, final String ref,
         final String scheduledDate, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind,
-        final String version, final SubMerchant subMerchant) {
+        final String version, final SubMerchant subMerchant, final Recurring recurring, final Authentication3DSecure authentication3dSecure,
+        final String linkedTransactionId) {
         setException(null);
         DoScheduledWalletPaymentResponse result = new DoScheduledWalletPaymentResponse();
         DoScheduledWalletPaymentRequest parameters = new DoScheduledWalletPaymentRequest();
@@ -402,6 +410,9 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setVersion(version);
         parameters.setSubMerchant(subMerchant);
+        parameters.setRecurring(recurring);
+        parameters.setAuthentication3DSecure(authentication3dSecure);
+        parameters.setLinkedTransactionId(linkedTransactionId);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -435,10 +446,14 @@ public class WalletPayment extends WebServiceWrapper {
      * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param Cardind within a wallet, index of the card to be used for payment
+     * @param cvx Visual cryptogram on the back of the credit card
+     * @param linkedTransactionId In case of installment, recurring or split shipment payment refers to the first authorization (bank id)
+     * @param authentication3DSecure 3DSecure operations information
      * @return DoRecurrentWalletPaymentResponse
      */
     public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment(final Payment payment, final Recurring recurring, final String date,
-        final String ref, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind, final String version) {
+        final String ref, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind, final String version,
+        final String cvx, final String linkedTransactionId, final Authentication3DSecure authentication3DSecure) {
         setException(null);
         DoRecurrentWalletPaymentResponse result = new DoRecurrentWalletPaymentResponse();
         DoRecurrentWalletPaymentRequest parameters = new DoRecurrentWalletPaymentRequest();
@@ -451,6 +466,9 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setWalletId(walletId);
         parameters.setVersion(version);
+        parameters.setCvx(cvx);
+        parameters.setLinkedTransactionId(linkedTransactionId);
+        parameters.setAuthentication3DSecure(authentication3DSecure);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
