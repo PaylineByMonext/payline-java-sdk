@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.64.1</version>
+  <version>4.66</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.64.1</version>
+  <version>4.66</version>
 </dependency>
 <dependency>
   <groupId>javax.xml.ws</groupId>
@@ -102,9 +102,9 @@ public class SampleCalls {
 4.59
 
 ## Learn about Payline
-* [www.payline.com](http://www.payline.com/index.php/en/)
+* [www.payline.com](https://www.monext.fr/en/online)
 * [support payline](https://support.payline.com/hc/en-us)
-* [Getting Started Guide](https://support.payline.com/hc/en-us/articles/201221883-Users-guide-to-installing-the-Payline-payment-solution)
+* [Getting Started Guide](https://docs.payline.com/display/DT/Getting+Started+Guide)
 
 *For assistance, advice or an answer to your question, contact Payline Support by email at*
 `support@payline.com`

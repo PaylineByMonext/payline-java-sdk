@@ -1,9 +1,23 @@
 ----------------------------------------
 
+* 4.66 (2020-04-30)
+* Update WSDL from 4.64.1 to 4.66
+* new parameter PrivateDataList for doBankTransfer
+* new parameters mdFieldValue, generateVirtualCvx, recurring, returnURL, order, buyer, subMerchant, recurring, threeDSinfo, transientParam, privateDataList for verifyEnrollment
+* new parameters sequenceNumber, media for doReset
+* new parameters transientParam, PrivateDataList for verifyAuthentication
+
+* new parameters recurring, linkedTransactionId for doImmediateWalletPayment
+* new parameters recurring, authentication3dSecure, linkedTransactionId for doScheduledWalletPayment
+* new parameters cvx, linkedTransactionId, authentication3DSecure for doRecurrentWalletPayment
+* new parameters skipSmartDisplay, owner, contractNumberWalletList, asynchronousRetryTimeout, threeDSInfo, merchantScore for doWebPayment
+
+----------------------------------------
+
 * 4.64.1 (2020-12-14)
- * Update WSDL from 4.62.1 to 4.64.1
- * Split wsl in tree files
- * Improve pom.xml definition
+* Update WSDL from 4.62.1 to 4.64.1
+* Split wsl in tree files
+* Improve pom.xml definition
 
 ----------------------------------------
 
