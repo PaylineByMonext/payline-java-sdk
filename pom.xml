@@ -129,6 +129,7 @@
 						<configuration>
 							<excludePackageNames>com.payline.ws.*</excludePackageNames>
 							<additionalparam>-Xdoclint:none</additionalparam>
+							<sources>8</sources>
 						</configuration>
 					</execution>
 				</executions>
