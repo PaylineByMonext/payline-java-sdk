@@ -1,5 +1,11 @@
 ----------------------------------------
 
+* 4.68 (2020-09-28)
+* Update WSDL from 4.66 to 4.68
+* new parameters merchantURL, merchantCountryCode for verifyEnrollment
+
+----------------------------------------
+
 * 4.66 (2020-04-30)
 * Update WSDL from 4.64.1 to 4.66
 * new parameter PrivateDataList for doBankTransfer

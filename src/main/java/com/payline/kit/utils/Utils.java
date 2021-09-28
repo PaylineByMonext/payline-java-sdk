@@ -90,7 +90,7 @@ public final class Utils {
     /**
      * kit version
      */
-    private static final String kitVersion = "kit JAVA v4.66";
+    private static final String kitVersion = "kit JAVA v4.68";
 
     private static final String HTTP_PROXY_SET = "http.proxySet";
     private static final String HTTP_PROXY_HOST = "http.proxyHost";
