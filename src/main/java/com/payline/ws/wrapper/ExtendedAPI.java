@@ -103,6 +103,7 @@ public class ExtendedAPI extends WebServiceWrapper {
         return result;
     }
 
+
     /**
      * Obtain payment details of any nature. The <b>getTransactionDetails</b> function is used to obtain the details of a payment transaction whatever its
      * status.
@@ -114,6 +115,28 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @param version the API version of Payline
      * @return GetTransactionDetailsResponse
      */
+
+    //public final GetTransactionDetailsResponse getTransactionDetails: TODO: archiveSearch
+    public final GetTransactionDetailsResponse getTransactionDetails(final String orderRef, final String transactionID, final String startDate,
+        final String endDate, final String transactionHistory, final String version) {
+
+        return this.getTransactionDetails(orderRef, transactionID, startDate,
+                endDate, transactionHistory, version);
+    }
+
+    /**
+     * Obtain payment details of any nature. The <b>getTransactionDetails</b> function is used to obtain the details of a payment transaction whatever its
+     * status.
+     * @param orderRef the order reference
+     * @param transactionID the unique Payline transaction ID
+     * @param startDate the Start date of the transaction search period
+     * @param endDate the End date of the transaction search period
+     * @param transactionHistory the status history for a given transaction
+     * @param version the API version of Payline
+     * @return GetTransactionDetailsResponse
+     */
+
+    //public final GetTransactionDetailsResponse getTransactionDetails: TODO: archiveSearch
     public final GetTransactionDetailsResponse getTransactionDetails(final String orderRef, final String transactionID, final String startDate,
         final String endDate, final String transactionHistory, final String version) {
         setException(null);

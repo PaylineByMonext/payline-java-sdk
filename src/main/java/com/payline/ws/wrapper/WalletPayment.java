@@ -116,6 +116,30 @@ public class WalletPayment extends WebServiceWrapper {
         this.connectParams = connectParams;
     }
 
+
+
+
+    //public final CreateWalletResponse createWallet: TODO Add: buyer, owner, media, contractNumberWalletList, transactionID
+
+    /**
+     * Create a customer wallet. The 'createWallet' function is used to create a virtual wallet for your customer. In order to validate the use of a wallet,
+     * Payline performs an e-payment check of the payment method via an authorization transaction of 1 euro which will not then be validated (no actual
+     * payment).
+     * @param wallet the wallet object, containing the walletId and data about its owner (firstName, lastName, email,...)
+     * @param contractNumber Payline identifier of your e-commerce contract number
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
+     * @param version the API version of Payline
+     * @return CreateWalletResponse
+     */
+    public final CreateWalletResponse createWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
+        final Authentication3DSecure authentication3DSecure, final String version) {
+        
+        return this.createWallet(wallet, contractNumber, privateDataList,
+                authentication3DSecure, version);
+    }
+
+
     /**
      * Create a customer wallet. The 'createWallet' function is used to create a virtual wallet for your customer. In order to validate the use of a wallet,
      * Payline performs an e-payment check of the payment method via an authorization transaction of 1 euro which will not then be validated (no actual
@@ -165,6 +189,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param version the API version of Payline
      * @return GetWalletResponse
      */
+    // public final GetWalletResponse getWallet: TODO: media
     public final GetWalletResponse getWallet(final String walletId, final String contractNumber, final String Cardind, final String version) {
         setException(null);
         GetWalletResponse result = new GetWalletResponse();
@@ -203,6 +228,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param version the API version of Payline
      * @return UpdateWalletResponse
      */
+    // public final UpdateWalletResponse updateWallet: TODO:  buyer, owner, media, contractNumberWalletList, transactionID
     public final UpdateWalletResponse updateWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
         final Authentication3DSecure authentication3DSecure, final String Cardind, final String version) {
         setException(null);
@@ -337,6 +363,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
      * @return DoImmediateWalletPaymentResponse
      */
+    // public final DoImmediateWalletPaymentResponse doImmediateWalletPayment: TODO: media
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
         final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId) {
@@ -451,6 +478,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param authentication3DSecure 3DSecure operations information
      * @return DoRecurrentWalletPaymentResponse
      */
+    // public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment: TODO: media
     public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment(final Payment payment, final Recurring recurring, final String date,
         final String ref, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind, final String version,
         final String cvx, final String linkedTransactionId, final Authentication3DSecure authentication3DSecure) {
@@ -492,15 +520,15 @@ public class WalletPayment extends WebServiceWrapper {
     /**
      * Retrieve a payment record. The <b>getPaymentRecord</b> function is used to get the information from a recurring payment record.
      * @param contractNumber Payline identifier of your e-commerce contract number
-     * @param recordId the record identifier
+     * @param paymentRecordId the record identifier
      * @return GetPaymentRecordResponse
      */
-    public final GetPaymentRecordResponse getPaymentRecord(final String contractNumber, final String recordId, final String version) {
+    public final GetPaymentRecordResponse getPaymentRecord(final String contractNumber, final String paymentRecordId, final String version) {
         setException(null);
         GetPaymentRecordResponse result = new GetPaymentRecordResponse();
         GetPaymentRecordRequest parameters = new GetPaymentRecordRequest();
         parameters.setContractNumber(contractNumber);
-        parameters.setPaymentRecordId(recordId);
+        parameters.setPaymentRecordId(paymentRecordId);
         parameters.setVersion(version);
         final DirectPaymentAPI port;
         try {
@@ -681,6 +709,8 @@ public class WalletPayment extends WebServiceWrapper {
      * @param updatePersonalDetails flag (0/1) to indicate wether customer can change his personal details (firstname, lastname,...) on update wallet page
      * @return CreateWebWalletResponse
      */
+
+    // public final CreateWebWalletResponse createWebWallet: TODO: contractNumber, owner, contractNumberWalletList
     public final CreateWebWalletResponse createWebWallet(final Buyer buyer, final PrivateDataList privateDataList, String notificationURL, String returnURL,
         String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
         final SelectedContractList selectedContractList, final String updatePersonalDetails, final String version) {
@@ -750,6 +780,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param Cardind within a wallet, index of the card to be used for payment
      * @return UpdateWebWalletResponse
      */
+    //public final UpdateWebWalletResponse updateWebWallet: TODO: contractNumber, updateOwnerDetails, contractNumberWalletList
     public final UpdateWebWalletResponse updateWebWallet(final String walletId, final PrivateDataList privateDataList, String notificationURL, String returnURL,
         String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
         final SelectedContractList selectedContractList, final String updatePersonalDetails, final String updatePaymentDetails, final Buyer buyer,
@@ -814,6 +845,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @param merchantName name displayed to buyer on 3D Secure authentication form
      * @return ManageWebWalletResponse
      */
+    //public final ManageWebWalletResponse manageWebWallet: TODO: threeDSInfo
     public final ManageWebWalletResponse manageWebWallet(final String version, final String contractNumber, final SelectedContractList selectedContractList,
         final String updatePersonalDetails, final Buyer buyer, final Owner owner, final String languageCode, final String customPaymentPageCode,
         final String securityMode, final String returnURL, final String cancelURL, final String notificationURL, final PrivateDataList privateDataList,
