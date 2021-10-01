@@ -65,6 +65,7 @@ import com.payline.ws.model.ContractNumberWalletList;
 import com.payline.ws.model.Order;
 import com.payline.ws.model.Owner;
 import com.payline.ws.model.Payment;
+import com.payline.ws.model.ThreeDSInfo;
 import com.payline.ws.model.PrivateDataList;
 import com.payline.ws.model.Recurring;
 import com.payline.ws.model.RecurringForUpdate;
@@ -136,7 +137,7 @@ public class WalletPayment extends WebServiceWrapper {
         final Authentication3DSecure authentication3DSecure, final String version) {
         
         return this.createWallet(wallet, contractNumber, privateDataList,
-                authentication3DSecure, version);
+                authentication3DSecure, version, null, null, null, null, null);
     }
 
 
@@ -149,10 +150,15 @@ public class WalletPayment extends WebServiceWrapper {
      * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
      * @param version the API version of Payline
+     * @param buyer
+     * @param owner
+     * @param media
+     * @param contractNumberWalletList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param transactionID
      * @return CreateWalletResponse
      */
     public final CreateWalletResponse createWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
-        final Authentication3DSecure authentication3DSecure, final String version) {
+        final Authentication3DSecure authentication3DSecure, final String version, final Buyer buyer, final Owner owner, final String media, ContractNumberWalletList contractNumberWalletList, final String transationID) {
         setException(null);
         CreateWalletResponse result = new CreateWalletResponse();
         CreateWalletRequest parameters = new CreateWalletRequest();
@@ -161,6 +167,12 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setPrivateDataList(privateDataList);
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setVersion(version);
+		parameters.setBuyer(buyer);
+		parameters.setOwner(owner);
+        parameters.setMedia(media);
+        parameters.setContractNumberWalletList(contractNumberWalletList);
+        parameters.setTransactionID(transationID);
+
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -181,16 +193,28 @@ public class WalletPayment extends WebServiceWrapper {
         return result;
     }
 
+        /**
+         * Retrieve information making up the customer wallet The 'getWallet' function retrieves virtual wallet data.
+         * @param walletId the wallet identifier
+         * @param contractNumber Payline identifier of your e-commerce contract number
+         * @param Cardind within a wallet, index of the card to be used for payment
+         * @param version the API version of Payline
+         * @return GetWalletResponse
+         */
+        public final GetWalletResponse getWallet(final String walletId, final String contractNumber, final String Cardind, final String version) {
+            return this.getWallet(walletId, contractNumber, Cardind, version, null);
+        }
+
     /**
      * Retrieve information making up the customer wallet The 'getWallet' function retrieves virtual wallet data.
      * @param walletId the wallet identifier
      * @param contractNumber Payline identifier of your e-commerce contract number
      * @param Cardind within a wallet, index of the card to be used for payment
      * @param version the API version of Payline
+     * @param media                 Detection of the media used during the payment.
      * @return GetWalletResponse
      */
-    // public final GetWalletResponse getWallet: TODO: media
-    public final GetWalletResponse getWallet(final String walletId, final String contractNumber, final String Cardind, final String version) {
+    public final GetWalletResponse getWallet(final String walletId, final String contractNumber, final String Cardind, final String version, final String media) {
         setException(null);
         GetWalletResponse result = new GetWalletResponse();
         GetWalletRequest parameters = new GetWalletRequest();
@@ -198,6 +222,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setContractNumber(contractNumber);
         parameters.setVersion(version);
         parameters.setCardInd(Cardind);
+        parameters.setMedia(media);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -218,6 +243,24 @@ public class WalletPayment extends WebServiceWrapper {
         return result;
     }
 
+
+    /**
+         * Update customer wallet. The 'updateWallet' function is used to update the virtual wallet.
+         * @param wallet the wallet object, containing the walletId and data about its owner (firstName, lastName, email,...)
+         * @param contractNumber Payline identifier of your e-commerce contract number
+         * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+         * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
+         * @param Cardind within a wallet, index of the card to be used for payment
+         * @param version the API version of Payline
+         * @return UpdateWalletResponse
+         */
+        public final UpdateWalletResponse updateWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
+            final Authentication3DSecure authentication3DSecure, final String Cardind, final String version) {
+            return this.updateWallet(wallet, contractNumber, privateDataList,
+                        authentication3DSecure, Cardind, version);
+
+        }
+
     /**
      * Update customer wallet. The 'updateWallet' function is used to update the virtual wallet.
      * @param wallet the wallet object, containing the walletId and data about its owner (firstName, lastName, email,...)
@@ -226,11 +269,15 @@ public class WalletPayment extends WebServiceWrapper {
      * @param authentication3DSecure the authentication3DSecure object, filled with MD and PARES retrieved from the ACS after the customer entered his password
      * @param Cardind within a wallet, index of the card to be used for payment
      * @param version the API version of Payline
+     * @param buyer
+     * @param owner
+     * @param media
+     * @param contractNumberWalletList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param transactionID
      * @return UpdateWalletResponse
      */
-    // public final UpdateWalletResponse updateWallet: TODO:  buyer, owner, media, contractNumberWalletList, transactionID
     public final UpdateWalletResponse updateWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
-        final Authentication3DSecure authentication3DSecure, final String Cardind, final String version) {
+        final Authentication3DSecure authentication3DSecure, final String Cardind, final String version, final Buyer buyer, final Owner owner, final String media, ContractNumberWalletList contractNumberWalletList, final String transationID ) {
         setException(null);
         UpdateWalletResponse result = new UpdateWalletResponse();
         UpdateWalletRequest parameters = new UpdateWalletRequest();
@@ -240,6 +287,12 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setAuthentication3DSecure(authentication3DSecure);
         parameters.setCardInd(Cardind);
         parameters.setVersion(version);
+		parameters.setBuyer(buyer);
+		parameters.setOwner(owner);
+        parameters.setMedia(media);
+        parameters.setContractNumberWalletList(contractNumberWalletList);
+        parameters.setTransactionID(transationID);
+
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -343,8 +396,9 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final String version) {
-        return this.doImmediateWalletPayment(payment, order, buyer, privateDataList, walletId, Cardind, cvx, null, version, null, null, null);
+        return this.doImmediateWalletPayment(payment, order, buyer, privateDataList, walletId, Cardind, cvx, null, version, null, null, null, null);
     }
+
 
     /**
      * Carry out a payment request from a customer wallet. The <b>doImmediateWalletPaymen</b> function makes a virtual wallet payment. With this function, you
@@ -363,10 +417,37 @@ public class WalletPayment extends WebServiceWrapper {
      * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
      * @return DoImmediateWalletPaymentResponse
      */
-    // public final DoImmediateWalletPaymentResponse doImmediateWalletPayment: TODO: media
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
         final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId) {
+
+            return this.doImmediateWalletPayment(payment, order, buyer,
+                    privateDataList, walletId, Cardind, cvx, auth3ds,
+                    version, subMerchant, recurring, linkedTransactionId, null);
+        }
+
+    /**
+     * Carry out a payment request from a customer wallet. The <b>doImmediateWalletPaymen</b> function makes a virtual wallet payment. With this function, you
+     * may use the payment in full (FUL) and deferred (DEF) payment methods. Payline will send return code 02308: payment method not accepted for other methods.
+     * @param payment the payment object containing the amount, the currency, action and mode codes
+     * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
+     * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param walletId the wallet identifier
+     * @param Cardind within a wallet, index of the card to be used for payment
+     * @param cvx Card Verification Value associated to the Card Number
+     * @param auth3ds 3D Secure authentication data
+     * @param version the API version of Payline
+     * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
+     * @param recurring Recurring information
+     * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
+	 * @param owner
+	 * @param media                 Detection of the media used during the payment.
+     * @return DoImmediateWalletPaymentResponse
+     */
+    public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
+        final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
+        final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId, final String media) {
         setException(null);
         DoImmediateWalletPaymentResponse result = new DoImmediateWalletPaymentResponse();
         DoImmediateWalletPaymentRequest parameters = new DoImmediateWalletPaymentRequest();
@@ -382,6 +463,7 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setSubMerchant(subMerchant);
         parameters.setRecurring(recurring);
         parameters.setLinkedTransactionId(linkedTransactionId);
+        parameters.setMedia(media);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -478,10 +560,36 @@ public class WalletPayment extends WebServiceWrapper {
      * @param authentication3DSecure 3DSecure operations information
      * @return DoRecurrentWalletPaymentResponse
      */
-    // public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment: TODO: media
     public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment(final Payment payment, final Recurring recurring, final String date,
         final String ref, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind, final String version,
         final String cvx, final String linkedTransactionId, final Authentication3DSecure authentication3DSecure) {
+            return this.doRecurrentWalletPayment(payment, recurring, date,
+                    ref, walletId, order, privateDataList, Cardind, version,
+                    cvx, linkedTransactionId, authentication3DSecure, null);
+        }
+
+    /**
+     * Schedule a fixed payment amount for payment requests (subscription). The <b>doRecurringWalletPayment</b> function registers a payment record for
+     * automatic and recurring billing of your customer. Payline processes the instalments that come up on a daily basis and informs you of the result through
+     * the notification function.
+     * @param payment the payment object containing the amount, the currency, action and mode codes
+     * @param recurring the recurring object, containing data about how Payline will deal with the recurring payment : first amount, other amount, number of
+     *            instalment, periodicity
+     * @param date the date to use
+     * @param ref the reference
+     * @param walletId the wallet identifier
+     * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param Cardind within a wallet, index of the card to be used for payment
+     * @param cvx Visual cryptogram on the back of the credit card
+     * @param linkedTransactionId In case of installment, recurring or split shipment payment refers to the first authorization (bank id)
+     * @param authentication3DSecure 3DSecure operations information
+     * @param media                 Detection of the media used during the payment.
+     * @return DoRecurrentWalletPaymentResponse
+     */
+    public final DoRecurrentWalletPaymentResponse doRecurrentWalletPayment(final Payment payment, final Recurring recurring, final String date,
+        final String ref, final String walletId, final Order order, final PrivateDataList privateDataList, final String Cardind, final String version,
+        final String cvx, final String linkedTransactionId, final Authentication3DSecure authentication3DSecure, final String media) {
         setException(null);
         DoRecurrentWalletPaymentResponse result = new DoRecurrentWalletPaymentResponse();
         DoRecurrentWalletPaymentRequest parameters = new DoRecurrentWalletPaymentRequest();
@@ -497,6 +605,8 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCvx(cvx);
         parameters.setLinkedTransactionId(linkedTransactionId);
         parameters.setAuthentication3DSecure(authentication3DSecure);
+        parameters.setMedia(media);
+
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -691,7 +801,8 @@ public class WalletPayment extends WebServiceWrapper {
 
     }
 
-    /**
+
+/**
      * Create a customer wallet using web pages The <b>createWebWallet</b> function initialises the creation of a virtual wallet via the web interface. Once
      * your customer is redirected, they are asked to enter their card details to create their virtual wallet. Payline checks this information by a debit
      * authorization request for a sum of EUR 1 (validation does not take place so no card is credited on creation) and registers the customer wallet with the ID
@@ -709,11 +820,42 @@ public class WalletPayment extends WebServiceWrapper {
      * @param updatePersonalDetails flag (0/1) to indicate wether customer can change his personal details (firstname, lastname,...) on update wallet page
      * @return CreateWebWalletResponse
      */
-
-    // public final CreateWebWalletResponse createWebWallet: TODO: contractNumber, owner, contractNumberWalletList
     public final CreateWebWalletResponse createWebWallet(final Buyer buyer, final PrivateDataList privateDataList, String notificationURL, String returnURL,
         String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
         final SelectedContractList selectedContractList, final String updatePersonalDetails, final String version) {
+
+            return this.createWebWallet(buyer, privateDataList, notificationURL, returnURL,
+                    cancelURL, languageCode, securityMode, customPaymentPageCode, customPaymentTemplateURL, selectedContractList, updatePersonalDetails, version, null, null, null);
+
+        }
+
+    /**
+     * Create a customer wallet using web pages The <b>createWebWallet</b> function initialises the creation of a virtual wallet via the web interface. Once
+     * your customer is redirected, they are asked to enter their card details to create their virtual wallet. Payline checks this information by a debit
+     * authorization request for a sum of EUR 1 (validation does not take place so no card is credited on creation) and registers the customer wallet with the ID
+     * (walletId) you have provided.
+     * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param notificationURL store URL which Payline will call if customer do not come back to store after his payment
+     * @param returnURL store URL to which customer is redirected when "back to store" button is used on Payline payment page after the payment
+     * @param cancelURL store URL to which customer is redirected when "cancel" button is used on Payline payment page before the payment
+     * @param languageCode ISO 639-1 code of language in which payment page is displayed
+     * @param securityMode type of security when wallet is used on payment page : 3DS, CVV or CVV+3DS
+     * @param customPaymentPageCode code of payment page customization, created in administration center
+     * @param customPaymentTemplateURL URL of the custom template
+     * @param selectedContractList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param updatePersonalDetails flag (0/1) to indicate wether customer can change his personal details (firstname, lastname,...) on update wallet page
+	 * @param version                the API version of Payline
+	 * @param contractNumber Payline identifier of your e-commerce contract number
+	 * @param owner                      Cardholder Information
+	 * @param contractNumberWalletList   A chart of the contract numbers of the
+	 *                                   wallet. The Widget mode uses the multi-PDV
+	 *                                   Wallet and multi-contract.
+     * @return CreateWebWalletResponse
+     */
+    public final CreateWebWalletResponse createWebWallet(final Buyer buyer, final PrivateDataList privateDataList, String notificationURL, String returnURL,
+        String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
+        final SelectedContractList selectedContractList, final String updatePersonalDetails, final String version, final String contractNumber, final Owner owner, final ContractNumberWalletList contractNumberWalletList) {
         setException(null);
         CreateWebWalletResponse result = new CreateWebWalletResponse();
         if (returnURL.length() <= 0) {
@@ -742,6 +884,10 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setSelectedContractList(selectedContractList);
         parameters.setUpdatePersonalDetails(updatePersonalDetails);
         parameters.setVersion(version);
+        parameters.setContractNumber(contractNumber);
+        parameters.setOwner(owner);
+		parameters.setContractNumberWalletList(contractNumberWalletList);
+
         final WebPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -762,6 +908,8 @@ public class WalletPayment extends WebServiceWrapper {
         return result;
     }
 
+
+
     /**
      * Modify a customer wallet using web pages The <b>updateWebWallet</b> function initialises the modification of a virtual wallet via the web interface.
      * @param walletId the wallet identifier
@@ -780,11 +928,42 @@ public class WalletPayment extends WebServiceWrapper {
      * @param Cardind within a wallet, index of the card to be used for payment
      * @return UpdateWebWalletResponse
      */
-    //public final UpdateWebWalletResponse updateWebWallet: TODO: contractNumber, updateOwnerDetails, contractNumberWalletList
     public final UpdateWebWalletResponse updateWebWallet(final String walletId, final PrivateDataList privateDataList, String notificationURL, String returnURL,
         String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
         final SelectedContractList selectedContractList, final String updatePersonalDetails, final String updatePaymentDetails, final Buyer buyer,
         final String Cardind, final String version) {
+
+            return this.updateWebWallet(walletId, privateDataList, notificationURL, returnURL,
+                     cancelURL, languageCode, securityMode, customPaymentPageCode, customPaymentTemplateURL,
+                    selectedContractList, updatePersonalDetails, updatePaymentDetails, buyer,
+                    Cardind, version);
+
+    }
+    /**
+     * Modify a customer wallet using web pages The <b>updateWebWallet</b> function initialises the modification of a virtual wallet via the web interface.
+     * @param walletId the wallet identifier
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param notificationURL store URL which Payline will call if customer do not come back to store after his payment
+     * @param returnURL store URL to which customer is redirected when "back to store" button is used on Payline payment page after the payment
+     * @param cancelURL store URL to which customer is redirected when "cancel" button is used on Payline payment page before the payment
+     * @param languageCode ISO 639-1 code of language in which payment page is displayed
+     * @param securityMode type of security when wallet is used on payment page : 3DS, CVV or CVV+3DS
+     * @param customPaymentPageCode code of payment page customization, created in administration center
+     * @param customPaymentTemplateURL URL of the custom template
+     * @param selectedContractList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param updatePersonalDetails flag (0/1) to indicate whether customer can change his personal details (firstname, lastname,...) on update wallet page
+     * @param updatePaymentDetails flag (0/1) to indicate whether customer can change his card data on update wallet page
+     * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
+     * @param Cardind within a wallet, index of the card to be used for payment
+     * @param updateOwnerDetails
+     * @param contractNumberWalletList   A chart of the contract numbers of the
+	 *                                   wallet. The Widget mode uses the multi-PDV
+     * @return UpdateWebWalletResponse
+     */
+    public final UpdateWebWalletResponse updateWebWallet(final String walletId, final PrivateDataList privateDataList, String notificationURL, String returnURL,
+        String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
+        final SelectedContractList selectedContractList, final String updatePersonalDetails, final String updatePaymentDetails, final Buyer buyer,
+        final String Cardind, final String version, final String  updateOwnerDetails, ContractNumberWalletList contractNumberWalletList) {
         setException(null);
         UpdateWebWalletResponse result = new UpdateWebWalletResponse();
         UpdateWebWalletRequest parameters = new UpdateWebWalletRequest();
@@ -805,6 +984,9 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCardInd(Cardind);
         parameters.setBuyer(buyer);
         parameters.setVersion(version);
+		parameters.setUpdateOwnerDetails(updateOwnerDetails);
+		parameters.setContractNumberWalletList(contractNumberWalletList);
+
         final WebPaymentAPI port;
         try {
             if (this.initFromFile) {
@@ -845,11 +1027,41 @@ public class WalletPayment extends WebServiceWrapper {
      * @param merchantName name displayed to buyer on 3D Secure authentication form
      * @return ManageWebWalletResponse
      */
-    //public final ManageWebWalletResponse manageWebWallet: TODO: threeDSInfo
     public final ManageWebWalletResponse manageWebWallet(final String version, final String contractNumber, final SelectedContractList selectedContractList,
         final String updatePersonalDetails, final Buyer buyer, final Owner owner, final String languageCode, final String customPaymentPageCode,
         final String securityMode, final String returnURL, final String cancelURL, final String notificationURL, final PrivateDataList privateDataList,
         final String customPaymentTemplateURL, final ContractNumberWalletList contractNumberWalletList, final String merchantName) {
+            return this.manageWebWallet(version, contractNumber, selectedContractList,
+                    updatePersonalDetails, buyer, owner, languageCode, customPaymentPageCode,
+                    securityMode, returnURL, cancelURL, notificationURL, privateDataList,
+                    customPaymentTemplateURL, contractNumberWalletList, merchantName, null);
+        }
+
+    /**
+     * Manage a wallet from the web interface.
+     * @param version the API version of Payline
+     * @param contractNumber Payline identifier of your e-commerce contract number
+     * @param selectedContractList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param updatePersonalDetails flag (0/1) to indicate whether customer can change his personal details (firstname, lastname,...) on update wallet page
+     * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
+     * @param owner the owner object, containing info about the owner of an American Express card
+     * @param languageCode ISO 639-1 code of language in which payment page is displayed
+     * @param customPaymentPageCode code of payment page customization, created in administration center
+     * @param securityMode type of security when wallet is used on payment page : 3DS, CVV or CVV+3DS
+     * @param returnURL store URL to which customer is redirected when "back to store" button is used on Payline payment page after the payment
+     * @param cancelURL store URL to which customer is redirected when "cancel" button is used on Payline payment page before the payment
+     * @param notificationURL store URL which Payline will call if customer do not come back to store after his payment
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param customPaymentTemplateURL URL of the custom template
+     * @param contractNumberWalletList a list of selectedContract objects, containing Payline identifier of your e-commerce contract number
+     * @param merchantName name displayed to buyer on 3D Secure authentication form
+	 * @param threeDSInfo                Information specific to 3DS authentication
+     * @return ManageWebWalletResponse
+     */
+    public final ManageWebWalletResponse manageWebWallet(final String version, final String contractNumber, final SelectedContractList selectedContractList,
+        final String updatePersonalDetails, final Buyer buyer, final Owner owner, final String languageCode, final String customPaymentPageCode,
+        final String securityMode, final String returnURL, final String cancelURL, final String notificationURL, final PrivateDataList privateDataList,
+        final String customPaymentTemplateURL, final ContractNumberWalletList contractNumberWalletList, final String merchantName, final ThreeDSInfo threeDSInfo) {
         setException(null);
         final WebPaymentAPI port;
         ManageWebWalletResponse result = new ManageWebWalletResponse();
@@ -870,6 +1082,8 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setCustomPaymentTemplateURL(customPaymentTemplateURL);
         parameters.setContractNumberWalletList(contractNumberWalletList);
         parameters.setMerchantName(merchantName);
+		parameters.setThreeDSInfo(threeDSInfo);
+
         try {
             if (this.initFromFile) {
                 port = Utils.initServiceWeb();

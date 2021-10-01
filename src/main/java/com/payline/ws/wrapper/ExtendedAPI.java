@@ -116,12 +116,11 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @return GetTransactionDetailsResponse
      */
 
-    //public final GetTransactionDetailsResponse getTransactionDetails: TODO: archiveSearch
     public final GetTransactionDetailsResponse getTransactionDetails(final String orderRef, final String transactionID, final String startDate,
         final String endDate, final String transactionHistory, final String version) {
 
         return this.getTransactionDetails(orderRef, transactionID, startDate,
-                endDate, transactionHistory, version);
+                endDate, transactionHistory, version, null);
     }
 
     /**
@@ -133,12 +132,11 @@ public class ExtendedAPI extends WebServiceWrapper {
      * @param endDate the End date of the transaction search period
      * @param transactionHistory the status history for a given transaction
      * @param version the API version of Payline
+     * @param archiveSearch
      * @return GetTransactionDetailsResponse
      */
-
-    //public final GetTransactionDetailsResponse getTransactionDetails: TODO: archiveSearch
     public final GetTransactionDetailsResponse getTransactionDetails(final String orderRef, final String transactionID, final String startDate,
-        final String endDate, final String transactionHistory, final String version) {
+        final String endDate, final String transactionHistory, final String version, String archiveSearch) {
         setException(null);
         GetTransactionDetailsResponse result = new GetTransactionDetailsResponse();
         GetTransactionDetailsRequest request = new GetTransactionDetailsRequest();
@@ -148,6 +146,7 @@ public class ExtendedAPI extends WebServiceWrapper {
         request.setStartDate(startDate);
         request.setEndDate(endDate);
         request.setTransactionHistory(transactionHistory);
+        request.setArchiveSearch(archiveSearch);
         final com.payline.ws.model.ExtendedAPI port;
         try {
             if (this.initFromFile) {

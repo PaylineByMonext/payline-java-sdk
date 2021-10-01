@@ -19,6 +19,7 @@ import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.Utils;
 import com.payline.ws.model.*;
 
+
 import javax.xml.ws.WebServiceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +66,7 @@ public class DirectPayment extends WebServiceWrapper {
 		this.connectParams = connectParams;
 	}
 
+
 /**
 	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
 	 * sends a debit authorization request to your bank authorization server.
@@ -98,16 +100,17 @@ public class DirectPayment extends WebServiceWrapper {
 			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
 			final BankAccountData bank, final String version, final SubMerchant subMerchant) {
 
-			return this.doAuthorization(payment, order, buyer,
-                       			card, privateDataList, authentication3DSecure,
-                       			bank, version, subMerchant,
-                       			null, null, null, null, null, null);
-    }
+            return this.doAuthorization(payment, order, buyer,
+                            card, privateDataList, authentication3DSecure,
+                            bank, version, subMerchant,
+                            null, null, null, null, null, null);
+
+        }
 
 	/**
 	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
 	 * sends a debit authorization request to your bank authorization server.
-	 * 
+	 *
 	 * @param payment                the payment object containing the amount, the
 	 *                               currency, action and mode codes
 	 * @param order                  the order object containing the ref, the
@@ -130,16 +133,22 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version                the API version of Payline
 	 * @param subMerchant            sub-merchant info in case you're using Payline
 	 *                               as a payment facilitator for other merchants
+	 * @param transientParam         Data to populate the 3DSV2 container
+	 * @param owner
+	 * @param media                 Detection of the media used during the payment.
+
+	 * @param asynchronousRetryTimeout  Numeric that specifies the period in minutes
+	 * @param linkedTransactionId   In case of installment, recurring or split shippment payment refers to the first authorization
+	 * @param recurring             Recurring or installment information
 	 * @return DoAuthorizationResponse the response given by Payline to a debit
 	 *         authorization request
 	 */
-	//public final DoAuthorizationResponse doAuthorization: TODO: transient, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring
-
 	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
 			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
 			final BankAccountData bank, final String version, final SubMerchant subMerchant,
-			final String transientParam, final Owner owner, final String media, final String asynchronousRetryTimeout,
-			final String linkedTransactionId, final Recurring recurring ) {
+			final String transientParam,
+			final Owner owner, final String media, final String asynchronousRetryTimeout, final String linkedTransactionId, final Recurring recurring
+			) {
 		setException(null);
 		DoAuthorizationResponse result = new DoAuthorizationResponse();
 		DoAuthorizationRequest parameters = new DoAuthorizationRequest();
@@ -152,11 +161,13 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setVersion(version);
 		parameters.setSubMerchant(subMerchant);
 		parameters.setBankAccountData(bank);
-		parameters.setTransientParam(transientParam);
+		parameters.setTransient(transientParam);
 		parameters.setOwner(owner);
 		parameters.setMedia(media);
-		parameters.setBankAccountData(asynchronousRetryTimeout);
-		parameters.setLinkedTransactionId(linkedTransactionId);
+		if (asynchronousRetryTimeout != null)
+			parameters.setAsynchronousRetryTimeout(asynchronousRetryTimeout);
+        parameters.setLinkedTransactionId(linkedTransactionId);
+		parameters.setRecurring(recurring);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -179,44 +190,6 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 
-	/**
-	 * The <b>doDebit</b> function is used following a phone call and is a forced
-	 * debit. The merchant has contacted his bank and the bank provides an
-	 * authorization number; this allows him to request a debit on his customer's
-	 * bank card.
-	 *
-	 * @param payment                the payment object containing the amount, the
-	 *                               currency, action and mode codes
-	 * @param order                  the order object containing the ref, the
-	 *                               amount, the currency, the date and cart content
-	 *                               in details child
-	 * @param buyer                  the buyer object, containing many information
-	 *                               about the buyer: firstname, lastname, email,
-	 *                               addresses,...
-	 * @param card                   the card object, containing the card data :
-	 *                               number, expirationDate, cvx,...
-	 * @param privateDataList        A list of privateData, allowing to send any
-	 *                               kind of extra information organized with keys
-	 *                               and values
-	 * @param authentication3DSecure the authentication3DSecure object, filled with
-	 *                               MD and PARES retrieved from the ACS after the
-	 *                               customer entered his password
-	 * @param authorization          the authorization
-	 * @param version                the API version of Payline
-	 * @param subMerchant            sub-merchant info in case you're using Payline
-	 *                               as a payment facilitator for other merchants
-	 * @return DoDebitResponse the response given by Payline to a debit request
-	 */
-
-    //public final DoDebitResponse doDebi: TODO: owner, media
-	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
-			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
-			final Authorization authorization, final String version, final SubMerchant subMerchant) {
-
-			return this.doDebit(payment, order, buyer, card,
-                        			privateDataList, authentication3DSecure,
-                        			authorization, version, subMerchant);
-    }
 
 
 /**
@@ -247,15 +220,13 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                               as a payment facilitator for other merchants
 	 * @return DoDebitResponse the response given by Payline to a debit request
 	 */
-
-    //public final DoDebitResponse doDebi: TODO: owner, media
 	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
 			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
 			final Authorization authorization, final String version, final SubMerchant subMerchant) {
 
 			return this.doDebit(payment, order, buyer, card,
             			privateDataList, authentication3DSecure,
-            			authorization, version, subMerchant);
+            			authorization, version, subMerchant, null, null);
     }
 
 	/**
@@ -284,13 +255,13 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version                the API version of Payline
 	 * @param subMerchant            sub-merchant info in case you're using Payline
 	 *                               as a payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoDebitResponse the response given by Payline to a debit request
 	 */
-
-    //public final DoDebitResponse doDebi: TODO: owner, media
 	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
 			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
-			final Authorization authorization, final String version, final SubMerchant subMerchant) {
+			final Authorization authorization, final String version, final SubMerchant subMerchant, final Owner owner, final String media) {
 		setException(null);
 		DoDebitResponse result = new DoDebitResponse();
 		DoDebitRequest parameters = new DoDebitRequest();
@@ -303,6 +274,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setVersion(version);
 		parameters.setAuthentication3DSecure(authentication3DSecure);
 		parameters.setSubMerchant(subMerchant);
+        parameters.setOwner(owner);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -384,14 +357,11 @@ public class DirectPayment extends WebServiceWrapper {
     	 * @return DoCaptureResponse the response from Payline to a validation request
     	 *         for a debit authorization
     	 */
-
-
-         //public final DoCaptureResponse doCapture: TODO: media
     	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
     			final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
 
             return this.doCapture(payment, transationID,
-    			privateDataList, sequenceNumber, version);
+    			privateDataList, sequenceNumber, version, null);
         }
 
 	/**
@@ -399,21 +369,19 @@ public class DirectPayment extends WebServiceWrapper {
 	 * validation of an accepted authorization. Once the validation is taken into
 	 * account, a file with all the validations is sent to the merchant's bank;
 	 * Payline sends payment requests to your bank.
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param transationID    the unique Payline transaction ID
 	 * @param privateDataList A list of privateData, allowing to send any kind of
 	 *                        extra information organized with keys and values
 	 * @param sequenceNumber  the transaction sequence number
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoCaptureResponse the response from Payline to a validation request
 	 *         for a debit authorization
 	 */
-
-
-     //public final DoCaptureResponse doCapture: TODO: media
 	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
-			final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
+			final PrivateDataList privateDataList, final String sequenceNumber, final String version, final String media) {
 		setException(null);
 		DoCaptureResponse result = new DoCaptureResponse();
 		DoCaptureRequest parameters = new DoCaptureRequest();
@@ -422,6 +390,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setSequenceNumber(sequenceNumber);
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -459,22 +428,20 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                        for doRefund
 	 * @return DoRefundResponse the response given by Payline to a refund request
 	 */
-
-     //public final DoRefundResponse doRefund: TODO: media, details
 	public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version,
 			final Order order) {
 
         return this.doRefund(payment, transationID, comment,
 			privateDataList, sequenceNumber, version,
-			order);
+			order, null);
     }
 
 	/**
 	 * Refund a payment using an accepted authorization number. A refund request for
 	 * a validated payment paid into the bank; therefore the customer has been
 	 * debited and the merchant credited
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param transationID    the unique Payline transaction ID
@@ -484,13 +451,12 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param sequenceNumber  the transaction sequence number
 	 * @param order           the order info. Only details (cart content) is used
 	 *                        for doRefund
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoRefundResponse the response given by Payline to a refund request
 	 */
-
-     //public final DoRefundResponse doRefund: TODO: media, details
 	public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version,
-			final Order order) {
+			final Order order, final String media) {
 		setException(null);
 		DoRefundResponse result = new DoRefundResponse();
 		DoRefundRequest parameters = new DoRefundRequest();
@@ -501,6 +467,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
 		parameters.setDetails(order.getDetails());
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -546,14 +513,13 @@ public class DirectPayment extends WebServiceWrapper {
     	 *                        payment facilitator for other merchants
     	 * @return DoCreditResponse
     	 */
-         //public final DoCreditResponse doCredit: TODO: media, owner
     	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
     			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
     			final SubMerchant subMerchant) {
 
             return this.doCredit(payment, card, comment,
                         buyer, order, privateDataList, version,
-                        subMerchant);
+                        subMerchant, null, null);
         }
 
 
@@ -563,7 +529,7 @@ public class DirectPayment extends WebServiceWrapper {
 	 * payment be credited. This function is useful for refunding your customer if
 	 * you have not kept the transaction authorization ID needed for the doRefund
 	 * function.
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param card            the card object, containing the card data : number,
@@ -578,12 +544,13 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version         the API version of Payline
 	 * @param subMerchant     sub-merchant info in case you're using Payline as a
 	 *                        payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoCreditResponse
 	 */
-     //public final DoCreditResponse doCredit: TODO: media, owner
 	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
 			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
-			final SubMerchant subMerchant) {
+			final SubMerchant subMerchant, final Owner owner, final String media) {
 		setException(null);
 		DoCreditResponse result = new DoCreditResponse();
 		DoCreditRequest parameters = new DoCreditRequest();
@@ -595,6 +562,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
 		parameters.setSubMerchant(subMerchant);
+        parameters.setOwner(owner);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -661,7 +630,7 @@ public class DirectPayment extends WebServiceWrapper {
     	 * @param recurring          Recurring or installment information
     	 * @param threeDSinfo        Information specific to 3DS authentication
     	 * @param merchantScore      Merchant calculated score. Mainly for CB scoring.
-    	 * @param transient     Data to populate the 3DSV2 container
+    	 * @param transientParam     Data to populate the 3DSV2 container
     	 * @param privateDataList    List containing privateData Number of items 0 to
     	 *                           100
     	 * @return VerifyEnrollmentResponse
@@ -671,7 +640,7 @@ public class DirectPayment extends WebServiceWrapper {
     			final String version, final String merchantName, final String mdFieldValue, final String generateVirtualCvx,
     			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
     			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
-    			final String transient, final PrivateDataList privateDataList){
+    			final String transientParam, final PrivateDataList privateDataList){
             return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         }
 
@@ -706,7 +675,7 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param recurring          Recurring or installment information
 	 * @param threeDSinfo        Information specific to 3DS authentication
 	 * @param merchantScore      Merchant calculated score. Mainly for CB scoring.
-	 * @param transient     Data to populate the 3DSV2 container
+	 * @param transientParam     Data to populate the 3DSV2 container
 	 * @param privateDataList    List containing privateData Number of items 0 to
 	 *                           100
 	 * @return VerifyEnrollmentResponse
@@ -716,7 +685,7 @@ public class DirectPayment extends WebServiceWrapper {
 			final String version, final String merchantName, final String merchantURL, final String merchantCountryCode, final String mdFieldValue, final String generateVirtualCvx,
 			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
 			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
-			final String transient, final PrivateDataList privateDataList) {
+			final String transientParam, final PrivateDataList privateDataList) {
 		setException(null);
 		VerifyEnrollmentResponse result = new VerifyEnrollmentResponse();
 		VerifyEnrollmentRequest parameters = new VerifyEnrollmentRequest();
@@ -743,7 +712,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setRecurring(recurring);
 		parameters.setThreeDSInfo(threeDSinfo);
 		parameters.setMerchantScore(merchantScore);
-		parameters.setTransient(transient);
+		parameters.setTransient(transientParam);
 		parameters.setPrivateDataList(privateDataList);
 
 		final DirectPaymentAPI port;
@@ -872,28 +841,29 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 
-		/**
-    	 * Supply the public card data encryption key
-    	 *
-    	 * @return GetEncryptionKeyResponse
-    	 */
-    	//public final GetEncryptionKeyResponse getEncryptionKey: TODO: version
-    	public final GetEncryptionKeyResponse getEncryptionKey() {
-        	return this.getEncryptionKey();
-    	}
-
+    /**
+     * Supply the public card data encryption key
+     *
+     * @return GetEncryptionKeyResponse
+     */
+    public final GetEncryptionKeyResponse getEncryptionKey() {
+        return this.getEncryptionKey(null);
+    }
 
 
 	/**
 	 * Supply the public card data encryption key
-	 * 
+	 *
+	 * @param version                    the API version of Payline
 	 * @return GetEncryptionKeyResponse
 	 */
-	//public final GetEncryptionKeyResponse getEncryptionKey: TODO: version
-	public final GetEncryptionKeyResponse getEncryptionKey() {
+	public final GetEncryptionKeyResponse getEncryptionKey(final String version) {
 		setException(null);
 		GetEncryptionKeyResponse result = new GetEncryptionKeyResponse();
 		GetEncryptionKeyRequest parameters = new GetEncryptionKeyRequest();
+
+        parameters.setVersion(version);
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -1029,12 +999,11 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                        extra information organized with keys and values
 	 * @return DoScoringChequeResponse
 	 */
-	//public final DoScoringChequeResponse doScoringCheque: TODO: media
 	public final DoScoringChequeResponse doScoringCheque(final Cheque cheque, final Order order, final Payment payment,
 			final PrivateDataList privatedatalist, final String version) {
 
         return this.doScoringCheque(cheque, order, payment,
-                    privatedatalist, version);
+                    privatedatalist, version, null);
     }
 
 
@@ -1047,11 +1016,11 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                        currency, action and mode codes
 	 * @param privatedatalist A list of privateData, allowing to send any kind of
 	 *                        extra information organized with keys and values
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoScoringChequeResponse
 	 */
-	//public final DoScoringChequeResponse doScoringCheque: TODO: media
 	public final DoScoringChequeResponse doScoringCheque(final Cheque cheque, final Order order, final Payment payment,
-			final PrivateDataList privatedatalist, final String version) {
+			final PrivateDataList privatedatalist, final String version, final String media) {
 		setException(null);
 		DoScoringChequeResponse result = new DoScoringChequeResponse();
 		DoScoringChequeRequest parameters = new DoScoringChequeRequest();
@@ -1060,6 +1029,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 
 		final DirectPaymentAPI port;
 		try {
@@ -1095,19 +1065,18 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                        extra information organized with keys and values
 	 * @return DoReAuthorizationResponse
 	 */
-	//public final DoReAuthorizationResponse doReAuthorization: TODO: media
 	public final DoReAuthorizationResponse doReAuthorization(final String transationID, final Order order,
 			final Payment payment, final PrivateDataList privatedatalist, final String version) {
 
         return this.doReAuthorization(transationID, order,
-            			payment, privatedatalist, version);
+            			payment, privatedatalist, version, null);
     }
 
 
 	/**
 	 * Allow transaction replay. This allows a transaction which has been accepted
 	 * to be replayed.
-	 * 
+	 *
 	 * @param transationID    the unique Payline transaction ID
 	 * @param order           the order object containing the ref, the amount, the
 	 *                        currency, the date and cart content in details child,
@@ -1116,11 +1085,11 @@ public class DirectPayment extends WebServiceWrapper {
 	 *                        currency, action and mode codes
 	 * @param privatedatalist A list of privateData, allowing to send any kind of
 	 *                        extra information organized with keys and values
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoReAuthorizationResponse
 	 */
-	//public final DoReAuthorizationResponse doReAuthorization: TODO: media
 	public final DoReAuthorizationResponse doReAuthorization(final String transationID, final Order order,
-			final Payment payment, final PrivateDataList privatedatalist, final String version) {
+			final Payment payment, final PrivateDataList privatedatalist, final String version, final String media) {
 		setException(null);
 		DoReAuthorizationResponse result = new DoReAuthorizationResponse();
 		DoReAuthorizationRequest parameters = new DoReAuthorizationRequest();
@@ -1129,6 +1098,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 
 		final DirectPaymentAPI port;
 		try {
@@ -1210,27 +1180,27 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version
 	 * @return
 	 */
-	//public final IsRegisteredResponse isRegistered: TODO:  miscData
 	public final IsRegisteredResponse isRegistered(final Buyer buyer, final Order order, final Payment payment,
 			final PrivateDataList privatedatalist, final String version) {
 
         return this.isRegistered(buyer, order, payment,
-                    privatedatalist, version);
+                    privatedatalist, version, null);
     }
 
 	/**
 	 * Ask for customer scoring to an external payment processor
-	 * 
+	 *
 	 * @param buyer
 	 * @param order
 	 * @param payment
 	 * @param privatedatalist
 	 * @param version
+	 * @param miscData                   Additional data , without character limit
+	 *                                   and transmitted to the partners. Consult
 	 * @return
 	 */
-	//public final IsRegisteredResponse isRegistered: TODO:  miscData
 	public final IsRegisteredResponse isRegistered(final Buyer buyer, final Order order, final Payment payment,
-			final PrivateDataList privatedatalist, final String version) {
+			final PrivateDataList privatedatalist, final String version, final String miscData) {
 		IsRegisteredResponse result = new IsRegisteredResponse();
 		IsRegisteredRequest parameters = new IsRegisteredRequest();
 
@@ -1239,6 +1209,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMiscData(miscData);
 
 		final DirectPaymentAPI port;
 		try {
