@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.66.1</version>
+  <version>4.68</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.66.1</version>
+  <version>4.68</version>
 </dependency>
 <dependency>
   <groupId>javax.xml.ws</groupId>
@@ -50,12 +50,12 @@ Add this dependency in your project's POM:
 
 ### Gradle users and JDK 8
 ```
-   implementation 'com.payline:payline-java-sdk:4.66.1'
+   implementation 'com.payline:payline-java-sdk:4.68'
 ```
 
 ### Gradle users and JDK 12
 ```
-   implementation 'com.payline:payline-java-sdk:4.66.1'
+   implementation 'com.payline:payline-java-sdk:4.68'
    implementation 'javax.xml.ws:jaxws-api:2.3.1'
    implementation 'com.sun.xml.ws:jaxws-rt:2.3.2'
 ```
@@ -99,7 +99,7 @@ public class SampleCalls {
 ```
 
 ## Version
-4.66.1
+4.68
 
 ## Learn about Payline
 * [www.payline.com](https://www.monext.fr/en/online)
