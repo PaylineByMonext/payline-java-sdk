@@ -330,10 +330,12 @@ public class WebPayment extends WebServiceWrapper {
 		parameters.setSecurityMode(securityMode);
 		parameters.setCustomPaymentPageCode(customPaymentPageCode);
 		parameters.setCustomPaymentTemplateURL(customPaymentTemplateURL);
-
 		parameters.setSelectedContractList(selectedContractList);
 		parameters.setSecondSelectedContractList(secondSelectedContractList);
 		parameters.setMerchantName(merchantName);
+		parameters.setSubMerchant(subMerchant);
+		parameters.setMiscData(miscData);
+
 		WebPaymentAPI port = null;
 		try {
 			if (this.initFromFile) {
