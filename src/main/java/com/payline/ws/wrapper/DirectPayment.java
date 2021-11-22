@@ -642,7 +642,7 @@ public class DirectPayment extends WebServiceWrapper {
     			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
     			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
     			final String transientParam, final PrivateDataList privateDataList){
-            return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            return this.verifyEnrollment(card, payment, orderRef, walletId, walletCardInd, UsrAgent, version, merchantName, null, null, mdFieldValue, generateVirtualCvx, returnURL, order, buyer, subMerchant, recurring, threeDSinfo, merchantScore, transientParam, privateDataList);
         }
 
 

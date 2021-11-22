@@ -118,10 +118,6 @@ public class WalletPayment extends WebServiceWrapper {
     }
 
 
-
-
-    //public final CreateWalletResponse createWallet: TODO Add: buyer, owner, media, contractNumberWalletList, transactionID
-
     /**
      * Create a customer wallet. The 'createWallet' function is used to create a virtual wallet for your customer. In order to validate the use of a wallet,
      * Payline performs an e-payment check of the payment method via an authorization transaction of 1 euro which will not then be validated (no actual
@@ -257,7 +253,7 @@ public class WalletPayment extends WebServiceWrapper {
         public final UpdateWalletResponse updateWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
             final Authentication3DSecure authentication3DSecure, final String Cardind, final String version) {
             return this.updateWallet(wallet, contractNumber, privateDataList,
-                        authentication3DSecure, Cardind, version);
+                        authentication3DSecure, Cardind, version, null, null, null, null, null);
 
         }
 
