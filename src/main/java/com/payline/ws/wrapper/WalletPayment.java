@@ -940,7 +940,7 @@ public class WalletPayment extends WebServiceWrapper {
             return this.updateWebWallet(walletId, privateDataList, notificationURL, returnURL,
                      cancelURL, languageCode, securityMode, customPaymentPageCode, customPaymentTemplateURL,
                     selectedContractList, updatePersonalDetails, updatePaymentDetails, buyer,
-                    Cardind, version, null, null);
+                    Cardind, version, null, null, null);
 
     }
     /**

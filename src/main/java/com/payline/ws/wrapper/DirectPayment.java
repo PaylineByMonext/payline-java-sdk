@@ -585,10 +585,10 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
-	/**
+/**
 	 * created for compatibility purpose after introduction of walletId and
 	 * walletCardInd in v4.41
-	 * 
+	 *
 	 * @param card     the card object, containing the card data : number,
 	 *                 expirationDate, cvx,...
 	 * @param payment  the payment object containing the amount, the currency,
@@ -647,45 +647,43 @@ public class DirectPayment extends WebServiceWrapper {
 
 
 
-
-
-		/**
-         * created for compatibility purpose after introduction of merchantURL and
-         * merchantCountryCode in v4.68    	 *
-    	 * @param card               the card object, containing the card data : number,
-    	 *                           expirationDate, cvx,...
-    	 * @param payment            the payment object containing the amount, the
-    	 *                           currency, action and mode codes
-    	 * @param orderRef           the order reference
-    	 * @param walletId           the wallet identifier
-    	 * @param walletCardInd      the card index to use
-    	 * @param UsrAgent           the user Agent
-    	 * @param version            the API version of Payline
-    	 * @param merchantName       name displayed to buyer on 3D Secure authentication
-    	 *                           form
+	/**
+	 * Verify that the buyers card is 3DSecure.
+	 *
+	 * @param card               the card object, containing the card data : number,
+	 *                           expirationDate, cvx,...
+	 * @param payment            the payment object containing the amount, the
+	 *                           currency, action and mode codes
+	 * @param orderRef           the order reference
+	 * @param walletId           the wallet identifier
+	 * @param walletCardInd      the card index to use
+	 * @param UsrAgent           the user Agent
+	 * @param version            the API version of Payline
+	 * @param merchantName       name displayed to buyer on 3D Secure authentication
+	 *                           form
 	 * @param merchantURL        Fully qualified URL (beginnning with http:// ou https://)
 	 * @param merchantCountryCode ISO 3166-1 alpha-2 codes
 
-    	 * @param mdFieldValue       Value of merchantData (This value must be unique).
-    	 *                           Field use is not recommended.
-    	 * @param generateVirtualCvx Request to generate a virtual CVV. Check if your
-    	 *                           subscription allows this feature (Tokenization).
-    	 * @param returnURL          The URL of the system that receives the CRes
-    	 *                           message or Error Message
-    	 * @param order              Order Information
-    	 * @param buyer              Buyer information
-    	 * @param subMerchant        Payment Facilitator Information
-    	 * @param recurring          Recurring or installment information
-    	 * @param threeDSinfo        Information specific to 3DS authentication
-    	 * @param merchantScore      Merchant calculated score. Mainly for CB scoring.
-    	 * @param transientParam     Data to populate the 3DSV2 container
-    	 * @param privateDataList    List containing privateData Number of items 0 to
-    	 *                           100
-    	 * @return VerifyEnrollmentResponse
-    	 */
-    	public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment,
-    			final String orderRef, final String walletId, final String walletCardInd, final String UsrAgent,
-			final String version, final String merchantName, final String mdFieldValue, final String generateVirtualCvx,
+	 * @param mdFieldValue       Value of merchantData (This value must be unique).
+	 *                           Field use is not recommended.
+	 * @param generateVirtualCvx Request to generate a virtual CVV. Check if your
+	 *                           subscription allows this feature (Tokenization).
+	 * @param returnURL          The URL of the system that receives the CRes
+	 *                           message or Error Message
+	 * @param order              Order Information
+	 * @param buyer              Buyer information
+	 * @param subMerchant        Payment Facilitator Information
+	 * @param recurring          Recurring or installment information
+	 * @param threeDSinfo        Information specific to 3DS authentication
+	 * @param merchantScore      Merchant calculated score. Mainly for CB scoring.
+	 * @param transientParam     Data to populate the 3DSV2 container
+	 * @param privateDataList    List containing privateData Number of items 0 to
+	 *                           100
+	 * @return VerifyEnrollmentResponse
+	 */
+	public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment,
+			final String orderRef, final String walletId, final String walletCardInd, final String UsrAgent,
+			final String version, final String merchantName, final String merchantURL, final String merchantCountryCode, final String mdFieldValue, final String generateVirtualCvx,
 			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
 			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
 			final String transientParam, final PrivateDataList privateDataList) {
