@@ -234,7 +234,7 @@ public class DirectPayment extends WebServiceWrapper {
 	 * debit. The merchant has contacted his bank and the bank provides an
 	 * authorization number; this allows him to request a debit on his customer's
 	 * bank card.
-	 * 
+	 *
 	 * @param payment                the payment object containing the amount, the
 	 *                               currency, action and mode codes
 	 * @param order                  the order object containing the ref, the
@@ -467,6 +467,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
 		parameters.setDetails(order.getDetails());
+		parameters.setMedia(media);
 
 		final DirectPaymentAPI port;
 		try {

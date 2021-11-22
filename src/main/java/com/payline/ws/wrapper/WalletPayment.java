@@ -135,7 +135,7 @@ public class WalletPayment extends WebServiceWrapper {
      */
     public final CreateWalletResponse createWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
         final Authentication3DSecure authentication3DSecure, final String version) {
-        
+
         return this.createWallet(wallet, contractNumber, privateDataList,
                 authentication3DSecure, version, null, null, null, null, null);
     }
@@ -158,7 +158,7 @@ public class WalletPayment extends WebServiceWrapper {
      * @return CreateWalletResponse
      */
     public final CreateWalletResponse createWallet(final Wallet wallet, final String contractNumber, final PrivateDataList privateDataList,
-        final Authentication3DSecure authentication3DSecure, final String version, final Buyer buyer, final Owner owner, final String media, ContractNumberWalletList contractNumberWalletList, final String transationID) {
+        final Authentication3DSecure authentication3DSecure, final String version, final Buyer buyer, final Owner owner, final String media, final ContractNumberWalletList contractNumberWalletList, final String transationID) {
         setException(null);
         CreateWalletResponse result = new CreateWalletResponse();
         CreateWalletRequest parameters = new CreateWalletRequest();
@@ -871,9 +871,13 @@ public class WalletPayment extends WebServiceWrapper {
         CreateWebWalletRequest parameters = new CreateWebWalletRequest();
         parameters.setBuyer(buyer);
         parameters.setCancelURL(cancelURL);
-        if (parameters.getContractNumber() == null || parameters.getContractNumber().length() == 0) {
+
+        if(contractNumber != null ) {
+            parameters.setContractNumber(contractNumber);
+        } else if (parameters.getContractNumber() == null || parameters.getContractNumber().length() == 0) {
             parameters.setContractNumber(PaylineProperties.getString("CONTRACT_NUMBER"));
         }
+
         parameters.setCustomPaymentPageCode(customPaymentPageCode);
         parameters.setCustomPaymentTemplateURL(customPaymentTemplateURL);
         parameters.setLanguageCode(languageCode);
@@ -936,7 +940,7 @@ public class WalletPayment extends WebServiceWrapper {
             return this.updateWebWallet(walletId, privateDataList, notificationURL, returnURL,
                      cancelURL, languageCode, securityMode, customPaymentPageCode, customPaymentTemplateURL,
                     selectedContractList, updatePersonalDetails, updatePaymentDetails, buyer,
-                    Cardind, version);
+                    Cardind, version, null, null);
 
     }
     /**
@@ -963,13 +967,15 @@ public class WalletPayment extends WebServiceWrapper {
     public final UpdateWebWalletResponse updateWebWallet(final String walletId, final PrivateDataList privateDataList, String notificationURL, String returnURL,
         String cancelURL, final String languageCode, final String securityMode, final String customPaymentPageCode, final String customPaymentTemplateURL,
         final SelectedContractList selectedContractList, final String updatePersonalDetails, final String updatePaymentDetails, final Buyer buyer,
-        final String Cardind, final String version, final String  updateOwnerDetails, ContractNumberWalletList contractNumberWalletList) {
+        final String Cardind, final String version, final String  updateOwnerDetails, ContractNumberWalletList contractNumberWalletList, final String contractNumber) {
         setException(null);
         UpdateWebWalletResponse result = new UpdateWebWalletResponse();
         UpdateWebWalletRequest parameters = new UpdateWebWalletRequest();
         parameters.setWalletId(walletId);
         parameters.setCancelURL(cancelURL);
-        if (parameters.getContractNumber() == null || parameters.getContractNumber().length() == 0) {
+        if(contractNumber != null ) {
+            parameters.setContractNumber(contractNumber);
+        } else if (parameters.getContractNumber() == null || parameters.getContractNumber().length() == 0) {
             parameters.setContractNumber(PaylineProperties.getString("CONTRACT_NUMBER"));
         }
         parameters.setCustomPaymentPageCode(customPaymentPageCode);
