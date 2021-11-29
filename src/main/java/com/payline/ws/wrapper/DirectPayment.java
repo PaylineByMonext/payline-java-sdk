@@ -19,6 +19,7 @@ import com.payline.kit.utils.ConnectParams;
 import com.payline.kit.utils.Utils;
 import com.payline.ws.model.*;
 
+
 import javax.xml.ws.WebServiceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +66,47 @@ public class DirectPayment extends WebServiceWrapper {
 		this.connectParams = connectParams;
 	}
 
+
+		/**
+    	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
+    	 * sends a debit authorization request to your bank authorization server.
+    	 *
+    	 * @param payment                the payment object containing the amount, the
+    	 *                               currency, action and mode codes
+    	 * @param order                  the order object containing the ref, the
+    	 *                               amount, the currency, the date and cart content
+    	 *                               in details child. order.amount is required from
+    	 *                               4.65.1
+    	 * @param buyer                  the buyer object, containing many information
+    	 *                               about the buyer: firstname, lastname, email,
+    	 *                               addresses,...
+    	 * @param card                   the card object, containing the card data :
+    	 *                               number, expirationDate, cvx,...
+    	 * @param privateDataList        A list of privateData, allowing to send any
+    	 *                               kind of extra information organized with keys
+    	 *                               and values
+    	 * @param authentication3DSecure the authentication3DSecure object, filled with
+    	 *                               MD and PARES retrieved from the ACS after the
+    	 *                               customer entered his password
+    	 * @param bank                   the bankAccountData object, used for ELV
+    	 *                               payment only
+    	 * @param version                the API version of Payline
+    	 * @param subMerchant            sub-merchant info in case you're using Payline
+    	 *                               as a payment facilitator for other merchants
+    	 * @return DoAuthorizationResponse the response given by Payline to a debit
+    	 *         authorization request
+    	 */
+    	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
+    			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
+    			final BankAccountData bank, final String version, final SubMerchant subMerchant) {
+
+            return this.doAuthorization(payment, order, buyer,
+                            card, privateDataList, authentication3DSecure,
+                            bank, version, subMerchant,
+                            null, null, null, null, null, null);
+
+        }
+
 	/**
 	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
 	 * sends a debit authorization request to your bank authorization server.
@@ -91,12 +133,22 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version                the API version of Payline
 	 * @param subMerchant            sub-merchant info in case you're using Payline
 	 *                               as a payment facilitator for other merchants
+	 * @param transientParam         Data to populate the 3DSV2 container
+	 * @param owner
+	 * @param media                 Detection of the media used during the payment.
+
+	 * @param asynchronousRetryTimeout  Numeric that specifies the period in minutes
+	 * @param linkedTransactionId   In case of installment, recurring or split shippment payment refers to the first authorization
+	 * @param recurring             Recurring or installment information
 	 * @return DoAuthorizationResponse the response given by Payline to a debit
 	 *         authorization request
 	 */
 	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
 			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
-			final BankAccountData bank, final String version, final SubMerchant subMerchant) {
+			final BankAccountData bank, final String version, final SubMerchant subMerchant,
+			final String transientParam,
+			final Owner owner, final String media, final String asynchronousRetryTimeout, final String linkedTransactionId, final Recurring recurring
+			) {
 		setException(null);
 		DoAuthorizationResponse result = new DoAuthorizationResponse();
 		DoAuthorizationRequest parameters = new DoAuthorizationRequest();
@@ -109,6 +161,13 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setVersion(version);
 		parameters.setSubMerchant(subMerchant);
 		parameters.setBankAccountData(bank);
+		parameters.setTransient(transientParam);
+		parameters.setOwner(owner);
+		parameters.setMedia(media);
+		if (asynchronousRetryTimeout != null)
+			parameters.setAsynchronousRetryTimeout(asynchronousRetryTimeout);
+        parameters.setLinkedTransactionId(linkedTransactionId);
+		parameters.setRecurring(recurring);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {

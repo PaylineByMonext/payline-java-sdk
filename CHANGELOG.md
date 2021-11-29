@@ -1,5 +1,10 @@
 ----------------------------------------
 
+* 4.66.1 (2021-10-01)
+* new parameters transientParam, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for DoAuthorization
+
+----------------------------------------
+
 * 4.66 (2020-04-30)
 * Update WSDL from 4.64.1 to 4.66
 * new parameter PrivateDataList for doBankTransfer
