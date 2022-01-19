@@ -437,13 +437,43 @@ public class WalletPayment extends WebServiceWrapper {
      * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
      * @param recurring Recurring information
      * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
-	 * @param owner
 	 * @param media                 Detection of the media used during the payment.
      * @return DoImmediateWalletPaymentResponse
      */
     public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
         final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
         final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId, final String media) {
+
+        return this.doImmediateWalletPayment(payment, order, buyer,
+                privateDataList, walletId, Cardind, cvx, auth3ds,
+                version, subMerchant, recurring, linkedTransactionId, media, null, null);
+
+    }
+
+    /**
+     * Carry out a payment request from a customer wallet. The <b>doImmediateWalletPaymen</b> function makes a virtual wallet payment. With this function, you
+     * may use the payment in full (FUL) and deferred (DEF) payment methods. Payline will send return code 02308: payment method not accepted for other methods.
+     * @param payment the payment object containing the amount, the currency, action and mode codes
+     * @param order the order object containing the ref, the amount, the currency, the date and cart content in details child
+     * @param buyer the buyer object, containing many information about the buyer: firstname, lastname, email, addresses,...
+     * @param privateDataList A list of privateData, allowing to send any kind of extra information organized with keys and values
+     * @param walletId the wallet identifier
+     * @param Cardind within a wallet, index of the card to be used for payment
+     * @param cvx Card Verification Value associated to the Card Number
+     * @param auth3ds 3D Secure authentication data
+     * @param version the API version of Payline
+     * @param subMerchant sub-merchant info in case you're using Payline as a payment facilitator for other merchants
+     * @param recurring Recurring information
+     * @param linkedTransactionId Use to identify the first authorization request which initializes the payment (for merchants managing their own wallets).
+	 * @param media                 Detection of the media used during the payment.
+	 * @param threeDSInfo             Information specific to 3DS authentication
+	 * @param travelFileNumber
+     * @return DoImmediateWalletPaymentResponse
+     */
+    @SuppressWarnings("squid:S00107")
+    public final DoImmediateWalletPaymentResponse doImmediateWalletPayment(final Payment payment, final Order order, final Buyer buyer,
+        final PrivateDataList privateDataList, final String walletId, final String Cardind, final String cvx, final Authentication3DSecure auth3ds,
+        final String version, final SubMerchant subMerchant, final Recurring recurring, final String linkedTransactionId, final String media,final ThreeDSInfo threeDSInfo, final String travelFileNumber) {
         setException(null);
         DoImmediateWalletPaymentResponse result = new DoImmediateWalletPaymentResponse();
         DoImmediateWalletPaymentRequest parameters = new DoImmediateWalletPaymentRequest();
@@ -460,6 +490,8 @@ public class WalletPayment extends WebServiceWrapper {
         parameters.setRecurring(recurring);
         parameters.setLinkedTransactionId(linkedTransactionId);
         parameters.setMedia(media);
+        parameters.setThreeDSInfo(threeDSInfo);
+        parameters.setTravelFileNumber(travelFileNumber);
         final DirectPaymentAPI port;
         try {
             if (this.initFromFile) {
