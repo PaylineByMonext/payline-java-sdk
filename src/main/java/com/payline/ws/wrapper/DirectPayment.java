@@ -67,38 +67,38 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 
-		/**
-    	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
-    	 * sends a debit authorization request to your bank authorization server.
-    	 *
-    	 * @param payment                the payment object containing the amount, the
-    	 *                               currency, action and mode codes
-    	 * @param order                  the order object containing the ref, the
-    	 *                               amount, the currency, the date and cart content
-    	 *                               in details child. order.amount is required from
-    	 *                               4.65.1
-    	 * @param buyer                  the buyer object, containing many information
-    	 *                               about the buyer: firstname, lastname, email,
-    	 *                               addresses,...
-    	 * @param card                   the card object, containing the card data :
-    	 *                               number, expirationDate, cvx,...
-    	 * @param privateDataList        A list of privateData, allowing to send any
-    	 *                               kind of extra information organized with keys
-    	 *                               and values
-    	 * @param authentication3DSecure the authentication3DSecure object, filled with
-    	 *                               MD and PARES retrieved from the ACS after the
-    	 *                               customer entered his password
-    	 * @param bank                   the bankAccountData object, used for ELV
-    	 *                               payment only
-    	 * @param version                the API version of Payline
-    	 * @param subMerchant            sub-merchant info in case you're using Payline
-    	 *                               as a payment facilitator for other merchants
-    	 * @return DoAuthorizationResponse the response given by Payline to a debit
-    	 *         authorization request
-    	 */
-    	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
-    			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
-    			final BankAccountData bank, final String version, final SubMerchant subMerchant) {
+/**
+	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
+	 * sends a debit authorization request to your bank authorization server.
+	 *
+	 * @param payment                the payment object containing the amount, the
+	 *                               currency, action and mode codes
+	 * @param order                  the order object containing the ref, the
+	 *                               amount, the currency, the date and cart content
+	 *                               in details child. order.amount is required from
+	 *                               4.65.1
+	 * @param buyer                  the buyer object, containing many information
+	 *                               about the buyer: firstname, lastname, email,
+	 *                               addresses,...
+	 * @param card                   the card object, containing the card data :
+	 *                               number, expirationDate, cvx,...
+	 * @param privateDataList        A list of privateData, allowing to send any
+	 *                               kind of extra information organized with keys
+	 *                               and values
+	 * @param authentication3DSecure the authentication3DSecure object, filled with
+	 *                               MD and PARES retrieved from the ACS after the
+	 *                               customer entered his password
+	 * @param bank                   the bankAccountData object, used for ELV
+	 *                               payment only
+	 * @param version                the API version of Payline
+	 * @param subMerchant            sub-merchant info in case you're using Payline
+	 *                               as a payment facilitator for other merchants
+	 * @return DoAuthorizationResponse the response given by Payline to a debit
+	 *         authorization request
+	 */
+	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
+			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
+			final BankAccountData bank, final String version, final SubMerchant subMerchant) {
 
             return this.doAuthorization(payment, order, buyer,
                             card, privateDataList, authentication3DSecure,
@@ -110,7 +110,7 @@ public class DirectPayment extends WebServiceWrapper {
 	/**
 	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
 	 * sends a debit authorization request to your bank authorization server.
-	 * 
+	 *
 	 * @param payment                the payment object containing the amount, the
 	 *                               currency, action and mode codes
 	 * @param order                  the order object containing the ref, the
@@ -189,12 +189,15 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
-	/**
+
+
+
+/**
 	 * The <b>doDebit</b> function is used following a phone call and is a forced
 	 * debit. The merchant has contacted his bank and the bank provides an
 	 * authorization number; this allows him to request a debit on his customer's
 	 * bank card.
-	 * 
+	 *
 	 * @param payment                the payment object containing the amount, the
 	 *                               currency, action and mode codes
 	 * @param order                  the order object containing the ref, the
@@ -220,6 +223,45 @@ public class DirectPayment extends WebServiceWrapper {
 	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
 			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
 			final Authorization authorization, final String version, final SubMerchant subMerchant) {
+
+			return this.doDebit(payment, order, buyer, card,
+            			privateDataList, authentication3DSecure,
+            			authorization, version, subMerchant, null, null);
+    }
+
+	/**
+	 * The <b>doDebit</b> function is used following a phone call and is a forced
+	 * debit. The merchant has contacted his bank and the bank provides an
+	 * authorization number; this allows him to request a debit on his customer's
+	 * bank card.
+	 *
+	 * @param payment                the payment object containing the amount, the
+	 *                               currency, action and mode codes
+	 * @param order                  the order object containing the ref, the
+	 *                               amount, the currency, the date and cart content
+	 *                               in details child
+	 * @param buyer                  the buyer object, containing many information
+	 *                               about the buyer: firstname, lastname, email,
+	 *                               addresses,...
+	 * @param card                   the card object, containing the card data :
+	 *                               number, expirationDate, cvx,...
+	 * @param privateDataList        A list of privateData, allowing to send any
+	 *                               kind of extra information organized with keys
+	 *                               and values
+	 * @param authentication3DSecure the authentication3DSecure object, filled with
+	 *                               MD and PARES retrieved from the ACS after the
+	 *                               customer entered his password
+	 * @param authorization          the authorization
+	 * @param version                the API version of Payline
+	 * @param subMerchant            sub-merchant info in case you're using Payline
+	 *                               as a payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
+	 * @return DoDebitResponse the response given by Payline to a debit request
+	 */
+	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
+			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
+			final Authorization authorization, final String version, final SubMerchant subMerchant, final Owner owner, final String media) {
 		setException(null);
 		DoDebitResponse result = new DoDebitResponse();
 		DoDebitRequest parameters = new DoDebitRequest();
@@ -232,6 +274,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setVersion(version);
 		parameters.setAuthentication3DSecure(authentication3DSecure);
 		parameters.setSubMerchant(subMerchant);
+        parameters.setOwner(owner);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -299,22 +343,45 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 	/**
+    	 * Validate an accepted payment request. The <b>doCapture</b> function requests
+    	 * validation of an accepted authorization. Once the validation is taken into
+    	 * account, a file with all the validations is sent to the merchant's bank;
+    	 * Payline sends payment requests to your bank.
+    	 *
+    	 * @param payment         the payment object containing the amount, the
+    	 *                        currency, action and mode codes
+    	 * @param transationID    the unique Payline transaction ID
+    	 * @param privateDataList A list of privateData, allowing to send any kind of
+    	 *                        extra information organized with keys and values
+    	 * @param sequenceNumber  the transaction sequence number
+    	 * @return DoCaptureResponse the response from Payline to a validation request
+    	 *         for a debit authorization
+    	 */
+    	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
+    			final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
+
+            return this.doCapture(payment, transationID,
+    			privateDataList, sequenceNumber, version, null);
+        }
+
+	/**
 	 * Validate an accepted payment request. The <b>doCapture</b> function requests
 	 * validation of an accepted authorization. Once the validation is taken into
 	 * account, a file with all the validations is sent to the merchant's bank;
 	 * Payline sends payment requests to your bank.
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param transationID    the unique Payline transaction ID
 	 * @param privateDataList A list of privateData, allowing to send any kind of
 	 *                        extra information organized with keys and values
 	 * @param sequenceNumber  the transaction sequence number
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoCaptureResponse the response from Payline to a validation request
 	 *         for a debit authorization
 	 */
 	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
-			final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
+			final PrivateDataList privateDataList, final String sequenceNumber, final String version, final String media) {
 		setException(null);
 		DoCaptureResponse result = new DoCaptureResponse();
 		DoCaptureRequest parameters = new DoCaptureRequest();
@@ -323,6 +390,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setSequenceNumber(sequenceNumber);
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -343,11 +411,12 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
+
 	/**
 	 * Refund a payment using an accepted authorization number. A refund request for
 	 * a validated payment paid into the bank; therefore the customer has been
 	 * debited and the merchant credited
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param transationID    the unique Payline transaction ID
@@ -362,6 +431,32 @@ public class DirectPayment extends WebServiceWrapper {
 	public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version,
 			final Order order) {
+
+        return this.doRefund(payment, transationID, comment,
+			privateDataList, sequenceNumber, version,
+			order, null);
+    }
+
+	/**
+	 * Refund a payment using an accepted authorization number. A refund request for
+	 * a validated payment paid into the bank; therefore the customer has been
+	 * debited and the merchant credited
+	 *
+	 * @param payment         the payment object containing the amount, the
+	 *                        currency, action and mode codes
+	 * @param transationID    the unique Payline transaction ID
+	 * @param comment         the comment
+	 * @param privateDataList A list of privateData, allowing to send any kind of
+	 *                        extra information organized with keys and values
+	 * @param sequenceNumber  the transaction sequence number
+	 * @param order           the order info. Only details (cart content) is used
+	 *                        for doRefund
+     * @param media                 Detection of the media used during the payment.
+	 * @return DoRefundResponse the response given by Payline to a refund request
+	 */
+	public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
+			final PrivateDataList privateDataList, final String sequenceNumber, final String version,
+			final Order order, final String media) {
 		setException(null);
 		DoRefundResponse result = new DoRefundResponse();
 		DoRefundRequest parameters = new DoRefundRequest();
@@ -372,6 +467,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
 		parameters.setDetails(order.getDetails());
+		parameters.setMedia(media);
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -392,13 +489,48 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
+
+
+	/**
+    	 * Credit a payment card using a the merchant account. The <b>doCredit</b>
+    	 * function is used to request that the bank card used by your customer for the
+    	 * payment be credited. This function is useful for refunding your customer if
+    	 * you have not kept the transaction authorization ID needed for the doRefund
+    	 * function.
+    	 *
+    	 * @param payment         the payment object containing the amount, the
+    	 *                        currency, action and mode codes
+    	 * @param card            the card object, containing the card data : number,
+    	 *                        expirationDate, cvx,...
+    	 * @param comment         the comment
+    	 * @param buyer           the buyer object, containing many information about
+    	 *                        the buyer: firstname, lastname, email, addresses,...
+    	 * @param order           the order object containing the ref, the amount, the
+    	 *                        currency, the date and cart content in details child
+    	 * @param privateDataList A list of privateData, allowing to send any kind of
+    	 *                        extra information organized with keys and values
+    	 * @param version         the API version of Payline
+    	 * @param subMerchant     sub-merchant info in case you're using Payline as a
+    	 *                        payment facilitator for other merchants
+    	 * @return DoCreditResponse
+    	 */
+    	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
+    			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
+    			final SubMerchant subMerchant) {
+
+            return this.doCredit(payment, card, comment,
+                        buyer, order, privateDataList, version,
+                        subMerchant, null, null);
+        }
+
+
 	/**
 	 * Credit a payment card using a the merchant account. The <b>doCredit</b>
 	 * function is used to request that the bank card used by your customer for the
 	 * payment be credited. This function is useful for refunding your customer if
 	 * you have not kept the transaction authorization ID needed for the doRefund
 	 * function.
-	 * 
+	 *
 	 * @param payment         the payment object containing the amount, the
 	 *                        currency, action and mode codes
 	 * @param card            the card object, containing the card data : number,
@@ -413,11 +545,13 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version         the API version of Payline
 	 * @param subMerchant     sub-merchant info in case you're using Payline as a
 	 *                        payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
 	 * @return DoCreditResponse
 	 */
 	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
 			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
-			final SubMerchant subMerchant) {
+			final SubMerchant subMerchant, final Owner owner, final String media) {
 		setException(null);
 		DoCreditResponse result = new DoCreditResponse();
 		DoCreditRequest parameters = new DoCreditRequest();
@@ -429,6 +563,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
 		parameters.setSubMerchant(subMerchant);
+        parameters.setOwner(owner);
+        parameters.setMedia(media);
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -449,10 +585,10 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
-	/**
+/**
 	 * created for compatibility purpose after introduction of walletId and
 	 * walletCardInd in v4.41
-	 * 
+	 *
 	 * @param card     the card object, containing the card data : number,
 	 *                 expirationDate, cvx,...
 	 * @param payment  the payment object containing the amount, the currency,
@@ -464,12 +600,56 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment,
 			final String orderRef, final String UsrAgent, final String version) {
-		return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version, null, null, null, null, null, null, null, null, null, null, null, null);
+		return this.verifyEnrollment(card, payment, orderRef, null, null, UsrAgent, version, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	}
+
+
+
+		/**
+         * created for compatibility purpose after introduction of merchantURL and
+         * merchantCountryCode in v4.68    	 *
+    	 * @param card               the card object, containing the card data : number,
+    	 *                           expirationDate, cvx,...
+    	 * @param payment            the payment object containing the amount, the
+    	 *                           currency, action and mode codes
+    	 * @param orderRef           the order reference
+    	 * @param walletId           the wallet identifier
+    	 * @param walletCardInd      the card index to use
+    	 * @param UsrAgent           the user Agent
+    	 * @param version            the API version of Payline
+    	 * @param merchantName       name displayed to buyer on 3D Secure authentication
+    	 *                           form
+    	 * @param mdFieldValue       Value of merchantData (This value must be unique).
+    	 *                           Field use is not recommended.
+    	 * @param generateVirtualCvx Request to generate a virtual CVV. Check if your
+    	 *                           subscription allows this feature (Tokenization).
+    	 * @param returnURL          The URL of the system that receives the CRes
+    	 *                           message or Error Message
+    	 * @param order              Order Information
+    	 * @param buyer              Buyer information
+    	 * @param subMerchant        Payment Facilitator Information
+    	 * @param recurring          Recurring or installment information
+    	 * @param threeDSinfo        Information specific to 3DS authentication
+    	 * @param merchantScore      Merchant calculated score. Mainly for CB scoring.
+    	 * @param transientParam     Data to populate the 3DSV2 container
+    	 * @param privateDataList    List containing privateData Number of items 0 to
+    	 *                           100
+    	 * @return VerifyEnrollmentResponse
+    	 */
+    	public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment,
+    			final String orderRef, final String walletId, final String walletCardInd, final String UsrAgent,
+    			final String version, final String merchantName, final String mdFieldValue, final String generateVirtualCvx,
+    			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
+    			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
+    			final String transientParam, final PrivateDataList privateDataList){
+            return this.verifyEnrollment(card, payment, orderRef, walletId, walletCardInd, UsrAgent, version, merchantName, null, null, mdFieldValue, generateVirtualCvx, returnURL, order, buyer, subMerchant, recurring, threeDSinfo, merchantScore, transientParam, privateDataList);
+        }
+
+
 
 	/**
 	 * Verify that the buyers card is 3DSecure.
-	 * 
+	 *
 	 * @param card               the card object, containing the card data : number,
 	 *                           expirationDate, cvx,...
 	 * @param payment            the payment object containing the amount, the
@@ -481,6 +661,9 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param version            the API version of Payline
 	 * @param merchantName       name displayed to buyer on 3D Secure authentication
 	 *                           form
+	 * @param merchantURL        Fully qualified URL (beginnning with http:// ou https://)
+	 * @param merchantCountryCode ISO 3166-1 alpha-2 codes
+
 	 * @param mdFieldValue       Value of merchantData (This value must be unique).
 	 *                           Field use is not recommended.
 	 * @param generateVirtualCvx Request to generate a virtual CVV. Check if your
@@ -500,7 +683,7 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final VerifyEnrollmentResponse verifyEnrollment(final Card card, final Payment payment,
 			final String orderRef, final String walletId, final String walletCardInd, final String UsrAgent,
-			final String version, final String merchantName, final String mdFieldValue, final String generateVirtualCvx,
+			final String version, final String merchantName, final String merchantURL, final String merchantCountryCode, final String mdFieldValue, final String generateVirtualCvx,
 			final String returnURL, final Order order, final Buyer buyer, final SubMerchant subMerchant,
 			final Recurring recurring, final ThreeDSInfo threeDSinfo, final String merchantScore,
 			final String transientParam, final PrivateDataList privateDataList) {
@@ -515,6 +698,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setUserAgent(UsrAgent);
 		parameters.setVersion(version);
 		parameters.setMerchantName(merchantName);
+		parameters.setMerchantURL(merchantURL);
+		parameters.setMerchantCountryCode(merchantCountryCode);
 		/*
 		 * mdFieldValue generateVirtualCvx returnURL order buyer subMerchant recurring
 		 * threeDSinfo merchantScore transient privateDataList
@@ -656,15 +841,30 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
+
+    /**
+     * Supply the public card data encryption key
+     *
+     * @return GetEncryptionKeyResponse
+     */
+    public final GetEncryptionKeyResponse getEncryptionKey() {
+        return this.getEncryptionKey(null);
+    }
+
+
 	/**
 	 * Supply the public card data encryption key
-	 * 
+	 *
+	 * @param version                    the API version of Payline
 	 * @return GetEncryptionKeyResponse
 	 */
-	public final GetEncryptionKeyResponse getEncryptionKey() {
+	public final GetEncryptionKeyResponse getEncryptionKey(final String version) {
 		setException(null);
 		GetEncryptionKeyResponse result = new GetEncryptionKeyResponse();
 		GetEncryptionKeyRequest parameters = new GetEncryptionKeyRequest();
+
+        parameters.setVersion(version);
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -788,6 +988,8 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
+
+
 	/**
 	 * @param cheque          the cheque
 	 * @param order           the order object containing the ref, the amount, the
@@ -800,6 +1002,26 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final DoScoringChequeResponse doScoringCheque(final Cheque cheque, final Order order, final Payment payment,
 			final PrivateDataList privatedatalist, final String version) {
+
+        return this.doScoringCheque(cheque, order, payment,
+                    privatedatalist, version, null);
+    }
+
+
+
+	/**
+	 * @param cheque          the cheque
+	 * @param order           the order object containing the ref, the amount, the
+	 *                        currency, the date and cart content in details child
+	 * @param payment         the payment object containing the amount, the
+	 *                        currency, action and mode codes
+	 * @param privatedatalist A list of privateData, allowing to send any kind of
+	 *                        extra information organized with keys and values
+     * @param media                 Detection of the media used during the payment.
+	 * @return DoScoringChequeResponse
+	 */
+	public final DoScoringChequeResponse doScoringCheque(final Cheque cheque, final Order order, final Payment payment,
+			final PrivateDataList privatedatalist, final String version, final String media) {
 		setException(null);
 		DoScoringChequeResponse result = new DoScoringChequeResponse();
 		DoScoringChequeRequest parameters = new DoScoringChequeRequest();
@@ -808,6 +1030,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 
 		final DirectPaymentAPI port;
 		try {
@@ -829,10 +1052,10 @@ public class DirectPayment extends WebServiceWrapper {
 		return result;
 	}
 
-	/**
+/**
 	 * Allow transaction replay. This allows a transaction which has been accepted
 	 * to be replayed.
-	 * 
+	 *
 	 * @param transationID    the unique Payline transaction ID
 	 * @param order           the order object containing the ref, the amount, the
 	 *                        currency, the date and cart content in details child,
@@ -845,6 +1068,29 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final DoReAuthorizationResponse doReAuthorization(final String transationID, final Order order,
 			final Payment payment, final PrivateDataList privatedatalist, final String version) {
+
+        return this.doReAuthorization(transationID, order,
+            			payment, privatedatalist, version, null);
+    }
+
+
+	/**
+	 * Allow transaction replay. This allows a transaction which has been accepted
+	 * to be replayed.
+	 *
+	 * @param transationID    the unique Payline transaction ID
+	 * @param order           the order object containing the ref, the amount, the
+	 *                        currency, the date and cart content in details child,
+	 *                        mandatory from 4.65
+	 * @param payment         the payment object containing the amount, the
+	 *                        currency, action and mode codes
+	 * @param privatedatalist A list of privateData, allowing to send any kind of
+	 *                        extra information organized with keys and values
+     * @param media                 Detection of the media used during the payment.
+	 * @return DoReAuthorizationResponse
+	 */
+	public final DoReAuthorizationResponse doReAuthorization(final String transationID, final Order order,
+			final Payment payment, final PrivateDataList privatedatalist, final String version, final String media) {
 		setException(null);
 		DoReAuthorizationResponse result = new DoReAuthorizationResponse();
 		DoReAuthorizationRequest parameters = new DoReAuthorizationRequest();
@@ -853,6 +1099,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMedia(media);
 
 		final DirectPaymentAPI port;
 		try {
@@ -926,7 +1173,7 @@ public class DirectPayment extends WebServiceWrapper {
 
 	/**
 	 * Ask for customer scoring to an external payment processor
-	 * 
+	 *
 	 * @param buyer
 	 * @param order
 	 * @param payment
@@ -936,6 +1183,25 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final IsRegisteredResponse isRegistered(final Buyer buyer, final Order order, final Payment payment,
 			final PrivateDataList privatedatalist, final String version) {
+
+        return this.isRegistered(buyer, order, payment,
+                    privatedatalist, version, null);
+    }
+
+	/**
+	 * Ask for customer scoring to an external payment processor
+	 *
+	 * @param buyer
+	 * @param order
+	 * @param payment
+	 * @param privatedatalist
+	 * @param version
+	 * @param miscData                   Additional data , without character limit
+	 *                                   and transmitted to the partners. Consult
+	 * @return
+	 */
+	public final IsRegisteredResponse isRegistered(final Buyer buyer, final Order order, final Payment payment,
+			final PrivateDataList privatedatalist, final String version, final String miscData) {
 		IsRegisteredResponse result = new IsRegisteredResponse();
 		IsRegisteredRequest parameters = new IsRegisteredRequest();
 
@@ -944,6 +1210,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPayment(payment);
 		parameters.setPrivateDataList(privatedatalist);
 		parameters.setVersion(version);
+        parameters.setMiscData(miscData);
 
 		final DirectPaymentAPI port;
 		try {

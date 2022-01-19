@@ -1063,6 +1063,8 @@
 						<element name="walletCardInd" nillable="true" type="xsd:string"/>
 						<element minOccurs="0" name="generateVirtualCvx" nillable="true" type="xsd:string"/>
 						<element name="merchantName" nillable="true" type="xsd:string"/>
+						<element minOccurs="0" name="merchantURL" nillable="true" type="xsd:string"/>
+						<element minOccurs="0" name="merchantCountryCode" nillable="true" type="xsd:string"/>
 						<element name="returnURL" nillable="true" type="xsd:string"/>
                         <element name="order" nillable="true" type="tns1:order"/>
                         <element minOccurs="0" name="buyer" nillable="true" type="tns1:buyer"/>
@@ -3374,13 +3376,6 @@
       <wsdl:output name="verifyAuthenticationResponse" message="impl:verifyAuthenticationResponse">
     </wsdl:output>
     </wsdl:operation>
-    <!-- No corresponding port in binding isRegistered with CreateMerchant operation
-    <wsdl:operation name="createMerchant">
-      <wsdl:input name="createMerchantRequest" message="impl:createMerchantRequest">
-    </wsdl:input>
-      <wsdl:output name="createMerchantResponse" message="impl:createMerchantResponse">
-    </wsdl:output>
-    </wsdl:operation>-->
     <wsdl:operation name="doScoringCheque">
       <wsdl:input name="doScoringChequeRequest" message="impl:doScoringChequeRequest">
     </wsdl:input>

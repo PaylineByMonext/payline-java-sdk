@@ -1,5 +1,29 @@
 ----------------------------------------
 
+* 4.68 (2021-10-07)
+* Update WSDL from 4.66 to 4.68
+* add missing parameters merchantURL, merchantCountryCode for verifyEnrollment
+* add missing parameters transient, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for doAuthorization
+* add missing parameters owner, media for doDebit
+* add missing parameters media for doCapture
+* add missing parameters media, details for doRefund
+* add missing parameters media, owner for doCredit
+* add missing parameters version for getEncryptionKey
+* add missing parameters media for doScoringCheque
+* add missing parameters media for doReAuthorization
+* add missing parameters  miscData for isRegistered
+* add missing parameters archiveSearch for getTransactionDetails
+* add missing parameters buyer, owner, media, contractNumberWalletList, transactionID for createWallet
+* add missing parameters media for getWallet
+* add missing parameters  buyer, owner, media, contractNumberWalletList, transactionID for updateWallet
+* add missing parameters media for doImmediateWalletPayment
+* add missing parameters media for doRecurrentWalletPayment
+* add missing parameters contractNumber, owner, contractNumberWalletList for createWebWallet
+* add missing parameters contractNumber, updateOwnerDetails, contractNumberWalletList for updateWebWallet
+* add missing parameters threeDSInfo for manageWebWallet
+
+----------------------------------------
+
 * 4.66.1 (2021-10-01)
 * new parameters transientParam, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for DoAuthorization
 
