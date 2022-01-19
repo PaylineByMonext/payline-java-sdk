@@ -1,5 +1,13 @@
 ----------------------------------------
 
+* 4.69 (2022-01-19)
+* Update WSDL from 4.68 to 4.69
+* new parameters threeDSinfo, travelFileNumber for doAuthorization
+* new parameters threeDSinfo, travelFileNumber for doImmediateWalletPayment
+
+
+----------------------------------------
+
 * 4.68 (2021-10-07)
 * Update WSDL from 4.66 to 4.68
 * add missing parameters merchantURL, merchantCountryCode for verifyEnrollment
