@@ -1,5 +1,11 @@
 ----------------------------------------
 
+* 4.70 (2022-05-04)
+* Update WSDL from 4.69 to 4.70
+* new parameter encData for sdk
+
+----------------------------------------
+
 * 4.69 (2022-01-19)
 * Update WSDL from 4.68 to 4.69
 * new parameters threeDSinfo, travelFileNumber for doAuthorization
