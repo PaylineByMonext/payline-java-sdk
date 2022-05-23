@@ -149,6 +149,59 @@ public class DirectPayment extends WebServiceWrapper {
 			final String transientParam,
 			final Owner owner, final String media, final String asynchronousRetryTimeout, final String linkedTransactionId, final Recurring recurring
 			) {
+
+                return this.doAuthorization(payment, order, buyer,
+                                card, privateDataList, authentication3DSecure,
+                                bank, version, subMerchant,
+                                transientParam, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring, null, null);
+        }
+
+	/**
+	 * Carry out payment authorization requests. The <b>doAuthorization</b> function
+	 * sends a debit authorization request to your bank authorization server.
+	 *
+	 * @param payment                the payment object containing the amount, the
+	 *                               currency, action and mode codes
+	 * @param order                  the order object containing the ref, the
+	 *                               amount, the currency, the date and cart content
+	 *                               in details child. order.amount is required from
+	 *                               4.65.1
+	 * @param buyer                  the buyer object, containing many information
+	 *                               about the buyer: firstname, lastname, email,
+	 *                               addresses,...
+	 * @param card                   the card object, containing the card data :
+	 *                               number, expirationDate, cvx,...
+	 * @param privateDataList        A list of privateData, allowing to send any
+	 *                               kind of extra information organized with keys
+	 *                               and values
+	 * @param authentication3DSecure the authentication3DSecure object, filled with
+	 *                               MD and PARES retrieved from the ACS after the
+	 *                               customer entered his password
+	 * @param bank                   the bankAccountData object, used for ELV
+	 *                               payment only
+	 * @param version                the API version of Payline
+	 * @param subMerchant            sub-merchant info in case you're using Payline
+	 *                               as a payment facilitator for other merchants
+	 * @param transientParam         Data to populate the 3DSV2 container
+	 * @param owner
+	 * @param media                 Detection of the media used during the payment.
+
+	 * @param asynchronousRetryTimeout  Numeric that specifies the period in minutes
+	 * @param linkedTransactionId   In case of installment, recurring or split shippment payment refers to the first authorization
+	 * @param recurring             Recurring or installment information
+	 * @param threeDSInfo             Information specific to 3DS authentication
+	 * @param travelFileNumber
+	 * @return DoAuthorizationResponse the response given by Payline to a debit
+	 *         authorization request
+	 */
+    @SuppressWarnings("squid:S00107")
+	public final DoAuthorizationResponse doAuthorization(final Payment payment, final Order order, final Buyer buyer,
+			final Card card, final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
+			final BankAccountData bank, final String version, final SubMerchant subMerchant,
+			final String transientParam,
+			final Owner owner, final String media, final String asynchronousRetryTimeout, final String linkedTransactionId, final Recurring recurring,
+			final ThreeDSInfo threeDSInfo, final String travelFileNumber
+			) {
 		setException(null);
 		DoAuthorizationResponse result = new DoAuthorizationResponse();
 		DoAuthorizationRequest parameters = new DoAuthorizationRequest();
@@ -167,6 +220,8 @@ public class DirectPayment extends WebServiceWrapper {
 		if (asynchronousRetryTimeout != null)
 			parameters.setAsynchronousRetryTimeout(asynchronousRetryTimeout);
         parameters.setLinkedTransactionId(linkedTransactionId);
+        parameters.setThreeDSInfo(threeDSInfo);
+        parameters.setTravelFileNumber(travelFileNumber);
 		parameters.setRecurring(recurring);
 		final DirectPaymentAPI port;
 		try {
