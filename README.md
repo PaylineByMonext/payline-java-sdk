@@ -25,7 +25,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.70</version>
+  <version>4.72</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Add this dependency in your project's POM:
 <dependency>
   <groupId>com.payline</groupId>
   <artifactId>payline-java-sdk</artifactId>
-  <version>4.70</version>
+  <version>4.72</version>
 </dependency>
 <dependency>
   <groupId>javax.xml.ws</groupId>

@@ -398,26 +398,26 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 	/**
-    	 * Validate an accepted payment request. The <b>doCapture</b> function requests
-    	 * validation of an accepted authorization. Once the validation is taken into
-    	 * account, a file with all the validations is sent to the merchant's bank;
-    	 * Payline sends payment requests to your bank.
-    	 *
-    	 * @param payment         the payment object containing the amount, the
-    	 *                        currency, action and mode codes
-    	 * @param transationID    the unique Payline transaction ID
-    	 * @param privateDataList A list of privateData, allowing to send any kind of
-    	 *                        extra information organized with keys and values
-    	 * @param sequenceNumber  the transaction sequence number
-    	 * @return DoCaptureResponse the response from Payline to a validation request
-    	 *         for a debit authorization
-    	 */
-    	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
-    			final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
+     * Validate an accepted payment request. The <b>doCapture</b> function requests
+     * validation of an accepted authorization. Once the validation is taken into
+     * account, a file with all the validations is sent to the merchant's bank;
+     * Payline sends payment requests to your bank.
+     *
+     * @param payment         the payment object containing the amount, the
+     *                        currency, action and mode codes
+     * @param transationID    the unique Payline transaction ID
+     * @param privateDataList A list of privateData, allowing to send any kind of
+     *                        extra information organized with keys and values
+     * @param sequenceNumber  the transaction sequence number
+     * @return DoCaptureResponse the response from Payline to a validation request
+     *         for a debit authorization
+     */
+    public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
+            final PrivateDataList privateDataList, final String sequenceNumber, final String version) {
 
-            return this.doCapture(payment, transationID,
-    			privateDataList, sequenceNumber, version, null);
-        }
+        return this.doCapture(payment, transationID,
+            privateDataList, sequenceNumber, version, null, null);
+    }
 
 	/**
 	 * Validate an accepted payment request. The <b>doCapture</b> function requests
@@ -437,6 +437,33 @@ public class DirectPayment extends WebServiceWrapper {
 	 */
 	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version, final String media) {
+
+        return this.doCapture(payment, transationID,
+            privateDataList, sequenceNumber, version, null, null);
+
+    }
+
+
+	/**
+	 * Validate an accepted payment request. The <b>doCapture</b> function requests
+	 * validation of an accepted authorization. Once the validation is taken into
+	 * account, a file with all the validations is sent to the merchant's bank;
+	 * Payline sends payment requests to your bank.
+	 *
+	 * @param payment         the payment object containing the amount, the
+	 *                        currency, action and mode codes
+	 * @param transationID    the unique Payline transaction ID
+	 * @param privateDataList A list of privateData, allowing to send any kind of
+	 *                        extra information organized with keys and values
+	 * @param sequenceNumber  the transaction sequence number
+     * @param media           Detection of the media used during the payment.
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
+	 * @return DoCaptureResponse the response from Payline to a validation request
+	 *         for a debit authorization
+	 */
+	public final DoCaptureResponse doCapture(final Payment payment, final String transationID,
+			final PrivateDataList privateDataList, final String sequenceNumber, final String version, final String media, final String miscData) {
 		setException(null);
 		DoCaptureResponse result = new DoCaptureResponse();
 		DoCaptureRequest parameters = new DoCaptureRequest();
@@ -446,6 +473,9 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setPrivateDataList(privateDataList);
 		parameters.setVersion(version);
         parameters.setMedia(media);
+        parameters.setMiscData(miscData);
+
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -489,7 +519,33 @@ public class DirectPayment extends WebServiceWrapper {
 
         return this.doRefund(payment, transationID, comment,
 			privateDataList, sequenceNumber, version,
-			order, null);
+			order, null, null);
+    }
+
+    /**
+     * Refund a payment using an accepted authorization number. A refund request for
+     * a validated payment paid into the bank; therefore the customer has been
+     * debited and the merchant credited
+     *
+     * @param payment         the payment object containing the amount, the
+     *                        currency, action and mode codes
+     * @param transationID    the unique Payline transaction ID
+     * @param comment         the comment
+     * @param privateDataList A list of privateData, allowing to send any kind of
+     *                        extra information organized with keys and values
+     * @param sequenceNumber  the transaction sequence number
+     * @param order           the order info. Only details (cart content) is used
+     *                        for doRefund
+     * @param media                 Detection of the media used during the payment.
+     * @return DoRefundResponse the response given by Payline to a refund request
+     */
+    public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
+            final PrivateDataList privateDataList, final String sequenceNumber, final String version,
+            final Order order, final String media) {
+
+        return this.doRefund(payment, transationID, comment,
+			privateDataList, sequenceNumber, version,
+			order, null, null);
     }
 
 	/**
@@ -506,12 +562,14 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param sequenceNumber  the transaction sequence number
 	 * @param order           the order info. Only details (cart content) is used
 	 *                        for doRefund
-     * @param media                 Detection of the media used during the payment.
+     * @param media           Detection of the media used during the payment.
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
 	 * @return DoRefundResponse the response given by Payline to a refund request
 	 */
 	public final DoRefundResponse doRefund(final Payment payment, final String transationID, final String comment,
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version,
-			final Order order, final String media) {
+			final Order order, final String media, final String miscData) {
 		setException(null);
 		DoRefundResponse result = new DoRefundResponse();
 		DoRefundRequest parameters = new DoRefundRequest();
@@ -523,6 +581,7 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setVersion(version);
 		parameters.setDetails(order.getDetails());
 		parameters.setMedia(media);
+        parameters.setMiscData(miscData);
 
 		final DirectPaymentAPI port;
 		try {
@@ -1251,8 +1310,8 @@ public class DirectPayment extends WebServiceWrapper {
 	 * @param payment
 	 * @param privatedatalist
 	 * @param version
-	 * @param miscData                   Additional data , without character limit
-	 *                                   and transmitted to the partners. Consult
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
 	 * @return
 	 */
 	public final IsRegisteredResponse isRegistered(final Buyer buyer, final Order order, final Payment payment,

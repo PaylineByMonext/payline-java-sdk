@@ -1,66 +1,79 @@
 ----------------------------------------
 
+* 4.72 (2022-09-09)
+  * Update WSDL from 4.71 to 4.72
+  * add miscData in doCapture
+  * add miscData in doRefund
+  * add legalDocumentType on buyer object
+
+----------------------------------------
+
+* 4.71 (2022-06-16)
+  * Update WSDL from 4.70 to 4.71
+  * changer parameter type for sdk/maxTimeout
+
+----------------------------------------
+
 * 4.70 (2022-05-04)
-* Update WSDL from 4.69 to 4.70
-* new parameter encData for sdk
+  * Update WSDL from 4.69 to 4.70
+  * new parameter encData for sdk
 
 ----------------------------------------
 
 * 4.69 (2022-01-19)
-* Update WSDL from 4.68 to 4.69
-* new parameters threeDSinfo, travelFileNumber for doAuthorization
-* new parameters threeDSinfo, travelFileNumber for doImmediateWalletPayment
-
+  * Update WSDL from 4.68 to 4.69
+  * new parameters threeDSinfo, travelFileNumber for doAuthorization
+  * new parameters threeDSinfo, travelFileNumber for doImmediateWalletPayment
 
 ----------------------------------------
 
 * 4.68 (2021-10-07)
-* Update WSDL from 4.66 to 4.68
-* add missing parameters merchantURL, merchantCountryCode for verifyEnrollment
-* add missing parameters transient, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for doAuthorization
-* add missing parameters owner, media for doDebit
-* add missing parameters media for doCapture
-* add missing parameters media, details for doRefund
-* add missing parameters media, owner for doCredit
-* add missing parameters version for getEncryptionKey
-* add missing parameters media for doScoringCheque
-* add missing parameters media for doReAuthorization
-* add missing parameters  miscData for isRegistered
-* add missing parameters archiveSearch for getTransactionDetails
-* add missing parameters buyer, owner, media, contractNumberWalletList, transactionID for createWallet
-* add missing parameters media for getWallet
-* add missing parameters  buyer, owner, media, contractNumberWalletList, transactionID for updateWallet
-* add missing parameters media for doImmediateWalletPayment
-* add missing parameters media for doRecurrentWalletPayment
-* add missing parameters contractNumber, owner, contractNumberWalletList for createWebWallet
-* add missing parameters contractNumber, updateOwnerDetails, contractNumberWalletList for updateWebWallet
-* add missing parameters threeDSInfo for manageWebWallet
+  * Update WSDL from 4.66 to 4.68
+  * add missing parameters merchantURL, merchantCountryCode for verifyEnrollment
+  * add missing parameters transient, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for doAuthorization
+  * add missing parameters owner, media for doDebit
+  * add missing parameters media for doCapture
+  * add missing parameters media, details for doRefund
+  * add missing parameters media, owner for doCredit
+  * add missing parameters version for getEncryptionKey
+  * add missing parameters media for doScoringCheque
+  * add missing parameters media for doReAuthorization
+  * add missing parameters  miscData for isRegistered
+  * add missing parameters archiveSearch for getTransactionDetails
+  * add missing parameters buyer, owner, media, contractNumberWalletList, transactionID for createWallet
+  * add missing parameters media for getWallet
+  * add missing parameters  buyer, owner, media, contractNumberWalletList, transactionID for updateWallet
+  * add missing parameters media for doImmediateWalletPayment
+  * add missing parameters media for doRecurrentWalletPayment
+  * add missing parameters contractNumber, owner, contractNumberWalletList for createWebWallet
+  * add missing parameters contractNumber, updateOwnerDetails, contractNumberWalletList for updateWebWallet
+  * add missing parameters threeDSInfo for manageWebWallet
 
 ----------------------------------------
 
 * 4.66.1 (2021-10-01)
-* new parameters transientParam, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for DoAuthorization
+  * new parameters transientParam, owner, media, asynchronousRetryTimeout, linkedTransactionId, recurring for DoAuthorization
 
 ----------------------------------------
 
 * 4.66 (2020-04-30)
-* Update WSDL from 4.64.1 to 4.66
-* new parameter PrivateDataList for doBankTransfer
-* new parameters mdFieldValue, generateVirtualCvx, recurring, returnURL, order, buyer, subMerchant, recurring, threeDSinfo, transientParam, privateDataList for verifyEnrollment
-* new parameters sequenceNumber, media for doReset
-* new parameters transientParam, PrivateDataList for verifyAuthentication
+  * Update WSDL from 4.64.1 to 4.66
+  * new parameter PrivateDataList for doBankTransfer
+  * new parameters mdFieldValue, generateVirtualCvx, recurring, returnURL, order, buyer, subMerchant, recurring, threeDSinfo, transientParam, privateDataList for verifyEnrollment
+  * new parameters sequenceNumber, media for doReset
+  * new parameters transientParam, PrivateDataList for verifyAuthentication
 
-* new parameters recurring, linkedTransactionId for doImmediateWalletPayment
-* new parameters recurring, authentication3dSecure, linkedTransactionId for doScheduledWalletPayment
-* new parameters cvx, linkedTransactionId, authentication3DSecure for doRecurrentWalletPayment
-* new parameters skipSmartDisplay, owner, contractNumberWalletList, asynchronousRetryTimeout, threeDSInfo, merchantScore for doWebPayment
+  * new parameters recurring, linkedTransactionId for doImmediateWalletPayment
+  * new parameters recurring, authentication3dSecure, linkedTransactionId for doScheduledWalletPayment
+  * new parameters cvx, linkedTransactionId, authentication3DSecure for doRecurrentWalletPayment
+  * new parameters skipSmartDisplay, owner, contractNumberWalletList, asynchronousRetryTimeout, threeDSInfo, merchantScore for doWebPayment
 
 ----------------------------------------
 
 * 4.64.1 (2020-12-14)
-* Update WSDL from 4.62.1 to 4.64.1
-* Split wsl in tree files
-* Improve pom.xml definition
+  * Update WSDL from 4.62.1 to 4.64.1
+  * Split wsl in tree files
+  * Improve pom.xml definition
 
 ----------------------------------------
 
@@ -92,7 +105,6 @@
 ---------------------------------------- 
 
 * 4.52 (2017-10-25)
-
   * new "merchantName" parameter for services
   	- doWebPayment
   	- manageWebWallet
@@ -104,7 +116,6 @@
 ----------------------------------------
 
 * 4.48 (2016-09-20)
-
   * new getAlertDetails parameters
   	- version
   	- TransactionDate	
@@ -112,7 +123,6 @@
 ----------------------------------------
 
 * 4.47 (2016-06-16)
-
   * new buyer properties :
   	- deviceFingerprint
   	- isBot
@@ -132,5 +142,4 @@
 ----------------------------------------
 
 * 4.44.1 (2016-01-20)
-
   * First Payline release deployed on GitHub & Maven
