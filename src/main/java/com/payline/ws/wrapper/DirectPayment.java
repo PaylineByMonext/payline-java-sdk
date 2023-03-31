@@ -1345,4 +1345,47 @@ public class DirectPayment extends WebServiceWrapper {
 		}
 		return result;
 	}
+
+	/**
+	 *
+	 * @param version
+	 * @param contractNumber
+	 * @param orderRef
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
+	 * @return
+	 */
+	public final PrepareSessionResponse prepareSession(final String version, final String contractNumber, final String orderRef, final String miscData) {
+
+        PrepareSessionResponse result = new PrepareSessionResponse();
+        PrepareSessionRequest parameters = new PrepareSessionRequest();
+
+		parameters.setVersion(version);
+		parameters.setContractNumber(contractNumber);
+		parameters.setOrderRef(orderRef);
+		parameters.setMiscData(miscData);
+
+		final DirectPaymentAPI port;
+		try {
+			if (this.initFromFile) {
+				port = Utils.initServiceDirect();
+			} else {
+				port = Utils.initServiceDirect(this.connectParams);
+			}
+			result = port.prepareSession(parameters);
+		} catch (WebServiceException ex) {
+			setException(ex);
+			logger.log(Level.SEVERE, "Error during prepareSession call : ", ex);
+			Result err = new Result();
+			err.setCode(Utils.EXCEPTION_CODE);
+			err.setLongMessage(ex.getMessage());
+			err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
+			result.setResult(err);
+		}
+		return result;
+	}
+
+
+
+
 }

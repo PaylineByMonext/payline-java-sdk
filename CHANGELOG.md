@@ -1,5 +1,12 @@
 ----------------------------------------
 
+* 4.74 (2023-03-31)
+  * Update WSDL from 4.73 to 4.74
+  * Add service prepareSession
+  * Add par, tokenRequestorCryptogram, tokenRequestorId, last4, panType on card object
+
+----------------------------------------
+
 * 4.73 (2023-01-25)
   * Update WSDL from 4.72 to 4.73
 
