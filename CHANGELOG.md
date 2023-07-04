@@ -1,5 +1,12 @@
 ----------------------------------------
 
+* 4.75 (2023-07-04)
+  * Update WSDL from 4.74 to 4.75
+  * Add miscData to doCredit
+  * Add miscData to doDebit
+
+----------------------------------------
+
 * 4.74 (2023-03-31)
   * Update WSDL from 4.73 to 4.74
   * Add service prepareSession
