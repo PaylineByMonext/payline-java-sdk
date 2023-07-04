@@ -284,6 +284,7 @@ public class DirectPayment extends WebServiceWrapper {
             			authorization, version, subMerchant, null, null);
     }
 
+
 	/**
 	 * The <b>doDebit</b> function is used following a phone call and is a forced
 	 * debit. The merchant has contacted his bank and the bank provides an
@@ -317,6 +318,49 @@ public class DirectPayment extends WebServiceWrapper {
 	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
 			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
 			final Authorization authorization, final String version, final SubMerchant subMerchant, final Owner owner, final String media) {
+
+        return this.doDebit(payment, order, buyer, card,
+                    privateDataList, authentication3DSecure,
+                    authorization, version, subMerchant, null, null, null);
+    }
+
+
+
+	/**
+	 * The <b>doDebit</b> function is used following a phone call and is a forced
+	 * debit. The merchant has contacted his bank and the bank provides an
+	 * authorization number; this allows him to request a debit on his customer's
+	 * bank card.
+	 *
+	 * @param payment                the payment object containing the amount, the
+	 *                               currency, action and mode codes
+	 * @param order                  the order object containing the ref, the
+	 *                               amount, the currency, the date and cart content
+	 *                               in details child
+	 * @param buyer                  the buyer object, containing many information
+	 *                               about the buyer: firstname, lastname, email,
+	 *                               addresses,...
+	 * @param card                   the card object, containing the card data :
+	 *                               number, expirationDate, cvx,...
+	 * @param privateDataList        A list of privateData, allowing to send any
+	 *                               kind of extra information organized with keys
+	 *                               and values
+	 * @param authentication3DSecure the authentication3DSecure object, filled with
+	 *                               MD and PARES retrieved from the ACS after the
+	 *                               customer entered his password
+	 * @param authorization          the authorization
+	 * @param version                the API version of Payline
+	 * @param subMerchant            sub-merchant info in case you're using Payline
+	 *                               as a payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
+	 * @return DoDebitResponse the response given by Payline to a debit request
+	 */
+	public final DoDebitResponse doDebit(final Payment payment, final Order order, final Buyer buyer, final Card card,
+			final PrivateDataList privateDataList, final Authentication3DSecure authentication3DSecure,
+			final Authorization authorization, final String version, final SubMerchant subMerchant, final Owner owner, final String media, final String miscData) {
 		setException(null);
 		DoDebitResponse result = new DoDebitResponse();
 		DoDebitRequest parameters = new DoDebitRequest();
@@ -331,6 +375,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setSubMerchant(subMerchant);
         parameters.setOwner(owner);
         parameters.setMedia(media);
+        parameters.setMiscData(miscData);
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
@@ -637,7 +683,6 @@ public class DirectPayment extends WebServiceWrapper {
                         subMerchant, null, null);
         }
 
-
 	/**
 	 * Credit a payment card using a the merchant account. The <b>doCredit</b>
 	 * function is used to request that the bank card used by your customer for the
@@ -666,6 +711,43 @@ public class DirectPayment extends WebServiceWrapper {
 	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
 			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
 			final SubMerchant subMerchant, final Owner owner, final String media) {
+
+        return this.doCredit(payment, card, comment,
+                        buyer, order, privateDataList, version,
+                        subMerchant, null, null, null);
+    }
+
+
+	/**
+	 * Credit a payment card using a the merchant account. The <b>doCredit</b>
+	 * function is used to request that the bank card used by your customer for the
+	 * payment be credited. This function is useful for refunding your customer if
+	 * you have not kept the transaction authorization ID needed for the doRefund
+	 * function.
+	 *
+	 * @param payment         the payment object containing the amount, the
+	 *                        currency, action and mode codes
+	 * @param card            the card object, containing the card data : number,
+	 *                        expirationDate, cvx,...
+	 * @param comment         the comment
+	 * @param buyer           the buyer object, containing many information about
+	 *                        the buyer: firstname, lastname, email, addresses,...
+	 * @param order           the order object containing the ref, the amount, the
+	 *                        currency, the date and cart content in details child
+	 * @param privateDataList A list of privateData, allowing to send any kind of
+	 *                        extra information organized with keys and values
+	 * @param version         the API version of Payline
+	 * @param subMerchant     sub-merchant info in case you're using Payline as a
+	 *                        payment facilitator for other merchants
+     * @param owner
+     * @param media                 Detection of the media used during the payment.
+     * @param miscData        Additional data , without character limit
+     *                        and transmitted to the partners. Consult the payment method for each use
+	 * @return DoCreditResponse
+	 */
+	public final DoCreditResponse doCredit(final Payment payment, final Card card, final String comment,
+			final Buyer buyer, final Order order, final PrivateDataList privateDataList, final String version,
+			final SubMerchant subMerchant, final Owner owner, final String media, final String miscData) {
 		setException(null);
 		DoCreditResponse result = new DoCreditResponse();
 		DoCreditRequest parameters = new DoCreditRequest();
@@ -679,6 +761,8 @@ public class DirectPayment extends WebServiceWrapper {
 		parameters.setSubMerchant(subMerchant);
         parameters.setOwner(owner);
         parameters.setMedia(media);
+        parameters.setMiscData(miscData);
+
 		final DirectPaymentAPI port;
 		try {
 			if (this.initFromFile) {
