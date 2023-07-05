@@ -5,17 +5,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
-	<version>4.74</version>
+	<version>4.75</version>
 	<name>Payline JAVA SDK Project</name>
 	<description>Modified for TBD using last WSDL from https://docs.monext.fr/display/DT/Endpoints. The Payline API provides access to the various functions of the Payline payment solution. It is based on standard web service components, which include the SOAP protocol, the WSDL and XSD definition languages. These standards are supported by a large range of development tools on multiple platforms. This SDK covers all the functions of the Payline payment solution.</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<WebPaymentAPI.service>WebPaymentAPI</WebPaymentAPI.service>
 		<DirectPaymentAPI.service>DirectPaymentAPI</DirectPaymentAPI.service>
 		<ExtendedAPI.service>ExtendedAPI</ExtendedAPI.service>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jaxws-maven-plugin.version>4.0.1</jaxws-maven-plugin.version>
 	</properties>
 
 	<url>www.payline.com</url>
@@ -137,9 +138,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxws-maven-plugin</artifactId>
-				<version>2.6</version>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>${jaxws-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>wsimport-from-jdk-extendedapi</id>
@@ -234,29 +235,14 @@
 			<version>1.10</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.2.9</version>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.jws</groupId>
-			<artifactId>jsr181-api</artifactId>
-			<version>1.0-MR1</version>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.xml.ws</groupId>
-			<artifactId>jaxws-api</artifactId>
-			<version>2.2.11</version>
+			<artifactId>jakarta.xml.ws-api</artifactId>
+			<version>4.0.0</version>
 		</dependency>
 	</dependencies>
 </project>
