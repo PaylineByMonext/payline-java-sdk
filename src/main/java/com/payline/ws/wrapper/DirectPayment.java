@@ -20,7 +20,7 @@ import com.payline.kit.utils.Utils;
 import com.payline.ws.model.*;
 
 
-import javax.xml.ws.WebServiceException;
+import jakarta.xml.ws.WebServiceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -1,7 +1,7 @@
 <jxb:bindings
 	version="2.1"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
-	xmlns:xs="http://java.sun.com/xml/ns/jaxb"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
+	xmlns:xs="https://jakarta.ee/xml/ns/jaxb"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
