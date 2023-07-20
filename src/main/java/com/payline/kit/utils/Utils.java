@@ -31,8 +31,8 @@ import java.util.zip.GZIPInputStream;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
+import jakarta.xml.ws.BindingProvider;
+import jakarta.xml.ws.handler.MessageContext;
 
 import com.payline.ws.model.DirectPaymentAPI;
 import com.payline.ws.model.DirectPaymentAPI_Service;

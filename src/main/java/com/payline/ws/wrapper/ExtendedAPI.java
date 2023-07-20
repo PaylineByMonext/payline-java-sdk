@@ -18,7 +18,7 @@ package com.payline.ws.wrapper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.ws.WebServiceException;
+import jakarta.xml.ws.WebServiceException;
 
 import com.payline.ws.model.GetAlertDetailsRequest;
 import com.payline.ws.model.GetAlertDetailsResponse;
