@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.payline</groupId>
 	<artifactId>payline-java-sdk</artifactId>
-	<version>4.75</version>
+	<version>4.76</version>
 	<name>Payline JAVA SDK Project</name>
 	<description>Modified for TBD using last WSDL from https://docs.monext.fr/display/DT/Endpoints. The Payline API provides access to the various functions of the Payline payment solution. It is based on standard web service components, which include the SOAP protocol, the WSDL and XSD definition languages. These standards are supported by a large range of development tools on multiple platforms. This SDK covers all the functions of the Payline payment solution.</description>
 

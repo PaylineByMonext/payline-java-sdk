@@ -245,7 +245,98 @@ public class DirectPayment extends WebServiceWrapper {
 	}
 
 
+    /**
+     * Carry out payment authorization requests. The <b>doAuthorization</b> function
+     * sends a debit authorization request to your bank authorization server.
+     * @param version                the API version of Payline
+     *
+     * @param payment                the payment object containing the amount, the
+     *                               currency, action and mode codes
+     * @param card                   the card object, containing the card data :
+     *                               number, expirationDate, cvx,...
+     * @param returnURL
+     * @param cancelURL
+     * @param order                  the order object containing the ref, the
+     *                               amount, the currency, the date and cart content
+     *                               in details child. order.amount is required from
+     *                               4.65.1
+     * @param notificationURL
+     * @param privateDataList        A list of privateData, allowing to send any
+     *                               kind of extra information organized with keys
+     *                               and values
+     * @param languageCode
+     * @param buyer                  the buyer object, containing many information
+     *                               about the buyer: firstname, lastname, email,
+     *                               addresses,...
+     * @param owner
+     * @param securityMode
+     * @param recurring             Recurring or installment information
+     * @param merchantName
+     * @param subMerchant            sub-merchant info in case you're using Payline
+     *                               as a payment facilitator for other merchants
+     * @param miscData
+     * @param asynchronousRetryTimeout
+     */
+    public final DoAuthorizationRedirectResponse doAuthorizationRedirect(final String version,
+            final Payment payment,
+            final Card card,
+            final String returnURL,
+            final String cancelURL,
+            final Order order,
+            final String notificationURL,
+            final PrivateDataList privateDataList,
+            final String languageCode,
+            final Buyer buyer,
+            final Owner owner,
+            final String securityMode,
+            final Recurring recurring,
+            final String merchantName,
+            final SubMerchant subMerchant,
+            final String miscData,
+            final String asynchronousRetryTimeout
+			) {
+		setException(null);
+		DoAuthorizationRedirectResponse result = new DoAuthorizationRedirectResponse();
+		DoAuthorizationRedirectRequest parameters = new DoAuthorizationRedirectRequest();
+		parameters.setVersion(version);
+		parameters.setPayment(payment);
+		parameters.setCard(card);
+		parameters.setReturnURL(returnURL);
+		parameters.setCancelURL(cancelURL);
+		parameters.setOrder(order);
+		parameters.setNotificationURL(notificationURL);
+		parameters.setPrivateDataList(privateDataList);
+		parameters.setLanguageCode(languageCode);
+		parameters.setBuyer(buyer);
+		parameters.setOwner(owner);
+		parameters.setSecurityMode(securityMode);
+		parameters.setRecurring(recurring);
+        parameters.setMerchantName(merchantName);
+		parameters.setSubMerchant(subMerchant);
+		parameters.setMiscData(miscData);
+		if (asynchronousRetryTimeout != null)
+			parameters.setAsynchronousRetryTimeout(asynchronousRetryTimeout);
 
+		final DirectPaymentAPI port;
+		try {
+			if (this.initFromFile) {
+				port = Utils.initServiceDirect();
+			} else {
+				port = Utils.initServiceDirect(this.connectParams);
+			}
+			result = port.doAuthorizationRedirect(parameters);
+
+		} catch (WebServiceException ex) {
+			setException(ex);
+			logger.log(Level.SEVERE, "Error during doAuthorizationRedirect call : ", ex);
+			Result err = new Result();
+			err.setCode(Utils.EXCEPTION_CODE);
+			err.setLongMessage(ex.getMessage());
+			err.setShortMessage(Utils.EXCEPTION_SHORTMESSAGE);
+			result.setResult(err);
+		}
+		return result;
+	}
 
 /**
 	 * The <b>doDebit</b> function is used following a phone call and is a forced
