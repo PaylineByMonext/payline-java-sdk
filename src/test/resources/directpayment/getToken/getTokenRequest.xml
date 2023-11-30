@@ -1,0 +1,9 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getTokenRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:cardNumber>4970101122334455</ns2:cardNumber>
+            <ns2:expirationDate>1255</ns2:expirationDate>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+        </ns2:getTokenRequest>
+    </S:Body>
+</S:Envelope>

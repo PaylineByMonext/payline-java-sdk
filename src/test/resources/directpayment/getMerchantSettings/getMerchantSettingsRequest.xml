@@ -1,0 +1,7 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getMerchantSettingsRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+        </ns2:getMerchantSettingsRequest>
+    </S:Body>
+</S:Envelope>

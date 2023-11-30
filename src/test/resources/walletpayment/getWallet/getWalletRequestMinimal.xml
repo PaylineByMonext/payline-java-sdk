@@ -1,0 +1,11 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getWalletRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:walletId>5</ns2:walletId>
+            <ns2:cardInd>1</ns2:cardInd>
+            <ns2:media xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        </ns2:getWalletRequest>
+    </S:Body>
+</S:Envelope>

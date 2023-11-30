@@ -1,32 +1,62 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Maven3.3.3' 
+
+    tools {
+        maven 'Maven3.3.3'
+        jdk 'JDK13'
     }
     options {
-      buildDiscarder(logRotator(numToKeepStr:'10'))
+        buildDiscarder(logRotator(numToKeepStr:'10'))
     }
-    
+
     stages {
-      stage('Build') {
-          steps {
-            sh 'mvn clean install'
-          }
-      }
-      stage('SonarQube analysis') {
-        steps {
-            withSonarQubeEnv('SonarMonext') {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+
+        stage('Build') {
+            steps {
+                echo '-----'
+                echo 'Build with MAVEN version'
+                sh 'mvn --version'
+                sh 'mvn clean package'
             }
         }
-      }
-      stage('Deploy') {
-          steps {
-              withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE'),
-                               usernamePassword(credentialsId: 'OSSRH', usernameVariable: 'OSSRH_USER', passwordVariable: 'OSSRH_PWD')]) {
-                 sh 'mvn -Psign deploy'
-              }
-          }
-      }
+
+        stage('Tests') {
+            steps {
+                sh "mvn test"
+            }
+            post {
+                always {
+                    catchError {
+                        junit '**/target/surfire-reports/**/*.xml'
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube') {
+            steps {
+                withSonarQubeEnv('SonarMonext') {
+                    script {
+                        if (BRANCH_NAME == 'master') {
+                            sh 'mvn sonar:sonar -Dsonar.branch.name=${BRANCH_NAME}'
+                        }
+                        if (BRANCH_NAME != 'master') {
+//                            sh 'mvn sonar:sonar -Dsonar.branch.name=${BRANCH_NAME}'
+                            sh 'mvn sonar:sonar -Dsonar.branch.name=${BRANCH_NAME} -Dsonar.branch.target=master'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when { branch 'master' }
+            steps {
+                withCredentials([string(credentialsId: 'KEY_GPG_PASSPHRASE', variable: 'KEY_GPG_PASSPHRASE'),
+                                 usernamePassword(credentialsId: 'OSSRH', usernameVariable: 'OSSRH_USER', passwordVariable: 'OSSRH_PWD')]) {
+                    sh 'mvn -Psign deploy'
+                }
+            }
+        }
     }
 }

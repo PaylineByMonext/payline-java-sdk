@@ -1,0 +1,205 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:doWebPaymentRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:payment>
+                <amount>100</amount>
+                <currency>978</currency>
+                <action>100</action>
+                <mode>CPT</mode>
+                <contractNumber>CB</contractNumber>
+                <differedActionDate>DiffActDate 11/11/2011</differedActionDate>
+                <method>Method</method>
+                <softDescriptor>SoftDescriptor</softDescriptor>
+                <cardBrand>VISA-CB-MC</cardBrand>
+                <registrationToken xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <cumulatedAmount>0</cumulatedAmount>
+            </ns2:payment>
+            <ns2:returnURL>http://return.url</ns2:returnURL>
+            <ns2:cancelURL>http://cancel.url</ns2:cancelURL>
+            <ns2:order>
+                <ref>Refxxx999</ref>
+                <origin>BIGBANG</origin>
+                <country xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <taxes>50%</taxes>
+                <amount>100</amount>
+                <currency>978</currency>
+                <date>15/12/2014 12:20</date>
+                <details xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <deliveryTime>entre 6h et 22h</deliveryTime>
+                <deliveryMode>Par camion</deliveryMode>
+                <deliveryExpectedDate>Demain</deliveryExpectedDate>
+                <deliveryExpectedDelay>200</deliveryExpectedDelay>
+                <deliveryCharge>DeliveryChareg 8</deliveryCharge>
+                <discountAmount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <otaPackageType>Valise</otaPackageType>
+                <otaDestinationCountry>GB</otaDestinationCountry>
+                <bookingReference>BookingRef ppp</bookingReference>
+                <orderDetail>OrderDetails 9999</orderDetail>
+                <orderExtended xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <orderOTA>OrderOTA supp</orderOTA>
+            </ns2:order>
+            <ns2:notificationURL>http://notif.url</ns2:notificationURL>
+            <ns2:selectedContractList>
+                <selectedContract>CB firt</selectedContract>
+                <selectedContract>APPLE_PAY firt</selectedContract>
+            </ns2:selectedContractList>
+            <ns2:secondSelectedContractList>
+                <selectedContract>CB second</selectedContract>
+                <selectedContract>APPLE_PAY second</selectedContract>
+            </ns2:secondSelectedContractList>
+            <ns2:privateDataList>
+                <privateData>
+                    <key>pvDataKey</key>
+                    <value>pvDataValue</value>
+                </privateData>
+            </ns2:privateDataList>
+            <ns2:languageCode>FR_fr</ns2:languageCode>
+            <ns2:customPaymentPageCode>PloufXX</ns2:customPaymentPageCode>
+            <ns2:buyer>
+                <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <lastName>lastnamexxx</lastName>
+                <firstName>firstnameyyy</firstName>
+                <email>toto@nowhere.fr</email>
+                <shippingAdress>
+                    <title>Maitre de lunivers</title>
+                    <name xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <firstName>First yeah shipping</firstName>
+                    <lastName>Last oups shipping</lastName>
+                    <street1>123 rue de nowhere + suffix</street1>
+                    <street2>Street 2 + suffix</street2>
+                    <streetNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000 + suffix</zipCode>
+                    <country>FR</country>
+                    <phone>000000000 shipping</phone>
+                    <state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <county xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <phoneType>Nokia3310 shipping</phoneType>
+                    <addressCreateDate>00/00/0000</addressCreateDate>
+                    <email>toto@fait.dubateau + suffix</email>
+                </shippingAdress>
+                <billingAddress>
+                    <title>Maitre de lunivers</title>
+                    <name xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <firstName>First yeah billing</firstName>
+                    <lastName>Last oups billing</lastName>
+                    <street1>123 rue de nowhere + suffix</street1>
+                    <street2>Street 2 + suffix</street2>
+                    <streetNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000 + suffix</zipCode>
+                    <country>FR</country>
+                    <phone>000000000 billing</phone>
+                    <state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <county xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <phoneType>Nokia3310 billing</phoneType>
+                    <addressCreateDate>00/00/0000</addressCreateDate>
+                    <email>toto@fait.dubateau + suffix</email>
+                </billingAddress>
+                <accountCreateDate>22/22/2222</accountCreateDate>
+                <accountAverageAmount>1</accountAverageAmount>
+                <accountOrderCount>9</accountOrderCount>
+                <walletId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletDisplayed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletSecured xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletCardInd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <ip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <mobilePhone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <customerId>yoo</customerId>
+                <legalStatus>Pacs</legalStatus>
+                <legalDocumentType>Papier</legalDocumentType>
+                <legalDocument>le papier</legalDocument>
+                <birthDate>01/01/1900</birthDate>
+                <fingerprintID>aaa-aaa-aaa</fingerprintID>
+                <deviceFingerprint>print</deviceFingerprint>
+                <isBot>bot false</isBot>
+                <isIncognito>incognito false</isIncognito>
+                <isBehindProxy>proxy false</isBehindProxy>
+                <isFromTor>thor false</isFromTor>
+                <isEmulator>emul false</isEmulator>
+                <isRooted>root false</isRooted>
+                <hasTimezoneMismatch>jesaispas</hasTimezoneMismatch>
+                <loyaltyMemberType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <buyerExtended>BuyerExt</buyerExtended>
+                <merchantAuthentication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:buyer>
+            <ns2:owner>
+                <lastName>Owner LastName</lastName>
+                <firstName>Owner firstname</firstName>
+                <billingAddress>
+                    <street>123 rue de nowhere</street>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000</zipCode>
+                    <country>FR</country>
+                    <phone>0600000000</phone>
+                </billingAddress>
+                <issueCardDate>15/12/2020 10:00</issueCardDate>
+            </ns2:owner>
+            <ns2:securityMode>XX</ns2:securityMode>
+            <ns2:recurring>
+                <firstAmount>30</firstAmount>
+                <amount>100</amount>
+                <billingCycle>12</billingCycle>
+                <billingLeft>20</billingLeft>
+                <billingDay>5</billingDay>
+                <startDate>15/01/2020 10:00</startDate>
+                <endDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <newAmount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <amountModificationDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <billingRank xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:recurring>
+            <ns2:customPaymentTemplateURL>PloufXXUrl</ns2:customPaymentTemplateURL>
+            <ns2:contractNumberWalletList>
+                <contractNumberWallet>CB second</contractNumberWallet>
+            </ns2:contractNumberWalletList>
+            <ns2:merchantName>Balthazar Picsou</ns2:merchantName>
+            <ns2:subMerchant>
+                <subMerchantName>Monext</subMerchantName>
+                <subMerchantSIRET xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <subMerchantTaxCode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <subMerchantStreet>123 rue des petits poids</subMerchantStreet>
+                <subMerchantCity>Aix</subMerchantCity>
+                <subMerchantZipCode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <subMerchantCountry>Fr</subMerchantCountry>
+                <subMerchantState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <subMerchantEmailAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <subMerchantPhoneNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:subMerchant>
+            <ns2:miscData>miscData value</ns2:miscData>
+            <ns2:asynchronousRetryTimeout>async 100</ns2:asynchronousRetryTimeout>
+            <ns2:threeDSInfo>
+                <challengeInd>1</challengeInd>
+                <threeDSReqPriorAuthData>ThreeDSReqPriorAuthData</threeDSReqPriorAuthData>
+                <threeDSReqPriorAuthMethod>ThreeDSReqPriorAuthMethod</threeDSReqPriorAuthMethod>
+                <threeDSReqPriorAuthTimestamp>ThreeDSReqPriorAuthTimestamp</threeDSReqPriorAuthTimestamp>
+                <browser>
+                    <acceptHeader>headers</acceptHeader>
+                    <javaEnabled>javaTrue</javaEnabled>
+                    <javascriptEnabled>jsTrus</javascriptEnabled>
+                    <language>FR</language>
+                    <colorDepth>ColorDepth</colorDepth>
+                    <screenHeight>500</screenHeight>
+                    <screenWidth>400</screenWidth>
+                    <timeZoneOffset>GTM+5</timeZoneOffset>
+                    <userAgent>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36</userAgent>
+                </browser>
+                <sdk>
+                    <deviceRenderingOptionsIF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <deviceRenderOptionsUI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <appID>AppId9</appID>
+                    <ephemPubKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <maxTimeout>10</maxTimeout>
+                    <referenceNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <transID>trsIdSDK</transID>
+                    <encData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                </sdk>
+                <threeDSMethodNotificationURL>ThreeDSMethodNotificationURL</threeDSMethodNotificationURL>
+                <threeDSMethodResult>3dsMethodResult</threeDSMethodResult>
+                <challengeWindowSize>500px</challengeWindowSize>
+            </ns2:threeDSInfo>
+            <ns2:merchantScore>merchantScore 0</ns2:merchantScore>
+            <ns2:skipSmartDisplay>true</ns2:skipSmartDisplay>
+        </ns2:doWebPaymentRequest>
+    </S:Body>
+</S:Envelope>

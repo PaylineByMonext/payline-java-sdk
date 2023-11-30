@@ -1,0 +1,34 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:doBankTransferRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:payment>
+                <amount>100</amount>
+                <currency>978</currency>
+                <action>100</action>
+                <mode>CPT</mode>
+                <contractNumber>CB</contractNumber>
+                <differedActionDate>DiffActDate 11/11/2011</differedActionDate>
+                <method>Method</method>
+                <softDescriptor>SoftDescriptor</softDescriptor>
+                <cardBrand>VISA-CB-MC</cardBrand>
+                <registrationToken xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <cumulatedAmount>0</cumulatedAmount>
+            </ns2:payment>
+            <ns2:creditor>
+                <bic>BIC123</bic>
+                <iban>IBAN123456789</iban>
+                <name>Creditor Name</name>
+            </ns2:creditor>
+            <ns2:comment>Commentbbbb</ns2:comment>
+            <ns2:transactionID>TrsIdyyyy</ns2:transactionID>
+            <ns2:orderID>OrderIdaaaa</ns2:orderID>
+            <ns2:privateDataList>
+                <privateData>
+                    <key>pvDataKey</key>
+                    <value>pvDataValue</value>
+                </privateData>
+            </ns2:privateDataList>
+        </ns2:doBankTransferRequest>
+    </S:Body>
+</S:Envelope>

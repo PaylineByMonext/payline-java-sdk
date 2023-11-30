@@ -1,0 +1,160 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:updateWalletRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:cardInd>1</ns2:cardInd>
+            <ns2:wallet>
+                <walletId>1</walletId>
+                <lastName>last wallet</lastName>
+                <firstName>first wallet</firstName>
+                <email>aaaaa@nowhere.fr</email>
+                <shippingAddress>
+                    <title>Maitre de lunivers</title>
+                    <name xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <firstName>First yeahwallet</firstName>
+                    <lastName>Last oupswallet</lastName>
+                    <street1>123 rue de nowhere + suffix</street1>
+                    <street2>Street 2 + suffix</street2>
+                    <streetNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000 + suffix</zipCode>
+                    <country>FR</country>
+                    <phone>000000000wallet</phone>
+                    <state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <county xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <phoneType>Nokia3310wallet</phoneType>
+                    <addressCreateDate>00/00/0000</addressCreateDate>
+                    <email>toto@fait.dubateau + suffix</email>
+                </shippingAddress>
+                <card>
+                    <encryptionKeyId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <encryptedData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <number>4970101122334455</number>
+                    <type>CB</type>
+                    <expirationDate>1255</expirationDate>
+                    <cvx>123</cvx>
+                    <ownerBirthdayDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <password xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cardPresent>Y</cardPresent>
+                    <cardholder>Jean Claude</cardholder>
+                    <token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <par xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <tokenRequestorCryptogram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <tokenRequestorId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <last4 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <panType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                </card>
+                <comment>comment wallet</comment>
+                <default>Y</default>
+                <cardStatus>OK</cardStatus>
+                <cardBrand>VISA</cardBrand>
+            </ns2:wallet>
+            <ns2:buyer>
+                <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <lastName>lastnamexxx</lastName>
+                <firstName>firstnameyyy</firstName>
+                <email>toto@nowhere.fr</email>
+                <shippingAdress>
+                    <title>Maitre de lunivers</title>
+                    <name xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <firstName>First yeah shipping</firstName>
+                    <lastName>Last oups shipping</lastName>
+                    <street1>123 rue de nowhere + suffix</street1>
+                    <street2>Street 2 + suffix</street2>
+                    <streetNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000 + suffix</zipCode>
+                    <country>FR</country>
+                    <phone>000000000 shipping</phone>
+                    <state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <county xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <phoneType>Nokia3310 shipping</phoneType>
+                    <addressCreateDate>00/00/0000</addressCreateDate>
+                    <email>toto@fait.dubateau + suffix</email>
+                </shippingAdress>
+                <billingAddress>
+                    <title>Maitre de lunivers</title>
+                    <name xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <firstName>First yeah billing</firstName>
+                    <lastName>Last oups billing</lastName>
+                    <street1>123 rue de nowhere + suffix</street1>
+                    <street2>Street 2 + suffix</street2>
+                    <streetNumber xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000 + suffix</zipCode>
+                    <country>FR</country>
+                    <phone>000000000 billing</phone>
+                    <state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <county xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <phoneType>Nokia3310 billing</phoneType>
+                    <addressCreateDate>00/00/0000</addressCreateDate>
+                    <email>toto@fait.dubateau + suffix</email>
+                </billingAddress>
+                <accountCreateDate>22/22/2222</accountCreateDate>
+                <accountAverageAmount>1</accountAverageAmount>
+                <accountOrderCount>9</accountOrderCount>
+                <walletId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletDisplayed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletSecured xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <walletCardInd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <ip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <mobilePhone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <customerId>yoo</customerId>
+                <legalStatus>Pacs</legalStatus>
+                <legalDocumentType>Papier</legalDocumentType>
+                <legalDocument>le papier</legalDocument>
+                <birthDate>01/01/1900</birthDate>
+                <fingerprintID>aaa-aaa-aaa</fingerprintID>
+                <deviceFingerprint>print</deviceFingerprint>
+                <isBot>bot false</isBot>
+                <isIncognito>incognito false</isIncognito>
+                <isBehindProxy>proxy false</isBehindProxy>
+                <isFromTor>thor false</isFromTor>
+                <isEmulator>emul false</isEmulator>
+                <isRooted>root false</isRooted>
+                <hasTimezoneMismatch>jesaispas</hasTimezoneMismatch>
+                <loyaltyMemberType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <buyerExtended>BuyerExt</buyerExtended>
+                <merchantAuthentication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:buyer>
+            <ns2:owner>
+                <lastName>Owner LastName</lastName>
+                <firstName>Owner firstname</firstName>
+                <billingAddress>
+                    <street>123 rue de nowhere</street>
+                    <cityName>Aix</cityName>
+                    <zipCode>11000</zipCode>
+                    <country>FR</country>
+                    <phone>0600000000</phone>
+                </billingAddress>
+                <issueCardDate>15/12/2020 10:00</issueCardDate>
+            </ns2:owner>
+            <ns2:privateDataList>
+                <privateData>
+                    <key>pvDataKey</key>
+                    <value>pvDataValue</value>
+                </privateData>
+            </ns2:privateDataList>
+            <ns2:authentication3DSecure>
+                <md>Md2123454657897</md>
+                <pares>Pares</pares>
+                <xid>xidzzzzz</xid>
+                <eci>05</eci>
+                <cavv>aaaaaaaaaaaaaaa</cavv>
+                <cavvAlgorithm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <vadsResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <typeSecurisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <PaResStatus>ParesStatus9</PaResStatus>
+                <VeResStatus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <resultContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <authenticationResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:authentication3DSecure>
+            <ns2:media>media pc</ns2:media>
+            <ns2:contractNumberWalletList>
+                <contractNumberWallet>CB create</contractNumberWallet>
+            </ns2:contractNumberWalletList>
+            <ns2:transactionID>TrsIdyyyy</ns2:transactionID>
+        </ns2:updateWalletRequest>
+    </S:Body>
+</S:Envelope>

@@ -576,7 +576,7 @@ public class DirectPayment extends WebServiceWrapper {
 			final PrivateDataList privateDataList, final String sequenceNumber, final String version, final String media) {
 
         return this.doCapture(payment, transationID,
-            privateDataList, sequenceNumber, version, null, null);
+            privateDataList, sequenceNumber, version, media, null);
 
     }
 
