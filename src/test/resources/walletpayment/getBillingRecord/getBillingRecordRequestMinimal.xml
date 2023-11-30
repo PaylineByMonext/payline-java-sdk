@@ -1,0 +1,9 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getBillingRecordRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:paymentRecordId>paymentRecordId 5</ns2:paymentRecordId>
+            <ns2:billingRecordId>billingRecordId 6</ns2:billingRecordId>
+        </ns2:getBillingRecordRequest>
+    </S:Body>
+</S:Envelope>

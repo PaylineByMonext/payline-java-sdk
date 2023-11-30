@@ -1,0 +1,10 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getAlertDetailsRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:AlertId>alertId5</ns2:AlertId>
+            <ns2:TransactionId>TrsIdyyyy</ns2:TransactionId>
+            <ns2:TransactionDate>15/01/2020 10:00</ns2:TransactionDate>
+        </ns2:getAlertDetailsRequest>
+    </S:Body>
+</S:Envelope>

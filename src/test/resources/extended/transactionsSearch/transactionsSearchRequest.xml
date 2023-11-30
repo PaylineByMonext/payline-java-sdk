@@ -1,0 +1,30 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:transactionsSearchRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:transactionId>TrsIdyyyy</ns2:transactionId>
+            <ns2:orderRef>OrderRefbbbb</ns2:orderRef>
+            <ns2:startDate>15/01/2020 10:00</ns2:startDate>
+            <ns2:endDate>endDate</ns2:endDate>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:authorizationNumber>authorizationNumber</ns2:authorizationNumber>
+            <ns2:returnCode>0000</ns2:returnCode>
+            <ns2:paymentMean>XX</ns2:paymentMean>
+            <ns2:transactionType>06</ns2:transactionType>
+            <ns2:name>name 6</ns2:name>
+            <ns2:firstName>fname 7</ns2:firstName>
+            <ns2:email>email 8</ns2:email>
+            <ns2:cardNumber>4970100000000</ns2:cardNumber>
+            <ns2:currency>978</ns2:currency>
+            <ns2:minAmount>200</ns2:minAmount>
+            <ns2:maxAmount>4000</ns2:maxAmount>
+            <ns2:walletId>walIdp</ns2:walletId>
+            <ns2:sequenceNumber>seqNum</ns2:sequenceNumber>
+            <ns2:token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            <ns2:pointOfSellId>pos44</ns2:pointOfSellId>
+            <ns2:cardNetwork>CB</ns2:cardNetwork>
+            <ns2:threeDSecured>3DS</ns2:threeDSecured>
+            <ns2:customerMediaId>media8</ns2:customerMediaId>
+        </ns2:transactionsSearchRequest>
+    </S:Body>
+</S:Envelope>

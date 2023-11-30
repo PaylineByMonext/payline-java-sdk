@@ -1,0 +1,10 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:prepareSessionRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:orderRef>OrderRefbbbb</ns2:orderRef>
+            <ns2:miscData>miscData value</ns2:miscData>
+        </ns2:prepareSessionRequest>
+    </S:Body>
+</S:Envelope>

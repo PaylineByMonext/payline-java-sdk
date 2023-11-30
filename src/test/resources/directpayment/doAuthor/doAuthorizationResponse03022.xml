@@ -1,0 +1,47 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <doAuthorizationResponse xmlns="http://impl.ws.payline.experian.com" xmlns:obj="http://obj.ws.payline.experian.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <result>
+                <obj:code>03022</obj:code>
+                <obj:shortMessage>CANCELLED</obj:shortMessage>
+                <obj:longMessage>Authentication verification failed</obj:longMessage>
+            </result>
+            <transaction>
+                <obj:id>PV4071223935712704</obj:id>
+                <obj:date>07/12/23 13:10:27</obj:date>
+                <obj:isDuplicated>0</obj:isDuplicated>
+                <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                <obj:fraudResult xsi:nil="true"/>
+                <obj:explanation xsi:nil="true"/>
+                <obj:threeDSecure xsi:nil="true"/>
+                <obj:score xsi:nil="true"/>
+            </transaction>
+            <authorization>
+                <obj:number/>
+                <obj:date>07/12/23 13:10:27</obj:date>
+            </authorization>
+            <card>
+                <obj:number>4XXXXXXXXXXXX04</obj:number>
+                <obj:type>CB</obj:type>
+                <obj:expirationDate>1225</obj:expirationDate>
+                <obj:token>4YYYYYYYYYYYYYY4</obj:token>
+                <obj:panType xsi:nil="true"/>
+            </card>
+            <extendedCard>
+                <obj:country>FRA</obj:country>
+                <obj:isCvd/>
+                <obj:bank>17515 - CE ILE DE FRANCE</obj:bank>
+                <obj:type>CB</obj:type>
+                <obj:network xsi:nil="true"/>
+                <obj:product>Visa Gold</obj:product>
+            </extendedCard>
+            <contractNumber/>
+            <authentication3DSecure>
+                <obj:md>md dsfsdklhsfhgkhfdk</obj:md>
+                <obj:resultContainer>3DSResultContainer xxxxxx</obj:resultContainer>
+            </authentication3DSecure>
+            <resultContainer>ResultContainer xxxxxx</resultContainer>
+        </doAuthorizationResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

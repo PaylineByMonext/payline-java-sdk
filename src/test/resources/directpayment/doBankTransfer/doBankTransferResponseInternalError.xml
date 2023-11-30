@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns2:doBankTransferResponse xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:result>
+                <code>XXXXX</code>
+                <shortMessage>EXCEPTION</shortMessage>
+                <longMessage>Erreur lors de l'appel au service DirectPaymentAPI</longMessage>
+                <partnerCode xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                <partnerCodeLabel xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </ns2:result>
+            <ns2:privateDataList xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        </ns2:doBankTransferResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

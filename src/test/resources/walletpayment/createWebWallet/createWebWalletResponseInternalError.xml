@@ -1,0 +1,12 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns2:createWebWalletResponse xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:result>
+                <code>XXXXX</code>
+                <shortMessage>EXCEPTION</shortMessage>
+                <longMessage>Erreur lors de l'appel au service WebPayment</longMessage>
+            </ns2:result>
+        </ns2:createWebWalletResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

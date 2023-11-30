@@ -1,0 +1,86 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <transactionsSearchResponse xmlns="http://impl.ws.payline.experian.com" xmlns:obj="http://obj.ws.payline.experian.com">
+            <result>
+                <obj:code>00000</obj:code>
+                <obj:shortMessage>ACCEPTED</obj:shortMessage>
+                <obj:longMessage>Transaction approved</obj:longMessage>
+            </result>
+            <transactionList>
+                <obj:transaction>
+                    <obj:id>PV40712888923932479707</obj:id>
+                    <obj:date>07/12/2023 09:41:59</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>1493420654738976</obj:id>
+                    <obj:date>07/12/2023 07:54:38</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>2434214549462931</obj:id>
+                    <obj:date>07/12/2023 15:49:46</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>1434210068433244</obj:id>
+                    <obj:date>07/12/2023 11:04:33</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>14342083597240180</obj:id>
+                    <obj:date>07/12/2023 09:35:40</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>14342000117684602</obj:id>
+                    <obj:date>07/12/2023 01:01:14</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>143426000027565917</obj:id>
+                    <obj:date>07/12/2023 01:00:25</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>1434208900146677</obj:id>
+                    <obj:date>07/12/2023 01:01:46</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>143420080149769</obj:id>
+                    <obj:date>07/12/2023 01:01:49</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>24342691421550367</obj:id>
+                    <obj:date>07/12/2023 15:21:50</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>14340200028530293</obj:id>
+                    <obj:date>07/12/2023 01:02:30</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+                <obj:transaction>
+                    <obj:id>142342073091252598</obj:id>
+                    <obj:date>07/12/2023 08:39:12</obj:date>
+                    <obj:isDuplicated>0</obj:isDuplicated>
+                    <obj:isPossibleFraud>0</obj:isPossibleFraud>
+                </obj:transaction>
+            </transactionList>
+        </transactionsSearchResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

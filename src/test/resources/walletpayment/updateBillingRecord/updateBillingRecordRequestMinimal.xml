@@ -1,0 +1,15 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:updateBillingRecordRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:paymentRecordId>paymentRecordId 5</ns2:paymentRecordId>
+            <ns2:billingRecordId>billingRecordId 6</ns2:billingRecordId>
+            <ns2:billingRecordForUpdate>
+                <date>10/10/1010</date>
+                <amount>100</amount>
+                <status>OK</status>
+                <executionDate>20/20/2020</executionDate>
+            </ns2:billingRecordForUpdate>
+        </ns2:updateBillingRecordRequest>
+    </S:Body>
+</S:Envelope>

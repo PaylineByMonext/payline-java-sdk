@@ -1,0 +1,20 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <doAuthorizationResponse xmlns="http://impl.ws.payline.experian.com" xmlns:ns2="http://obj.ws.payline.experian.com">
+            <transient xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <result>
+                <ns2:code>XXXXX</ns2:code>
+                <ns2:shortMessage>EXCEPTION</ns2:shortMessage>
+                <ns2:longMessage>Erreur lors de l'appel au service DirectPaymentAPI</ns2:longMessage>
+                <ns2:partnerCode xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                <ns2:partnerCodeLabel xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </result>
+            <privateDataList xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <linkedTransactionId xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <travelFileNumber xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <authentication3DSecure xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <resultContainer xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        </doAuthorizationResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

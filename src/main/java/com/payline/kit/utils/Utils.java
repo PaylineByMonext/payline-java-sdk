@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Collections;
 import java.util.HashMap;
@@ -406,8 +407,8 @@ public final class Utils {
         MessageDigest sha;
         try {
             sha = MessageDigest.getInstance("SHA-256");
-            byte[] aes256Key = sha.digest(accessKey.getBytes("UTF-8"));
-            byte[] msgUtf8 = merchantId.concat(sep).concat(orderRef).concat(sep).concat(contractNumber).getBytes("UTF-8");
+            byte[] aes256Key = sha.digest(accessKey.getBytes(StandardCharsets.UTF_8));
+            byte[] msgUtf8 = merchantId.concat(sep).concat(orderRef).concat(sep).concat(contractNumber).getBytes(StandardCharsets.UTF_8);
 
             SecretKeySpec secretKeySpec = new SecretKeySpec(aes256Key, "AES");
             Cipher cipher = Cipher.getInstance("AES");
@@ -430,7 +431,7 @@ public final class Utils {
     public static byte[] decrypt(final String accessKey, final String encrypt) {
         byte[] finalDecrypt = new byte[0];
         try {
-            byte[] accessKeyBytes = accessKey.getBytes("UTF-8");
+            byte[] accessKeyBytes = accessKey.getBytes(StandardCharsets.UTF_8);
             final MessageDigest sha = MessageDigest.getInstance("SHA-256");
             accessKeyBytes = sha.digest(accessKeyBytes);
 
@@ -438,7 +439,7 @@ public final class Utils {
 
             final Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            finalDecrypt = cipher.doFinal(Base64.decodeBase64(encrypt.getBytes("UTF-8")));
+            finalDecrypt = cipher.doFinal(Base64.decodeBase64(encrypt.getBytes(StandardCharsets.UTF_8)));
         } catch (final Exception e) {
             logger.log(Level.SEVERE, "Unexpected error", e);
         }
@@ -453,7 +454,7 @@ public final class Utils {
         StringBuilder outStr = new StringBuilder();
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(decrypt));
-            BufferedReader bf = new BufferedReader(new InputStreamReader(gis, "UTF-8"));
+            BufferedReader bf = new BufferedReader(new InputStreamReader(gis, StandardCharsets.UTF_8));
             String line;
             while ((line = bf.readLine()) != null) {
                 outStr.append(line);

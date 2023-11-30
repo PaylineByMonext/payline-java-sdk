@@ -1,0 +1,13 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getTransactionDetailsRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:transactionId>TrsIdyyyy</ns2:transactionId>
+            <ns2:orderRef>OrderRefbbbb</ns2:orderRef>
+            <ns2:startDate>15/01/2020 10:00</ns2:startDate>
+            <ns2:endDate>endDate</ns2:endDate>
+            <ns2:transactionHistory>Y</ns2:transactionHistory>
+            <ns2:archiveSearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        </ns2:getTransactionDetailsRequest>
+    </S:Body>
+</S:Envelope>

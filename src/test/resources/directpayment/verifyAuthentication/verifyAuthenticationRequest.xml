@@ -1,0 +1,35 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:verifyAuthenticationRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:transient>transientParam ooo</ns2:transient>
+            <ns2:version>99</ns2:version>
+            <ns2:contractNumber>contractNumber</ns2:contractNumber>
+            <ns2:pares>pares xxx</ns2:pares>
+            <ns2:md>md yyy</ns2:md>
+            <ns2:card>
+                <encryptionKeyId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <encryptedData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <number>4970101122334455</number>
+                <type>CB</type>
+                <expirationDate>1255</expirationDate>
+                <cvx>123</cvx>
+                <ownerBirthdayDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <password xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <cardPresent>Y</cardPresent>
+                <cardholder>Jean Claude</cardholder>
+                <token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <par xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <tokenRequestorCryptogram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <tokenRequestorId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <last4 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <panType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:card>
+            <ns2:privateDataList>
+                <privateData>
+                    <key>pvDataKey</key>
+                    <value>pvDataValue</value>
+                </privateData>
+            </ns2:privateDataList>
+        </ns2:verifyAuthenticationRequest>
+    </S:Body>
+</S:Envelope>

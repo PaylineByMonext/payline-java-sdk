@@ -1,0 +1,81 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:doRecurrentWalletPaymentRequest xmlns="http://obj.ws.payline.experian.com" xmlns:ns2="http://impl.ws.payline.experian.com">
+            <ns2:version>99</ns2:version>
+            <ns2:payment>
+                <amount>100</amount>
+                <currency>978</currency>
+                <action>100</action>
+                <mode>CPT</mode>
+                <contractNumber>CB</contractNumber>
+                <differedActionDate>DiffActDate 11/11/2011</differedActionDate>
+                <method>Method</method>
+                <softDescriptor>SoftDescriptor</softDescriptor>
+                <cardBrand>VISA-CB-MC</cardBrand>
+                <registrationToken xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <cumulatedAmount>0</cumulatedAmount>
+            </ns2:payment>
+            <ns2:orderRef>OrderRefbbbb</ns2:orderRef>
+            <ns2:orderDate>15/01/2020 10:00</ns2:orderDate>
+            <ns2:walletId>5</ns2:walletId>
+            <ns2:cardInd>1</ns2:cardInd>
+            <ns2:cvx>123</ns2:cvx>
+            <ns2:recurring>
+                <firstAmount>30</firstAmount>
+                <amount>100</amount>
+                <billingCycle>12</billingCycle>
+                <billingLeft>20</billingLeft>
+                <billingDay>5</billingDay>
+                <startDate>15/01/2020 10:00</startDate>
+                <endDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <newAmount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <amountModificationDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <billingRank xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:recurring>
+            <ns2:privateDataList>
+                <privateData>
+                    <key>pvDataKey</key>
+                    <value>pvDataValue</value>
+                </privateData>
+            </ns2:privateDataList>
+            <ns2:order>
+                <ref>Refxxx999</ref>
+                <origin>BIGBANG</origin>
+                <country xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <taxes>50%</taxes>
+                <amount>100</amount>
+                <currency>978</currency>
+                <date>15/12/2014 12:20</date>
+                <details xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <deliveryTime>entre 6h et 22h</deliveryTime>
+                <deliveryMode>Par camion</deliveryMode>
+                <deliveryExpectedDate>Demain</deliveryExpectedDate>
+                <deliveryExpectedDelay>200</deliveryExpectedDelay>
+                <deliveryCharge>DeliveryChareg 8</deliveryCharge>
+                <discountAmount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <otaPackageType>Valise</otaPackageType>
+                <otaDestinationCountry>GB</otaDestinationCountry>
+                <bookingReference>BookingRef ppp</bookingReference>
+                <orderDetail>OrderDetails 9999</orderDetail>
+                <orderExtended xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <orderOTA>OrderOTA supp</orderOTA>
+            </ns2:order>
+            <ns2:media>media pc</ns2:media>
+            <ns2:authentication3DSecure>
+                <md>Md2123454657897</md>
+                <pares>Pares</pares>
+                <xid>xidzzzzz</xid>
+                <eci>05</eci>
+                <cavv>aaaaaaaaaaaaaaa</cavv>
+                <cavvAlgorithm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <vadsResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <typeSecurisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <PaResStatus>ParesStatus9</PaResStatus>
+                <VeResStatus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <resultContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                <authenticationResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </ns2:authentication3DSecure>
+            <ns2:linkedTransactionId>LinkedTrsIdyyyy</ns2:linkedTransactionId>
+        </ns2:doRecurrentWalletPaymentRequest>
+    </S:Body>
+</S:Envelope>
