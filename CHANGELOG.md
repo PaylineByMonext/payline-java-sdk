@@ -1,5 +1,12 @@
 ---------------------------------------- 
 
+* 4.77 (2023-12-01)
+  * Update WSDL from 4.76 to 4.77
+  * Compatibility with JDK11
+  * Change header version format to pass JDK version
+
+---------------------------------------- 
+
 * 4.76 (2023-09-18)
   * Update WSDL from 4.75 to 4.76
   * Add reattempt to authorization

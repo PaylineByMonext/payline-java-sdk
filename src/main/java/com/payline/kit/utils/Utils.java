@@ -91,7 +91,7 @@ public final class Utils {
     /**
      * kit version
      */
-    private static final String kitVersion = "kit JAVA v4.76";
+    private static final String kitVersion = "JAVA SDK v4.77";
 
     private static final String HTTP_PROXY_SET = "http.proxySet";
     private static final String HTTP_PROXY_HOST = "http.proxyHost";
@@ -199,7 +199,7 @@ public final class Utils {
 
         // version
         Map<String, List<String>> httpHeaders = new HashMap<String, List<String>>();
-        httpHeaders.put("version", Collections.singletonList(Utils.kitVersion));
+        httpHeaders.put("version", Collections.singletonList(System.getProperty("java.version") + " - " + Utils.kitVersion));
         Map<String, Object> reqContext = ((BindingProvider) proxy).getRequestContext();
         reqContext.put(MessageContext.HTTP_REQUEST_HEADERS, httpHeaders);
     }
@@ -279,7 +279,7 @@ public final class Utils {
         if (params.getModule() != null) {
             headerVersion = params.getModule();
         } else {
-            headerVersion = Utils.kitVersion;
+            headerVersion = System.getProperty("java.version") + " - " + Utils.kitVersion;
         }
         Map<String, List<String>> httpHeaders = new HashMap<String, List<String>>();
         httpHeaders.put("version", Collections.singletonList(headerVersion));
