@@ -90,7 +90,7 @@ class UtilsTest {
             assertEquals("111222333", requestContext.get(BindingProvider.USERNAME_PROPERTY));
             assertEquals("xxx000xxx", requestContext.get(BindingProvider.PASSWORD_PROPERTY)); // Données dans payline.properties
             assertEquals("https://homologation.payline.com/V4/services/WebPaymentAPI", requestContext.get(BindingProvider.ENDPOINT_ADDRESS_PROPERTY));
-            assertEquals("kit JAVA v4.76", ((Map<String, List<String>>) requestContext.get(MessageContext.HTTP_REQUEST_HEADERS)).get("version").get(0));
+            assertEquals(System.getProperty("java.version") + " - " +  "JAVA SDK v4.77", ((Map<String, List<String>>) requestContext.get(MessageContext.HTTP_REQUEST_HEADERS)).get("version").get(0));
             assertEquals("false", System.getProperty("http.proxySet"));
             assertNull(System.getProperty("http.proxyHost"));
             assertNull(System.getProperty("http.proxyPort"));
